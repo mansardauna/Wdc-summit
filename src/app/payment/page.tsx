@@ -305,69 +305,79 @@ function PaymentPageContent() {
 
                   {/* Step 2: Delegate / Payer Details */}
                   <div className="pt-4 border-t border-slate-100">
-                    <label className="block text-xs font-mono uppercase tracking-wider text-[#455664] mb-3">
+                    <div className="text-xs font-mono uppercase tracking-wider text-[#455664] mb-3">
                       02 · Delegate Billing Details
-                    </label>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="pay-name" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Full Name *
                         </label>
                         <input
+                          id="pay-name"
                           type="text"
                           required
+                          aria-required="true"
+                          autoComplete="name"
                           placeholder="Amara Okafor"
                           value={customer.name}
                           onChange={(e) =>
                             setCustomer({ ...customer, name: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="pay-email" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Email Address (for Receipt) *
                         </label>
                         <input
+                          id="pay-email"
                           type="email"
                           required
+                          aria-required="true"
+                          autoComplete="email"
                           placeholder="you@example.com"
                           value={customer.email}
                           onChange={(e) =>
                             setCustomer({ ...customer, email: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="pay-phone" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Phone Number
                         </label>
                         <input
+                          id="pay-phone"
                           type="tel"
+                          autoComplete="tel"
                           placeholder="+27 82 555 0149"
                           value={customer.phone}
                           onChange={(e) =>
                             setCustomer({ ...customer, phone: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="pay-country" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Country
                         </label>
                         <input
+                          id="pay-country"
                           type="text"
+                          autoComplete="country-name"
                           placeholder="e.g. South Africa"
                           value={customer.country}
                           onChange={(e) =>
                             setCustomer({ ...customer, country: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                     </div>
@@ -375,14 +385,14 @@ function PaymentPageContent() {
 
                   {/* Step 3: Choose Gateway (Paystack vs Flutterwave) */}
                   <div className="pt-4 border-t border-slate-100">
-                    <label className="block text-xs font-mono uppercase tracking-wider text-[#455664] mb-3">
+                    <div className="text-xs font-mono uppercase tracking-wider text-[#455664] mb-3">
                       03 · Select Payment Gateway
-                    </label>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <button
                         type="button"
                         onClick={() => setGateway("paystack")}
-                        className={`rounded-2xl p-4 border text-left transition-all flex items-center justify-between ${
+                        className={`rounded-2xl p-4 border text-left transition-all flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] ${
                           gateway === "paystack"
                             ? "bg-[#E4EFF7] border-[#1B2228] ring-1 ring-[#1B2228]"
                             : "bg-slate-50 border-slate-200 hover:bg-slate-100"
@@ -390,20 +400,20 @@ function PaymentPageContent() {
                       >
                         <div>
                           <div className="font-bold text-sm text-[#1B2228] flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-[#00C3F7]" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#00C3F7]" aria-hidden="true" />
                             <span>Paystack Checkout</span>
                           </div>
                           <div className="text-[11px] text-[#54626F] mt-0.5">
                             Cards, Bank Transfer, Apple Pay & USSD
                           </div>
                         </div>
-                        <CreditCard className="w-5 h-5 text-[#1B2228]" />
+                        <CreditCard className="w-5 h-5 text-[#1B2228]" aria-hidden="true" />
                       </button>
 
                       <button
                         type="button"
                         onClick={() => setGateway("flutterwave")}
-                        className={`rounded-2xl p-4 border text-left transition-all flex items-center justify-between ${
+                        className={`rounded-2xl p-4 border text-left transition-all flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] ${
                           gateway === "flutterwave"
                             ? "bg-[#E4EFF7] border-[#1B2228] ring-1 ring-[#1B2228]"
                             : "bg-slate-50 border-slate-200 hover:bg-slate-100"
@@ -411,20 +421,20 @@ function PaymentPageContent() {
                       >
                         <div>
                           <div className="font-bold text-sm text-[#1B2228] flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-[#F5A623]" />
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#F5A623]" aria-hidden="true" />
                             <span>Flutterwave Checkout</span>
                           </div>
                           <div className="text-[11px] text-[#54626F] mt-0.5">
                             International Cards, Mobile Money & Bank
                           </div>
                         </div>
-                        <CreditCard className="w-5 h-5 text-[#1B2228]" />
+                        <CreditCard className="w-5 h-5 text-[#1B2228]" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
 
                   {error && (
-                    <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs text-red-700 font-medium">
+                    <div role="alert" aria-live="polite" className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs text-red-700 font-medium">
                       {error}
                     </div>
                   )}
@@ -432,9 +442,9 @@ function PaymentPageContent() {
                   <button
                     type="submit"
                     disabled={initializing}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold py-4 px-8 text-sm shadow-sm transition-all disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold py-4 px-8 text-sm shadow-sm transition-all disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2"
                   >
-                    <Lock className="w-4 h-4" />
+                    <Lock className="w-4 h-4" aria-hidden="true" />
                     <span>
                       {initializing
                         ? "Initializing Gateway..."
@@ -442,7 +452,7 @@ function PaymentPageContent() {
                             gateway === "paystack" ? "Paystack" : "Flutterwave"
                           }`}
                     </span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </button>
                 </form>
               </div>

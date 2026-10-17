@@ -281,7 +281,11 @@ export default function GlobalTelemetryHeroMap() {
       </svg>
 
       {/* Interactive HTML5 Canvas for 3D Globe Wireframe, Telemetry Arcs & Radar Pulses */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
 
       {/* Top & Left Vignette for Crisp Typography Contrast */}
       <div

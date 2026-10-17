@@ -249,76 +249,90 @@ function ApplyPageContent() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-fullname" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Full Name (as on Passport) *
                         </label>
                         <input
+                          id="apply-fullname"
                           type="text"
                           required
+                          aria-required="true"
+                          autoComplete="name"
                           placeholder="e.g. Amara Okafor"
                           value={form.fullName}
                           onChange={(e) =>
                             setForm({ ...form, fullName: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-email" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Email Address *
                         </label>
                         <input
+                          id="apply-email"
                           type="email"
                           required
+                          aria-required="true"
+                          autoComplete="email"
                           placeholder="delegate@example.com"
                           value={form.email}
                           onChange={(e) =>
                             setForm({ ...form, email: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-phone" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Phone / WhatsApp Number *
                         </label>
                         <input
+                          id="apply-phone"
                           type="tel"
                           required
+                          aria-required="true"
+                          autoComplete="tel"
                           placeholder="+27 82 555 0149"
                           value={form.phone}
                           onChange={(e) =>
                             setForm({ ...form, phone: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-nationality" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Nationality *
                         </label>
                         <input
+                          id="apply-nationality"
                           type="text"
                           required
+                          aria-required="true"
                           placeholder="e.g. South Africa, Nigeria, Kenya, UK..."
                           value={form.nationality}
                           onChange={(e) =>
                             setForm({ ...form, nationality: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-country" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Country of Residence *
                         </label>
                         <input
+                          id="apply-country"
                           type="text"
                           required
+                          aria-required="true"
+                          autoComplete="country-name"
                           placeholder="Current country of residence"
                           value={form.countryOfResidence}
                           onChange={(e) =>
@@ -327,38 +341,42 @@ function ApplyPageContent() {
                               countryOfResidence: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                          <label htmlFor="apply-age" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                             Age (18–30) *
                           </label>
                           <input
+                            id="apply-age"
                             type="number"
                             min={18}
                             max={35}
                             required
+                            aria-required="true"
                             value={form.age}
                             onChange={(e) =>
                               setForm({ ...form, age: e.target.value })
                             }
-                            className="w-full rounded-xl border border-slate-200 px-3.5 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                            className="w-full rounded-xl border border-slate-200 px-3.5 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                          <label htmlFor="apply-dob" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                             Date of Birth
                           </label>
                           <input
+                            id="apply-dob"
                             type="date"
+                            autoComplete="bday"
                             value={form.dateOfBirth}
                             onChange={(e) =>
                               setForm({ ...form, dateOfBirth: e.target.value })
                             }
-                            className="w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                            className="w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                           />
                         </div>
                       </div>
@@ -374,15 +392,16 @@ function ApplyPageContent() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-profile" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Applicant Profile Category *
                         </label>
                         <select
+                          id="apply-profile"
                           value={form.categoryProfile}
                           onChange={(e) =>
                             setForm({ ...form, categoryProfile: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         >
                           <option value="BA / BSc Undergraduate">
                             BA / BSc — Undergraduate Student
@@ -403,10 +422,11 @@ function ApplyPageContent() {
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-org" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           University / Organization / Community Initiative
                         </label>
                         <input
+                          id="apply-org"
                           type="text"
                           placeholder="Where do you study or work?"
                           value={form.organizationOrUniversity}
@@ -416,7 +436,7 @@ function ApplyPageContent() {
                               organizationOrUniversity: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                     </div>
@@ -432,7 +452,7 @@ function ApplyPageContent() {
                               speakerSlotInterest: e.target.checked,
                             })
                           }
-                          className="w-4 h-4 rounded text-[#1B2228]"
+                          className="w-4 h-4 rounded text-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                         <span className="text-xs sm:text-sm font-semibold text-[#1B2228]">
                           Consider me for one of the 20 Delegate Speaker Slots on Day 04
@@ -441,17 +461,18 @@ function ApplyPageContent() {
 
                       {form.speakerSlotInterest && (
                         <div>
-                          <label className="block text-xs font-medium text-[#54626F] mb-1">
+                          <label htmlFor="apply-speakertopic" className="block text-xs font-medium text-[#54626F] mb-1">
                             Proposed 5-Minute Delegate Stage Topic (Optional)
                           </label>
                           <input
+                            id="apply-speakertopic"
                             type="text"
                             placeholder="e.g. Youth-Led Flood Forecasting & Community Preparedness"
                             value={form.speakerTopic}
                             onChange={(e) =>
                               setForm({ ...form, speakerTopic: e.target.value })
                             }
-                            className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                            className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                           />
                         </div>
                       )}
@@ -467,10 +488,11 @@ function ApplyPageContent() {
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-pillar" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Which of the Six Pillars of Resilience interests you most for drafting the Declaration?
                         </label>
                         <select
+                          id="apply-pillar"
                           value={form.declarationInterest}
                           onChange={(e) =>
                             setForm({
@@ -478,7 +500,7 @@ function ApplyPageContent() {
                               declarationInterest: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         >
                           <option value="01 · Climate Resilience">
                             01 · Climate Resilience
@@ -502,12 +524,14 @@ function ApplyPageContent() {
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1.5">
+                        <label htmlFor="apply-motivation" className="block text-xs font-semibold text-[#1B2228] mb-1.5">
                           Why should you represent your community at the 2027 Summit in Cape Town? *
                         </label>
                         <textarea
+                          id="apply-motivation"
                           rows={4}
                           required
+                          aria-required="true"
                           placeholder="Share your passion for climate resilience, disaster readiness, or sustainable development..."
                           value={form.motivationStatement}
                           onChange={(e) =>
@@ -516,14 +540,14 @@ function ApplyPageContent() {
                               motivationStatement: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                     </div>
                   </div>
 
                   {error && (
-                    <div className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs text-red-700 font-medium">
+                    <div role="alert" aria-live="polite" className="rounded-xl bg-red-50 border border-red-200 p-3.5 text-xs text-red-700 font-medium">
                       {error}
                     </div>
                   )}
@@ -536,14 +560,14 @@ function ApplyPageContent() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-8 py-4 text-sm shadow-sm transition-all disabled:opacity-50"
+                      className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-8 py-4 text-sm shadow-sm transition-all disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2"
                     >
                       <span>
                         {submitting
                           ? "Saving Application..."
                           : `Save & Continue to Payment ($${currentPackage.price})`}
                       </span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4" aria-hidden="true" />
                     </button>
                   </div>
                 </form>

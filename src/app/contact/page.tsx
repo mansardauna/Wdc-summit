@@ -204,79 +204,90 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-fullname" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Your Full Name *
                       </label>
                       <input
+                        id="contact-fullname"
                         type="text"
                         required
+                        aria-required="true"
+                        autoComplete="name"
                         placeholder="e.g. Chloé Dubois"
                         value={form.fullName}
                         onChange={(e) =>
                           setForm({ ...form, fullName: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-email" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Email Address *
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         required
+                        aria-required="true"
+                        autoComplete="email"
                         placeholder="you@example.com"
                         value={form.email}
                         onChange={(e) =>
                           setForm({ ...form, email: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-phone" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Phone / WhatsApp
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
+                        autoComplete="tel"
                         placeholder="+27 21 555 0194"
                         value={form.phone}
                         onChange={(e) =>
                           setForm({ ...form, phone: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-country" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Country
                       </label>
                       <input
+                        id="contact-country"
                         type="text"
+                        autoComplete="country-name"
                         placeholder="e.g. South Africa"
                         value={form.country}
                         onChange={(e) =>
                           setForm({ ...form, country: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-category" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Inquiry Topic
                       </label>
                       <select
+                        id="contact-category"
                         value={form.category}
                         onChange={(e) =>
                           setForm({ ...form, category: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm bg-white focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       >
                         <option value="Scholarship Programme ($16.99)">
                           Scholarship Programme ($16.99)
@@ -297,47 +308,52 @@ export default function ContactPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                      <label htmlFor="contact-subject" className="block text-xs font-semibold text-[#1B2228] mb-1">
                         Subject Line
                       </label>
                       <input
+                        id="contact-subject"
                         type="text"
                         placeholder="Brief subject of your message"
                         value={form.subject}
                         onChange={(e) =>
                           setForm({ ...form, subject: e.target.value })
                         }
-                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                    <label htmlFor="contact-message" className="block text-xs font-semibold text-[#1B2228] mb-1">
                       Your Message *
                     </label>
                     <textarea
+                      id="contact-message"
                       rows={5}
                       required
+                      aria-required="true"
                       placeholder="How can the World Disaster Center Youth Leader Summit team assist you?"
                       value={form.message}
                       onChange={(e) =>
                         setForm({ ...form, message: e.target.value })
                       }
-                      className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228]"
+                      className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                     />
                   </div>
 
                   {error && (
-                    <p className="text-xs text-red-600 font-medium">{error}</p>
+                    <p role="alert" aria-live="polite" className="text-xs text-red-600 font-medium">
+                      {error}
+                    </p>
                   )}
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold py-4 px-8 text-sm shadow-sm transition-all disabled:opacity-50"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold py-4 px-8 text-sm shadow-sm transition-all disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2"
                   >
-                    <Send className="w-4 h-4" />
+                    <Send className="w-4 h-4" aria-hidden="true" />
                     <span>
                       {submitting ? "Sending Inquiry..." : "Send Message to WDC Team"}
                     </span>

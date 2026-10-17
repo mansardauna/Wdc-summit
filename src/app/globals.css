@@ -22,3 +22,24 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Accessible interactive focus states */
+:focus-visible {
+  outline: 2px solid #1B2228;
+  outline-offset: 2px;
+}
+
+/* WCAG 2.1 AAA: Respect User's Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

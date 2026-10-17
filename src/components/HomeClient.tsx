@@ -564,57 +564,66 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="lead-fullname" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Full Name *
                         </label>
                         <input
+                          id="lead-fullname"
                           type="text"
                           required
+                          aria-required="true"
+                          autoComplete="name"
                           placeholder="e.g. Amara Okafor"
                           value={leadForm.fullName}
                           onChange={(e) =>
                             setLeadForm({ ...leadForm, fullName: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="lead-email" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Email Address *
                         </label>
                         <input
+                          id="lead-email"
                           type="email"
                           required
+                          aria-required="true"
+                          autoComplete="email"
                           placeholder="you@example.com"
                           value={leadForm.email}
                           onChange={(e) =>
                             setLeadForm({ ...leadForm, email: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="lead-country" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Country / Nationality
                         </label>
                         <input
+                          id="lead-country"
                           type="text"
+                          autoComplete="country-name"
                           placeholder="e.g. South Africa"
                           value={leadForm.country}
                           onChange={(e) =>
                             setLeadForm({ ...leadForm, country: e.target.value })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                        <label htmlFor="lead-track" className="block text-xs font-semibold text-[#1B2228] mb-1">
                           Interested Track
                         </label>
                         <select
+                          id="lead-track"
                           value={leadForm.interestType}
                           onChange={(e) =>
                             setLeadForm({
@@ -622,7 +631,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                               interestType: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm bg-white focus:outline-none focus:border-[#1B2228]"
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm bg-white focus:outline-none focus:border-[#1B2228] focus-visible:ring-2 focus-visible:ring-[#1B2228]"
                         >
                           <option value="Scholarship Application ($16.99)">
                             Scholarship Application ($16.99)
@@ -644,15 +653,15 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                     </div>
 
                     {leadError && (
-                      <p className="text-xs text-red-600 font-medium">{leadError}</p>
+                      <p role="alert" aria-live="polite" className="text-xs text-red-600 font-medium">{leadError}</p>
                     )}
 
                     <button
                       type="submit"
                       disabled={leadSubmitting}
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#455664] hover:bg-[#33414D] text-white font-semibold py-3 px-6 text-xs sm:text-sm transition-all disabled:opacity-50"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#455664] hover:bg-[#33414D] text-white font-semibold py-3 px-6 text-xs sm:text-sm transition-all disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2"
                     >
-                      <Send className="w-3.5 h-3.5" />
+                      <Send className="w-3.5 h-3.5" aria-hidden="true" />
                       <span>
                         {leadSubmitting
                           ? "Registering Your Interest..."

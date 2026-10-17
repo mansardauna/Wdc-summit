@@ -246,28 +246,38 @@ export default function PackagesPage() {
           <div className="bg-white rounded-[28px] p-4 sm:p-8 shadow-card border border-slate-200/70 divide-y divide-slate-200/80">
             {cms.faqsSection.items.map((faq) => {
               const isOpen = openFaqId === faq.id;
+              const buttonId = `faq-btn-${faq.id}`;
+              const answerId = `faq-answer-${faq.id}`;
               return (
                 <div key={faq.id} className="py-4 sm:py-5">
                   <button
                     type="button"
+                    id={buttonId}
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
                     onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                    className="w-full flex items-center justify-between gap-4 text-left"
+                    className="w-full flex items-center justify-between gap-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] rounded-xl p-1 -m-1"
                   >
                     <span className="text-sm sm:text-base font-bold text-[#1B2228]">
                       {faq.question}
                     </span>
                     <span className="w-7 h-7 rounded-full bg-[#EEF5FA] text-[#1B2228] flex items-center justify-center shrink-0">
                       {isOpen ? (
-                        <Minus className="w-4 h-4" />
+                        <Minus className="w-4 h-4" aria-hidden="true" />
                       ) : (
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-4 h-4" aria-hidden="true" />
                       )}
                     </span>
                   </button>
                   {isOpen && (
-                    <p className="mt-3 text-xs sm:text-sm text-[#4A5864] leading-relaxed pr-8">
-                      {faq.answer}
-                    </p>
+                    <div
+                      id={answerId}
+                      role="region"
+                      aria-labelledby={buttonId}
+                      className="mt-3 text-xs sm:text-sm text-[#4A5864] leading-relaxed pr-8"
+                    >
+                      <p>{faq.answer}</p>
+                    </div>
                   )}
                 </div>
               );

@@ -85,8 +85,24 @@ export default function CardSlider({
     return () => clearInterval(timer);
   }, [autoPlay, interval, activeIndex, children.length]);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      handlePrev();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      handleNext();
+    }
+  };
+
   return (
-    <div className="relative w-full">
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={badge || "Featured Content Slider"}
+      onKeyDown={handleKeyDown}
+      className="relative w-full"
+    >
       {/* Slider Controls Header */}
       <div className="flex items-center justify-between mb-4 px-1">
         <div className="flex items-center gap-2">
@@ -95,8 +111,8 @@ export default function CardSlider({
               {badge}
             </span>
           )}
-          <span className="text-xs font-mono font-semibold text-[#54626F]">
-            {activeIndex + 1} / {children.length}
+          <span className="text-xs font-mono font-semibold text-[#54626F]" aria-live="polite">
+            Slide {activeIndex + 1} of {children.length}
           </span>
         </div>
 
@@ -105,26 +121,26 @@ export default function CardSlider({
             <button
               type="button"
               onClick={handlePrev}
-              aria-label="Previous card"
-              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all ${
+              aria-label="Previous slide"
+              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] ${
                 canScrollLeft || activeIndex > 0
                   ? "bg-white text-[#1B2228] border-slate-300 hover:bg-[#EEF5FA] shadow-xs active:scale-95"
                   : "bg-slate-100 text-slate-400 border-slate-200"
               }`}
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4" aria-hidden="true" />
             </button>
             <button
               type="button"
               onClick={handleNext}
-              aria-label="Next card"
-              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all ${
+              aria-label="Next slide"
+              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] ${
                 canScrollRight || activeIndex < children.length - 1
                   ? "bg-[#1B2228] text-white border-[#1B2228] hover:bg-[#34434F] shadow-xs active:scale-95"
                   : "bg-slate-100 text-slate-400 border-slate-200"
               }`}
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         )}
@@ -133,12 +149,17 @@ export default function CardSlider({
       {/* Swipeable / Scrollable Slider Track */}
       <div
         ref={scrollRef}
-        className={`flex ${gap} overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 pt-1 px-1 no-scrollbar`}
+        tabIndex={0}
+        aria-label="Scrollable slider track. Use arrow keys to navigate."
+        className={`flex ${gap} overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 pt-1 px-1 no-scrollbar focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] rounded-2xl`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {children.map((child, idx) => (
           <div
             key={idx}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${idx + 1} of ${children.length}`}
             className={`shrink-0 snap-start transition-opacity duration-300 ${cardClassName}`}
           >
             {child}
@@ -148,14 +169,20 @@ export default function CardSlider({
 
       {/* Dot Indicators */}
       {showDots && children.length > 1 && (
-        <div className="flex items-center justify-center gap-2 pt-3">
+        <div
+          role="tablist"
+          aria-label="Slide indicators"
+          className="flex items-center justify-center gap-2 pt-3"
+        >
           {children.map((_, idx) => (
             <button
               key={idx}
               type="button"
-              onClick={() => scrollTo(idx)}
+              role="tab"
+              aria-selected={activeIndex === idx}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              onClick={() => scrollTo(idx)}
+              className={`h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] ${
                 activeIndex === idx
                   ? "w-7 bg-[#1B2228]"
                   : "w-2 bg-slate-300 hover:bg-slate-400"
