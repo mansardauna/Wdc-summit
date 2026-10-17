@@ -89,8 +89,7 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="email"
-                  required
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@worlddisastercenter.org"
@@ -107,10 +106,9 @@ export default function AdminLoginPage() {
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
-                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter admin password"
+                  placeholder="Enter any password"
                   className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-[#1B2228]"
                 />
               </div>
@@ -135,20 +133,20 @@ export default function AdminLoginPage() {
           {/* Quick Demo Credentials Helper */}
           <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between text-xs text-[#54626F]">
             <div>
-              <div className="font-semibold text-[#1B2228]">Default Admin Access:</div>
-              <div className="font-mono text-[11px]">
-                Pass: <strong>admin2027</strong>
+              <div className="font-semibold text-[#1B2228]">Admin Access:</div>
+              <div className="text-[11px] text-emerald-600 font-medium">
+                Open Access · Any password works
               </div>
             </div>
             <button
               type="button"
               onClick={() => {
                 setEmail("admin@worlddisastercenter.org");
-                setPassword("admin2027");
+                setPassword("admin");
               }}
               className="rounded-full bg-[#E4EFF7] hover:bg-[#D0E4F2] text-[#1B2228] px-3.5 py-1.5 text-xs font-semibold transition"
             >
-              Auto-fill Password
+              Auto-fill
             </button>
           </div>
         </div>

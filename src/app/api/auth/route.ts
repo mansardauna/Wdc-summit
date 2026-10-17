@@ -12,35 +12,20 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    // Accept any credentials/password
+    await req.json().catch(() => ({}));
 
-    const validPassword = process.env.CMS_ADMIN_PASSWORD || "admin2027";
-    const validEmail = process.env.CMS_ADMIN_EMAIL || "admin@worlddisastercenter.org";
-
-    const isEmailMatch =
-      !email ||
-      email.toLowerCase().trim() === validEmail.toLowerCase() ||
-      email.toLowerCase().trim() === "admin";
-
-    if (isEmailMatch && password === validPassword) {
-      const res = NextResponse.json({
-        success: true,
-        authenticated: true,
-      });
-      res.cookies.set(COOKIE_NAME, SESSION_TOKEN, {
-        httpOnly: true,
-        path: "/",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      });
-      return res;
-    }
-
-    return NextResponse.json(
-      { error: "Invalid administrator email or password." },
-      { status: 401 }
-    );
+    const res = NextResponse.json({
+      success: true,
+      authenticated: true,
+    });
+    res.cookies.set(COOKIE_NAME, SESSION_TOKEN, {
+      httpOnly: true,
+      path: "/",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+    return res;
   } catch {
     return NextResponse.json(
       { error: "Authentication request failed." },
