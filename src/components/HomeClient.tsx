@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   Check,
   ArrowRight,
+  ArrowUpRight,
   Send,
   CheckCircle2,
   CreditCard,
@@ -12,8 +13,10 @@ import {
   Calendar,
   Award,
   Handshake,
+  Users,
+  MapPin,
 } from "lucide-react";
-import { SiteCMSContent } from "@/lib/default-data";
+import { SiteCMSContent, DEFAULT_CMS_CONTENT } from "@/lib/default-data";
 import {
   SunThemeCard,
   SectionPillBadge,
@@ -383,6 +386,199 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
               );
             })}
           </CardSlider>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          SECTION 03 · YOUTH SUMMIT CREW (3 CORE LEADERS ON LANDING PAGE)
+          + Button to /team to see all 7 members
+         ===================================================================== */}
+      <section id="youth-summit-crew" className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div className="max-w-2xl">
+              <SectionPillBadge
+                number={(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).sectionNumber}
+                label={(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).sectionLabel}
+              />
+              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-3">
+                {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).headline}
+              </h2>
+              <p className="text-sm sm:text-base text-[#54626F]">
+                {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).subtitle}
+              </p>
+            </div>
+
+            <div className="shrink-0">
+              <Link
+                href="/team"
+                className="inline-flex items-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#323E48] text-white font-semibold px-6 py-3.5 text-xs sm:text-sm shadow-sm transition-all"
+              >
+                <Users className="w-4 h-4 text-[#FCE46D]" />
+                <span>
+                  {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).ctaText} (
+                  {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || []).length} Total)
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 3 Featured Core Leaders in Responsive SunSummit CardSlider */}
+          <CardSlider
+            cardClassName="w-[86vw] sm:w-[360px] lg:w-[392px]"
+            badge="Swipe to meet the crew"
+          >
+            {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || [])
+              .filter((m) => m.featuredOnHome)
+              .slice(0, 3)
+              .map((member, idx) => {
+                const isSlate = member.theme === "slate";
+                return (
+                  <SunThemeCard
+                    key={member.id}
+                    theme={member.theme}
+                    watermarkPosition={idx === 1 ? "top-center" : "bottom-right"}
+                    className="h-full flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Badge & Number */}
+                      <div className="flex items-center justify-between gap-2 mb-5">
+                        <span
+                          className={`text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
+                            isSlate
+                              ? "border-white/25 bg-white/10 text-[#FCE46D]"
+                              : "border-[#1B2228]/20 bg-white/75 text-[#1B2228]"
+                          }`}
+                        >
+                          {member.badge}
+                        </span>
+                        <span
+                          className={`inline-flex items-center gap-1 text-[11px] font-medium ${
+                            isSlate ? "text-slate-300" : "text-[#4A5864]"
+                          }`}
+                        >
+                          <MapPin className="w-3 h-3" />
+                          {member.location}
+                        </span>
+                      </div>
+
+                      {/* Official Portrait */}
+                      <div className="flex items-center gap-4 mb-5">
+                        <div
+                          className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 border-2 shadow-md ${
+                            isSlate
+                              ? "border-[#FCE46D]/70 bg-white"
+                              : "border-white bg-white"
+                          }`}
+                        >
+                          <img
+                            src={member.imageUrl}
+                            alt={member.name}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        </div>
+                        <div>
+                          <h3
+                            className={`text-xl sm:text-2xl font-extrabold tracking-tight leading-snug ${
+                              isSlate ? "text-white" : "text-[#1B2228]"
+                            }`}
+                          >
+                            {member.name}
+                          </h3>
+                          <p
+                            className={`text-xs sm:text-sm font-semibold mt-1 ${
+                              isSlate ? "text-[#FCE46D]" : "text-[#2C3740]"
+                            }`}
+                          >
+                            {member.role}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Bio */}
+                      <p
+                        className={`text-xs sm:text-sm leading-relaxed mb-6 ${
+                          isSlate ? "text-slate-200/95" : "text-[#3D4B56]"
+                        }`}
+                      >
+                        {member.bio}
+                      </p>
+                    </div>
+
+                    {/* Footer Links */}
+                    <div
+                      className={`pt-4 border-t flex items-center justify-between gap-3 ${
+                        isSlate ? "border-white/15" : "border-[#1B2228]/10"
+                      }`}
+                    >
+                      {member.linkedinUrl ? (
+                        <a
+                          href={member.linkedinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
+                            isSlate
+                              ? "bg-white/10 hover:bg-white text-white hover:text-[#1B2228]"
+                              : "bg-white/80 hover:bg-[#1B2228] text-[#1B2228] hover:text-white"
+                          }`}
+                        >
+                          <span>Official LinkedIn</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <span />
+                      )}
+
+                      <Link
+                        href="/team"
+                        className={`inline-flex items-center gap-1 text-xs font-bold ${
+                          isSlate
+                            ? "text-[#FCE46D] hover:underline"
+                            : "text-[#1B2228] hover:underline"
+                        }`}
+                      >
+                        <span>Full Crew</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  </SunThemeCard>
+                );
+              })}
+          </CardSlider>
+
+          {/* Bottom Callout Bar to View All 7 Members on /team */}
+          <div className="mt-6 rounded-2xl bg-white border border-slate-200/80 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+            <div className="flex items-center gap-3.5">
+              <div className="flex -space-x-2.5 overflow-hidden shrink-0">
+                {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || [])
+                  .slice(0, 7)
+                  .map((m) => (
+                    <img
+                      key={m.id}
+                      src={m.imageUrl}
+                      alt={m.name}
+                      className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover object-top bg-slate-100"
+                    />
+                  ))}
+              </div>
+              <div>
+                <div className="text-xs sm:text-sm font-bold text-[#1B2228]">
+                  Explore All {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || []).length} Youth Summit Crew &amp; WDC Board Leaders
+                </div>
+                <div className="text-xs text-[#54626F]">
+                  Including Sapiens Ndatabaje, Susan Remane, Abdulrahman Monsur, Jonathan Itegwa, Maria Horvat Kohutova, Dr. Ndifanji Namacha &amp; Johnny Walker.
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/team"
+              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-6 py-3 text-xs sm:text-sm shrink-0 transition-all"
+            >
+              <span>See All 7 Team Members</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
 

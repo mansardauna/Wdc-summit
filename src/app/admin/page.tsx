@@ -285,7 +285,7 @@ export default function AdminCMSPage() {
     { id: "content", label: "Hero, About & Pillars", icon: <FileEdit className="w-4 h-4" /> },
     { id: "programme", label: "5-Day Programme", icon: <Calendar className="w-4 h-4" /> },
     { id: "packages", label: "Packages & Pricing", icon: <Package className="w-4 h-4" /> },
-    { id: "faqs_partners", label: "FAQs & Partners", icon: <HelpCircle className="w-4 h-4" /> },
+    { id: "faqs_partners", label: "Crew, Partners & FAQs", icon: <HelpCircle className="w-4 h-4" /> },
     { id: "settings", label: "Settings & API Keys", icon: <Settings className="w-4 h-4" /> },
   ];
 
@@ -1579,6 +1579,189 @@ export default function AdminCMSPage() {
                =============================================================== */}
             {activeTab === "faqs_partners" && (
               <div className="space-y-8">
+                {/* Youth Summit Crew (Team) Manager */}
+                <div className="bg-white rounded-2xl p-6 border border-slate-200/80 space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <h3 className="text-lg font-bold text-[#1B2228]">
+                        03 · Youth Summit Crew ({(cms.teamSection || INITIAL_STORE.cms.teamSection).members.length} Total)
+                      </h3>
+                      <p className="text-xs text-[#54626F]">
+                        Check &ldquo;Featured on Landing Page&rdquo; for the 3 core leaders shown on the homepage. All members appear on /team.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                        setCms({
+                          ...cms,
+                          teamSection: {
+                            ...currentTeam,
+                            members: [
+                              ...currentTeam.members,
+                              {
+                                id: `crew-${Date.now()}`,
+                                name: "New Crew Member",
+                                role: "Youth Summit Crew",
+                                badge: "SUMMIT CREW",
+                                location: "Global",
+                                bio: "Enter team member bio and responsibilities.",
+                                imageUrl: "/team/sapiens-ndatabaje.png",
+                                linkedinUrl: "https://www.linkedin.com/company/worlddisastercenter/",
+                                email: "summit@worlddisastercenter.org",
+                                theme: "ice",
+                                featuredOnHome: false,
+                              },
+                            ],
+                          },
+                        });
+                      }}
+                      className="inline-flex items-center gap-1 rounded-full bg-[#1B2228] text-white px-4 py-1.5 text-xs font-semibold"
+                    >
+                      <Plus className="w-3.5 h-3.5" /> Add Crew Member
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {(cms.teamSection || INITIAL_STORE.cms.teamSection).members.map((member, idx) => (
+                      <div
+                        key={member.id}
+                        className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2.5">
+                            <img
+                              src={member.imageUrl}
+                              alt={member.name}
+                              className="w-10 h-10 rounded-xl object-cover object-top bg-white border"
+                            />
+                            <span className="text-xs font-bold text-[#1B2228]">
+                              #{idx + 1} · {member.name}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <label className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1B2228] cursor-pointer">
+                              <input
+                                type="checkbox"
+                                checked={member.featuredOnHome}
+                                onChange={(e) => {
+                                  const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                                  const next = [...currentTeam.members];
+                                  next[idx] = { ...next[idx], featuredOnHome: e.target.checked };
+                                  setCms({
+                                    ...cms,
+                                    teamSection: { ...currentTeam, members: next },
+                                  });
+                                }}
+                              />
+                              <span>Featured on Home</span>
+                            </label>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                                setCms({
+                                  ...cms,
+                                  teamSection: {
+                                    ...currentTeam,
+                                    members: currentTeam.members.filter((m) => m.id !== member.id),
+                                  },
+                                });
+                              }}
+                              className="text-red-500 hover:text-red-700"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <input
+                            type="text"
+                            placeholder="Full Name"
+                            value={member.name}
+                            onChange={(e) => {
+                              const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                              const next = [...currentTeam.members];
+                              next[idx] = { ...next[idx], name: e.target.value };
+                              setCms({
+                                ...cms,
+                                teamSection: { ...currentTeam, members: next },
+                              });
+                            }}
+                            className="rounded-lg border px-2.5 py-1.5 text-xs font-bold bg-white"
+                          />
+                          <input
+                            type="text"
+                            placeholder="Role / Title"
+                            value={member.role}
+                            onChange={(e) => {
+                              const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                              const next = [...currentTeam.members];
+                              next[idx] = { ...next[idx], role: e.target.value };
+                              setCms({
+                                ...cms,
+                                teamSection: { ...currentTeam, members: next },
+                              });
+                            }}
+                            className="rounded-lg border px-2.5 py-1.5 text-xs bg-white"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <input
+                            type="text"
+                            placeholder="Photo URL (/team/...)"
+                            value={member.imageUrl}
+                            onChange={(e) => {
+                              const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                              const next = [...currentTeam.members];
+                              next[idx] = { ...next[idx], imageUrl: e.target.value };
+                              setCms({
+                                ...cms,
+                                teamSection: { ...currentTeam, members: next },
+                              });
+                            }}
+                            className="rounded-lg border px-2.5 py-1.5 text-xs bg-white font-mono"
+                          />
+                          <input
+                            type="text"
+                            placeholder="LinkedIn URL"
+                            value={member.linkedinUrl || ""}
+                            onChange={(e) => {
+                              const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                              const next = [...currentTeam.members];
+                              next[idx] = { ...next[idx], linkedinUrl: e.target.value };
+                              setCms({
+                                ...cms,
+                                teamSection: { ...currentTeam, members: next },
+                              });
+                            }}
+                            className="rounded-lg border px-2.5 py-1.5 text-xs bg-white"
+                          />
+                        </div>
+
+                        <textarea
+                          rows={2}
+                          placeholder="Short Bio"
+                          value={member.bio}
+                          onChange={(e) => {
+                            const currentTeam = cms.teamSection || INITIAL_STORE.cms.teamSection;
+                            const next = [...currentTeam.members];
+                            next[idx] = { ...next[idx], bio: e.target.value };
+                            setCms({
+                              ...cms,
+                              teamSection: { ...currentTeam, members: next },
+                            });
+                          }}
+                          className="w-full rounded-lg border px-2.5 py-1.5 text-xs bg-white"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Partners Manager */}
                 <div className="bg-white rounded-2xl p-6 border border-slate-200/80 space-y-4">
                   <div className="flex items-center justify-between">

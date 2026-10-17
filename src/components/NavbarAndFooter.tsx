@@ -205,6 +205,15 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
           </Link>
 
           <Link
+            href="/team"
+            className={`hover:text-[#1B2228] transition-colors ${
+              isActive("/team") ? "font-bold text-[#1B2228]" : ""
+            }`}
+          >
+            Team
+          </Link>
+
+          <Link
             href="/contact"
             className={`hover:text-[#1B2228] transition-colors ${
               isActive("/contact") ? "font-bold text-[#1B2228]" : ""
@@ -286,6 +295,13 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
               className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
             >
               Partners
+            </Link>
+            <Link
+              href="/team"
+              onClick={() => setMobileOpen(false)}
+              className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
+            >
+              Youth Summit Crew
             </Link>
             <Link
               href="/contact"
@@ -396,6 +412,11 @@ export function Footer({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
                 <li>
                   <Link href="/programme" className="hover:text-white transition">
                     5-Day Programme & Speakers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/team" className="hover:text-white transition">
+                    Youth Summit Crew (7 Members)
                   </Link>
                 </li>
                 <li>

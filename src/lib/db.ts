@@ -60,8 +60,16 @@ function readLocalStore(): FullDatabaseStore {
     }
     const raw = fs.readFileSync(DATA_FILE, "utf-8");
     const parsed = JSON.parse(raw) as Partial<FullDatabaseStore>;
+    const mergedCms: SiteCMSContent = {
+      ...INITIAL_STORE.cms,
+      ...(parsed.cms || {}),
+      teamSection:
+        parsed.cms?.teamSection && parsed.cms.teamSection.members?.length
+          ? parsed.cms.teamSection
+          : INITIAL_STORE.cms.teamSection,
+    };
     return {
-      cms: { ...INITIAL_STORE.cms, ...(parsed.cms || {}) },
+      cms: mergedCms,
       applications: parsed.applications || INITIAL_STORE.applications,
       leads: parsed.leads || INITIAL_STORE.leads,
       payments: parsed.payments || INITIAL_STORE.payments,
@@ -92,6 +100,14 @@ export async function getStore(): Promise<FullDatabaseStore> {
       const res = await pool.query(`SELECT payload FROM cms_state_store WHERE id = 'main' LIMIT 1`);
       if (res.rows.length > 0 && res.rows[0].payload) {
         const pgData = res.rows[0].payload as FullDatabaseStore;
+        pgData.cms = {
+          ...INITIAL_STORE.cms,
+          ...(pgData.cms || {}),
+          teamSection:
+            pgData.cms?.teamSection && pgData.cms.teamSection.members?.length
+              ? pgData.cms.teamSection
+              : INITIAL_STORE.cms.teamSection,
+        };
         return pgData;
       } else {
         const seed = readLocalStore();

@@ -29,6 +29,20 @@ export interface PartnerItem {
   website?: string;
 }
 
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  badge: string;
+  location: string;
+  bio: string;
+  imageUrl: string;
+  linkedinUrl?: string;
+  email?: string;
+  theme: "ice" | "powder" | "glacier" | "slate";
+  featuredOnHome: boolean;
+}
+
 export interface ProgrammeDay {
   id: string;
   dayNumber: string;
@@ -290,6 +304,14 @@ export interface SiteCMSContent {
     sectionLabel: string;
     headline: string;
     items: FAQItem[];
+  };
+  teamSection: {
+    sectionNumber: string;
+    sectionLabel: string;
+    headline: string;
+    subtitle: string;
+    ctaText: string;
+    members: TeamMember[];
   };
   gatewayCta: {
     eyebrow: string;
@@ -1014,6 +1036,107 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         question: "Does the Summit provide visa support?",
         answer:
           "Yes. Confirmed participants receive a stamped invitation letter, an official confirmation letter, a confirmation email to the embassy and visa application guidance. Approval remains at the discretion of the relevant embassy and is the applicant's responsibility.",
+      },
+    ],
+  },
+  teamSection: {
+    sectionNumber: "03",
+    sectionLabel: "YOUTH SUMMIT CREW",
+    headline: "Meet the Youth Summit Crew",
+    subtitle:
+      "The executive leadership, strategy directors, technical architects, and global board members of the World Disaster Center driving the 2027 Youth Leader Summit in Cape Town.",
+    ctaText: "Meet All 7 Crew Members",
+    members: [
+      {
+        id: "crew-1",
+        name: "Sapiens Ndatabaje",
+        role: "Founder and CEO, World Disaster Center",
+        badge: "FOUNDER & CEO",
+        location: "Paris / Washington, D.C.",
+        bio: "Multidisciplinary humanitarian and disaster-technology leader with over 15 years of field experience across 24 countries (including UN OCHA Regional Information Management). Founder of the World Disaster Center and architect of the MICHAEL and EAGLE global disaster intelligence platforms.",
+        imageUrl: "/team/sapiens-ndatabaje.png",
+        linkedinUrl: "https://www.linkedin.com/in/sapiens-ndatabaye-227425165/",
+        email: "sndatabaye@worlddisastercenter.org",
+        theme: "slate",
+        featuredOnHome: true,
+      },
+      {
+        id: "crew-2",
+        name: "Susan Remane",
+        role: "Director: Strategy & Development",
+        badge: "STRATEGY & DEVELOPMENT",
+        location: "United States",
+        bio: "Multinational program strategy and organizational development leader with over 20 years of experience in strategic research, stakeholder engagement, institutional governance, and international summit & program delivery.",
+        imageUrl: "/team/susan-remane.png",
+        linkedinUrl: "https://www.linkedin.com/company/worlddisastercenter/",
+        email: "summit@worlddisastercenter.org",
+        theme: "ice",
+        featuredOnHome: true,
+      },
+      {
+        id: "crew-3",
+        name: "Abdulrahman Monsur",
+        role: "Technical Lead",
+        badge: "TECHNICAL LEAD",
+        location: "Global Digital Operations",
+        bio: "Full-stack software engineer and technical lead spearheading the World Disaster Center Youth Leader Summit digital infrastructure, delegate telemetry portals, real-time application systems, and web architecture.",
+        imageUrl: "/team/abdulrahman-monsur.jpg",
+        linkedinUrl: "https://www.linkedin.com/in/monsur-alao-abdulrahman-3517913ab",
+        email: "summit@worlddisastercenter.org",
+        theme: "powder",
+        featuredOnHome: true,
+      },
+      {
+        id: "crew-4",
+        name: "Jonathan Itegwa",
+        role: "Board Director · Humanitarian Operations",
+        badge: "BOARD & FIELD OPS",
+        location: "Cameroon",
+        bio: "Seasoned humanitarian leader and project management expert with extensive experience in strategy development, program implementation, and cross-cultural field operations across Africa, serving as Head of Mission at Première Urgence Internationale.",
+        imageUrl: "/team/jonathan-itegwa.png",
+        linkedinUrl: "https://www.linkedin.com/in/jonathan-itegwa-965466108/",
+        email: "jitegwa@worlddisastercenter.org",
+        theme: "glacier",
+        featuredOnHome: false,
+      },
+      {
+        id: "crew-5",
+        name: "Maria Horvat Kohutova",
+        role: "Board Director · Climate Migration & Policy",
+        badge: "CLIMATE & MIGRATION",
+        location: "Germany",
+        bio: "Research consultant specializing in climate migration, human rights, and international project management. With over a decade of experience across global foundations, she guides youth policy and civic engagement initiatives.",
+        imageUrl: "/team/maria-kohutova.png",
+        linkedinUrl: "https://www.linkedin.com/in/maria-horvat-kohutova/",
+        email: "mkohutova@worlddisastercenter.org",
+        theme: "ice",
+        featuredOnHome: false,
+      },
+      {
+        id: "crew-6",
+        name: "Dr. Ndifanji Melia Namacha",
+        role: "Board Director · Global Health & Resilience",
+        badge: "HEALTH RESILIENCE",
+        location: "Malawi",
+        bio: "Physician (MBBS, MBA) and global health researcher with deep expertise in health systems resilience, policy development, digital health innovation, and international donor engagement in climate-vulnerable regions.",
+        imageUrl: "/team/ndifanji-namacha.png",
+        linkedinUrl: "https://www.linkedin.com/in/ndifanji-melia-namacha-mbbs-mba-001a62123/",
+        email: "nnamacha@worlddisastercenter.org",
+        theme: "powder",
+        featuredOnHome: false,
+      },
+      {
+        id: "crew-7",
+        name: "Johnny (Scot) Walker",
+        role: "Board Director · Global Advisory & Partnerships",
+        badge: "STRATEGIC ADVISORY",
+        location: "United States",
+        bio: "International board advisor and strategic leader supporting World Disaster Center's global institutional partnerships, disaster readiness frameworks, and cross-border youth leadership networks.",
+        imageUrl: "/team/scot-walker.png",
+        linkedinUrl: "https://www.linkedin.com/in/scot-walker/",
+        email: "office@worlddisastercenter.org",
+        theme: "slate",
+        featuredOnHome: false,
       },
     ],
   },
