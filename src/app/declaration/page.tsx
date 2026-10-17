@@ -10,6 +10,7 @@ import {
   SectionPillBadge,
   SunburstWatermark,
 } from "@/components/SunSummitDesign";
+import CardSlider from "@/components/CardSlider";
 
 export default function DeclarationPage() {
   const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
@@ -100,36 +101,44 @@ export default function DeclarationPage() {
 
       {/* Signatory Working Groups Breakdown */}
       <section className="px-5 sm:px-8 lg:px-14 pb-16">
-        <div className="max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <SunThemeCard theme="ice">
-            <FileCheck2 className="w-7 h-7 text-[#1B2228] mb-3" />
-            <h3 className="text-xl font-bold text-[#1B2228] mb-2">
-              Drafted by Delegates
-            </h3>
-            <p className="text-xs sm:text-sm text-[#4A5864] leading-relaxed">
-              Unlike top-down communiqués, the WDC Declaration is debated in working groups across the five days in Cape Town and adopted by plenary vote on Day 05.
-            </p>
-          </SunThemeCard>
+        <div className="max-w-[1240px] mx-auto">
+          <CardSlider
+            cardClassName="w-[85vw] sm:w-[360px] lg:w-[390px]"
+            gap="gap-5"
+            badge="Signatory Highlights"
+          >
+            {[
+              <SunThemeCard key="draft" theme="ice" className="h-full">
+                <FileCheck2 className="w-7 h-7 text-[#1B2228] mb-3" />
+                <h3 className="text-xl font-bold text-[#1B2228] mb-2">
+                  Drafted by Delegates
+                </h3>
+                <p className="text-xs sm:text-sm text-[#4A5864] leading-relaxed">
+                  Unlike top-down communiqués, the WDC Declaration is debated in working groups across the five days in Cape Town and adopted by plenary vote on Day 05.
+                </p>
+              </SunThemeCard>,
 
-          <SunThemeCard theme="powder">
-            <Users className="w-7 h-7 text-[#1B2228] mb-3" />
-            <h3 className="text-xl font-bold text-[#1B2228] mb-2">
-              Named Signatory Status
-            </h3>
-            <p className="text-xs sm:text-sm text-[#2C3740] leading-relaxed">
-              Every confirmed delegate — across Fully Funded, Partially Funded, Funded Forum Access, Self-Funded, and Forum Access — is recorded on the official roll of signatories.
-            </p>
-          </SunThemeCard>
+              <SunThemeCard key="status" theme="powder" className="h-full">
+                <Users className="w-7 h-7 text-[#1B2228] mb-3" />
+                <h3 className="text-xl font-bold text-[#1B2228] mb-2">
+                  Named Signatory Status
+                </h3>
+                <p className="text-xs sm:text-sm text-[#2C3740] leading-relaxed">
+                  Every confirmed delegate — across Fully Funded, Partially Funded, Funded Forum Access, Self-Funded, and Forum Access — is recorded on the official roll of signatories.
+                </p>
+              </SunThemeCard>,
 
-          <SunThemeCard theme="glacier">
-            <Award className="w-7 h-7 text-[#1B2228] mb-3" />
-            <h3 className="text-xl font-bold text-[#1B2228] mb-2">
-              Official WDC Certification
-            </h3>
-            <p className="text-xs sm:text-sm text-[#2C3740] leading-relaxed">
-              Delegates leave Cape Town with an official signatory certificate issued by the World Disaster Center to carry commitments back to their communities.
-            </p>
-          </SunThemeCard>
+              <SunThemeCard key="cert" theme="glacier" className="h-full">
+                <Award className="w-7 h-7 text-[#1B2228] mb-3" />
+                <h3 className="text-xl font-bold text-[#1B2228] mb-2">
+                  Official WDC Certification
+                </h3>
+                <p className="text-xs sm:text-sm text-[#2C3740] leading-relaxed">
+                  Delegates leave Cape Town with an official signatory certificate issued by the World Disaster Center to carry commitments back to their communities.
+                </p>
+              </SunThemeCard>,
+            ]}
+          </CardSlider>
         </div>
       </section>
     </SiteShell>
