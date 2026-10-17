@@ -1,0 +1,671 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import {
+  Check,
+  ArrowRight,
+  Send,
+  CheckCircle2,
+  CreditCard,
+  Compass,
+  Calendar,
+  Award,
+  Handshake,
+} from "lucide-react";
+import { SiteCMSContent } from "@/lib/default-data";
+import {
+  SunThemeCard,
+  SectionPillBadge,
+} from "./SunSummitDesign";
+import { SiteShell } from "./NavbarAndFooter";
+import GlobalTelemetryHeroMap from "./GlobalTelemetryHeroMap";
+import CardSlider from "./CardSlider";
+
+export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent }) {
+  const [cms, setCms] = useState<SiteCMSContent>(initialCms);
+
+  // Countdown state
+  const [timeLeft, setTimeLeft] = useState({
+    days: 358,
+    hours: 10,
+    minutes: 53,
+    seconds: 59,
+  });
+
+  // Lead capture form state
+  const [leadForm, setLeadForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    country: "",
+    interestType: "Scholarship Application ($16.99)",
+  });
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [leadSuccess, setLeadSuccess] = useState(false);
+  const [leadError, setLeadError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/cms?scope=public", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.cms) setCms(data.cms);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const updateTimer = () => {
+      const target = new Date(
+        cms.settings.countdownTargetIso || "2027-10-10T09:00:00Z"
+      ).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+    updateTimer();
+    const timer = setInterval(updateTimer, 1000);
+    return () => clearInterval(timer);
+  }, [cms.settings.countdownTargetIso]);
+
+  async function handleLeadSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLeadError("");
+    setLeadSubmitting(true);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...leadForm,
+          source: "Homepage Prospectus & Lead Capture",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setLeadError(data.error || "Could not submit your details.");
+      } else {
+        setLeadSuccess(true);
+        setLeadForm({
+          fullName: "",
+          email: "",
+          phone: "",
+          country: "",
+          interestType: "Scholarship Application ($16.99)",
+        });
+      }
+    } catch {
+      setLeadError("Network error. Please try again.");
+    } finally {
+      setLeadSubmitting(false);
+    }
+  }
+
+  return (
+    <SiteShell cms={cms}>
+      {/* =====================================================================
+          HERO SECTION — Powered by the WDC / MICHAEL Global Telemetry Map
+          & Interactive 3D Globe Background
+         ===================================================================== */}
+      <section className="relative w-full min-h-[640px] lg:min-h-[700px] flex flex-col justify-between overflow-hidden bg-[#061322] text-white">
+        {/* Interactive Map & Globe Background */}
+        <GlobalTelemetryHeroMap />
+
+        {/* Foreground Content */}
+        <div className="relative z-20 max-w-[1280px] w-full mx-auto px-5 sm:px-8 lg:px-14 pt-14 sm:pt-20 pb-14">
+          <div className="max-w-2xl">
+            {/* Edition Badge */}
+            <div className="inline-flex items-center gap-2 rounded-md bg-[#1A82B8] px-3.5 py-1.5 text-[11px] font-mono font-bold uppercase tracking-[0.14em] text-white mb-5 shadow-sm">
+              <span>{cms.hero.badge}</span>
+            </div>
+
+            <p className="text-sm sm:text-base text-slate-200 font-medium mb-3">
+              <span className="italic font-normal text-slate-300">
+                World Disaster Center
+              </span>{" "}
+              <strong className="font-bold text-white">
+                {cms.settings.summitTitle}
+              </strong>
+            </p>
+
+            {/* Main Headline matching PDF Page 1 & SunSummit typography */}
+            <h1 className="text-5xl sm:text-6xl md:text-[72px] font-extrabold tracking-tight leading-[1.03] mb-6 text-white">
+              Join the <span className="text-[#FCE46D]">first</span>
+              <br />
+              global
+              <br />
+              summit.
+            </h1>
+
+            {/* Description */}
+            <p className="text-sm sm:text-base md:text-[17px] text-slate-200/95 leading-relaxed mb-7 max-w-xl">
+              {cms.hero.description}
+            </p>
+
+            {/* Meta Pills */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-7">
+              {cms.hero.metaPills.map((pill, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center rounded-full bg-[#0D2238]/85 border border-sky-300/25 px-4 py-1.5 text-xs font-medium text-slate-100 backdrop-blur-xs"
+                >
+                  {pill}
+                </span>
+              ))}
+            </div>
+
+            {/* Live Countdown Boxes */}
+            <div className="grid grid-cols-4 gap-2.5 sm:gap-3.5 max-w-md mb-8">
+              {[
+                { value: timeLeft.days, label: "DAYS" },
+                { value: timeLeft.hours, label: "HOURS" },
+                { value: timeLeft.minutes, label: "MINUTES" },
+                { value: timeLeft.seconds, label: "SECONDS" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl bg-[#132C44]/90 border border-sky-400/20 px-3 py-3 text-center backdrop-blur-md"
+                >
+                  <div className="text-2xl sm:text-3xl font-extrabold text-white tabular-nums">
+                    {String(item.value).padStart(2, "0")}
+                  </div>
+                  <div className="text-[10px] font-mono tracking-[0.14em] text-sky-200/75 mt-0.5">
+                    {item.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Primary & Secondary Buttons */}
+            <div className="flex flex-wrap items-center gap-3.5">
+              <Link
+                href="/apply"
+                className="inline-flex items-center justify-center rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-8 py-3.5 text-sm shadow-md transition-all"
+              >
+                {cms.hero.primaryCta}
+              </Link>
+              <Link
+                href="/declaration"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 hover:bg-white/15 text-white font-semibold px-7 py-3.5 text-sm backdrop-blur-xs transition-all"
+              >
+                {cms.hero.secondaryCta}
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Yellow Ticker Bar at Bottom of Hero */}
+        <div className="relative z-20 w-full bg-[#FCE46D] border-t border-[#EBD052] py-3.5 px-5 overflow-x-auto">
+          <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-6 whitespace-nowrap text-[11px] sm:text-xs font-extrabold tracking-[0.14em] uppercase text-[#1B2228]">
+            {cms.hero.tickerItems.map((item, idx) => (
+              <React.Fragment key={idx}>
+                <span>{item}</span>
+                {idx < cms.hero.tickerItems.length - 1 && (
+                  <span className="text-[#1B2228]/35">•</span>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          SECTION 01 · ABOUT THE SUMMIT & DIVIDED STATS BANNER CARD
+          Matches the SunSummit white stats card layout!
+         ===================================================================== */}
+      <section className="px-5 sm:px-8 lg:px-14 pt-14 sm:pt-20 pb-10">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="bg-white rounded-[28px] sm:rounded-[32px] p-7 sm:p-10 md:p-12 shadow-card border border-slate-200/70">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-9 border-b border-slate-200/80 items-start">
+              <div className="lg:col-span-5">
+                <SectionPillBadge
+                  number={cms.about.sectionNumber}
+                  label={cms.about.sectionLabel}
+                />
+                <h2 className="text-2xl sm:text-3xl md:text-[36px] font-bold tracking-tight text-[#1B2228] leading-[1.15]">
+                  {cms.about.headline}
+                </h2>
+              </div>
+              <div className="lg:col-span-7 space-y-4 text-sm sm:text-[15px] text-[#4A5864] leading-relaxed">
+                <p>{cms.about.paragraph1}</p>
+                <p>{cms.about.paragraph2}</p>
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <Link
+                    href="/packages"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#323E48] text-white text-xs font-semibold px-6 py-3 transition-all"
+                  >
+                    <span>{cms.about.ctaText}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                  <Link
+                    href="/summit"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[#1B2228]/25 hover:bg-slate-100 text-[#1B2228] text-xs font-semibold px-5 py-3 transition-all"
+                  >
+                    <span>Explore Six Pillars & Host City</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/80 pt-8 gap-y-6">
+              {cms.about.stats.map((stat, idx) => (
+                <div
+                  key={idx}
+                  className={`${idx > 0 ? "sm:pl-8" : ""} ${
+                    idx < cms.about.stats.length - 1 ? "sm:pr-6" : ""
+                  }`}
+                >
+                  <div className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1B2228] mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs sm:text-sm text-[#54626F] font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          SECTION 02 · WHY JOIN THE SUMMIT?
+          Signature SunSummit Pastel-Blue & Slate Sunburst Cards!
+         ===================================================================== */}
+      <section className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="max-w-2xl mb-8">
+            <SectionPillBadge
+              number={cms.whyAttend.sectionNumber}
+              label={cms.whyAttend.sectionLabel}
+            />
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-3">
+              {cms.whyAttend.headline}
+            </h2>
+            <p className="text-sm sm:text-base text-[#54626F]">
+              {cms.whyAttend.subtitle}
+            </p>
+          </div>
+
+          {/* Cards in Responsive Slider */}
+          <CardSlider
+            cardClassName="w-[88vw] sm:w-[460px] lg:w-[540px]"
+            badge="Swipe to explore outcomes"
+          >
+            {cms.whyAttend.cards.map((card, index) => {
+              const isSlate = card.theme === "slate";
+              const cardHref =
+                index === 0
+                  ? "/declaration"
+                  : index === 1
+                  ? "/programme#stage"
+                  : "/summit#pillars";
+              const cardCta =
+                index === 0
+                  ? "Read About the Declaration"
+                  : index === 1
+                  ? "Explore 20 Speaker Slots"
+                  : "View Full 5-Day Programme";
+
+              return (
+                <SunThemeCard
+                  key={card.id}
+                  theme={card.theme}
+                  watermarkPosition={index === 1 ? "top-center" : "bottom-right"}
+                  className="h-full flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span
+                        className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
+                          isSlate
+                            ? "border-white/25 bg-white/10 text-[#FCE46D]"
+                            : "border-[#1B2228]/20 bg-white/60 text-[#1B2228]"
+                        }`}
+                      >
+                        {card.number}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2.5">
+                      {card.title}
+                    </h3>
+                    <p
+                      className={`text-sm sm:text-[15px] mb-6 max-w-2xl ${
+                        isSlate ? "text-slate-200" : "text-[#3D4B56]"
+                      }`}
+                    >
+                      {card.description}
+                    </p>
+                    <ul className="space-y-3 mb-7">
+                      {card.bullets.map((bullet, bIdx) => (
+                        <li
+                          key={bIdx}
+                          className="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed"
+                        >
+                          <span
+                            className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${
+                              isSlate
+                                ? "bg-[#FCE46D] text-[#1B2228]"
+                                : "bg-white/80 text-[#1B2228]"
+                            }`}
+                          >
+                            <Check className="w-3 h-3 stroke-[2.5]" />
+                          </span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
+                    <Link
+                      href={cardHref}
+                      className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-xs font-semibold transition-all ${
+                        isSlate
+                          ? "border-white/40 text-white hover:bg-white hover:text-[#1B2228]"
+                          : "border-[#1B2228]/40 text-[#1B2228] hover:bg-[#1B2228] hover:text-white"
+                      }`}
+                    >
+                      <span>{cardCta}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                    {index === 2 && (
+                      <span className="text-xs text-slate-200/90">
+                        Scholarships available.
+                      </span>
+                    )}
+                  </div>
+                </SunThemeCard>
+              );
+            })}
+          </CardSlider>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          DEDICATED PAGES DIRECTORY & $16.99 SCHOLARSHIP CALLOUT
+         ===================================================================== */}
+      <section className="px-5 sm:px-8 lg:px-14 py-10">
+        <div className="max-w-[1240px] mx-auto space-y-6">
+          {/* $16.99 Scholarship Highlight Banner */}
+          <div className="rounded-[28px] bg-[#1E2933] text-white p-7 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-card">
+            <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-6">
+              <div className="flex items-baseline gap-2.5">
+                <span className="text-4xl sm:text-5xl font-extrabold text-[#FCE46D]">
+                  ${cms.scholarshipSection.applicationFeePrice}
+                </span>
+                <span className="text-sm text-slate-300 font-medium">
+                  {cms.scholarshipSection.applicationFeeLabel}
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-200 max-w-xl leading-relaxed">
+                {cms.scholarshipSection.applicationFeeNote}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                href="/apply?package=pkg-scholarship-app"
+                className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-xs sm:text-sm transition-all"
+              >
+                <span>{cms.scholarshipSection.applicationFeeCta}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/packages"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/25 hover:bg-white/10 text-white font-medium px-6 py-3.5 text-xs sm:text-sm transition-all"
+              >
+                <span>Compare All Packages</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Quick Navigation Cards in Slider for Mobile/Tablet */}
+          <div className="pt-2">
+            <div className="mb-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#54626F] font-bold">
+                EXPLORE SUMMIT ARCHITECTURE
+              </span>
+            </div>
+            <CardSlider
+              cardClassName="w-[78vw] sm:w-[280px] lg:w-[285px]"
+              gap="gap-4"
+              showArrows={true}
+              showDots={true}
+            >
+              {[
+                <Link key="summit" href="/summit" className="group block h-full">
+                  <SunThemeCard theme="ice" className="h-full flex flex-col justify-between">
+                    <div>
+                      <Compass className="w-6 h-6 text-[#1B2228] mb-3" />
+                      <h3 className="text-lg font-bold text-[#1B2228] mb-1">
+                        Six Pillars & Cape Town
+                      </h3>
+                      <p className="text-xs text-[#4A5864] leading-relaxed mb-4">
+                        Explore the six training pillars and why Cape Town hosts the 1st global edition.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2228] group-hover:translate-x-1 transition-transform">
+                      Explore The Summit <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </SunThemeCard>
+                </Link>,
+
+                <Link key="decl" href="/declaration" className="group block h-full">
+                  <SunThemeCard theme="powder" className="h-full flex flex-col justify-between">
+                    <div>
+                      <Award className="w-6 h-6 text-[#1B2228] mb-3" />
+                      <h3 className="text-lg font-bold text-[#1B2228] mb-1">
+                        The WDC Declaration
+                      </h3>
+                      <p className="text-xs text-[#2C3740] leading-relaxed mb-4">
+                        Learn how delegates draft, debate, and sign the Global Environmental Protection Declaration.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2228] group-hover:translate-x-1 transition-transform">
+                      View Declaration <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </SunThemeCard>
+                </Link>,
+
+                <Link key="prog" href="/programme" className="group block h-full">
+                  <SunThemeCard theme="glacier" className="h-full flex flex-col justify-between">
+                    <div>
+                      <Calendar className="w-6 h-6 text-[#1B2228] mb-3" />
+                      <h3 className="text-lg font-bold text-[#1B2228] mb-1">
+                        5-Day Programme
+                      </h3>
+                      <p className="text-xs text-[#2C3740] leading-relaxed mb-4">
+                        Full Day 01–Day 05 itinerary in Cape Town, 20 speaker slots, and eligibility criteria.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2228] group-hover:translate-x-1 transition-transform">
+                      See Schedule <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </SunThemeCard>
+                </Link>,
+
+                <Link key="part" href="/partners" className="group block h-full">
+                  <SunThemeCard theme="slate" className="h-full flex flex-col justify-between">
+                    <div>
+                      <Handshake className="w-6 h-6 text-[#FCE46D] mb-3" />
+                      <h3 className="text-lg font-bold text-white mb-1">
+                        Partners & Impact
+                      </h3>
+                      <p className="text-xs text-slate-200 leading-relaxed mb-4">
+                        Meet the organisations behind the Summit and the long-term global youth network.
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-[#FCE46D] group-hover:translate-x-1 transition-transform">
+                      Our Partners <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </SunThemeCard>
+                </Link>,
+              ]}
+            </CardSlider>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          LEAD CAPTURE & PROSPECTUS DOWNLOAD SECTION
+         ===================================================================== */}
+      <section id="lead-capture" className="px-5 sm:px-8 lg:px-14 py-12 pb-16">
+        <div className="max-w-[1240px] mx-auto">
+          <SunThemeCard theme="powder" watermarkPosition="top-center" className="p-8 sm:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-6 space-y-3">
+                <span className="inline-block rounded-full bg-white/80 px-3.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-[#1B2228]">
+                  DELEGATE LEAD & PROSPECTUS DESK
+                </span>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#1B2228]">
+                  Get the 2027 Cape Town Information Pack & Scholarship Guide
+                </h2>
+                <p className="text-sm sm:text-base text-[#2C3740] leading-relaxed">
+                  Register your interest to receive the official programme syllabus, scholarship application guide, and Declaration briefing paper.
+                </p>
+              </div>
+
+              <div className="lg:col-span-6">
+                {leadSuccess ? (
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 text-center space-y-3 shadow-sm">
+                    <div className="w-12 h-12 rounded-full bg-[#FCE46D] text-[#1B2228] flex items-center justify-center mx-auto">
+                      <CheckCircle2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#1B2228]">
+                      You&apos;re on the 2027 Priority Delegate List!
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#54626F]">
+                      Your details have been recorded in our Delegate Lead Desk.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-3 pt-2">
+                      <Link
+                        href="/apply"
+                        className="rounded-full bg-[#1B2228] text-white px-5 py-2.5 text-xs font-semibold"
+                      >
+                        Complete Application Now
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setLeadSuccess(false)}
+                        className="rounded-full border border-slate-300 px-4 py-2.5 text-xs font-medium text-[#1B2228]"
+                      >
+                        Register Another Lead
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <form
+                    onSubmit={handleLeadSubmit}
+                    className="bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-7 shadow-sm space-y-3.5"
+                  >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. Amara Okafor"
+                          value={leadForm.fullName}
+                          onChange={(e) =>
+                            setLeadForm({ ...leadForm, fullName: e.target.value })
+                          }
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          placeholder="you@example.com"
+                          value={leadForm.email}
+                          onChange={(e) =>
+                            setLeadForm({ ...leadForm, email: e.target.value })
+                          }
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                          Country / Nationality
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. South Africa"
+                          value={leadForm.country}
+                          onChange={(e) =>
+                            setLeadForm({ ...leadForm, country: e.target.value })
+                          }
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm focus:outline-none focus:border-[#1B2228]"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-[#1B2228] mb-1">
+                          Interested Track
+                        </label>
+                        <select
+                          value={leadForm.interestType}
+                          onChange={(e) =>
+                            setLeadForm({
+                              ...leadForm,
+                              interestType: e.target.value,
+                            })
+                          }
+                          className="w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-xs sm:text-sm bg-white focus:outline-none focus:border-[#1B2228]"
+                        >
+                          <option value="Scholarship Application ($16.99)">
+                            Scholarship Application ($16.99)
+                          </option>
+                          <option value="Self-Funded Delegate ($749)">
+                            Self-Funded Delegate ($749)
+                          </option>
+                          <option value="Forum Access Pass ($349)">
+                            Forum Access Pass ($349)
+                          </option>
+                          <option value="Visa Invitation Letter ($99)">
+                            Visa Invitation Letter ($99)
+                          </option>
+                          <option value="Institutional Partnership">
+                            Institutional Partnership
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {leadError && (
+                      <p className="text-xs text-red-600 font-medium">{leadError}</p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={leadSubmitting}
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#455664] hover:bg-[#33414D] text-white font-semibold py-3 px-6 text-xs sm:text-sm transition-all disabled:opacity-50"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      <span>
+                        {leadSubmitting
+                          ? "Registering Your Interest..."
+                          : "Send Me the 2027 Summit Info Pack"}
+                      </span>
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </SunThemeCard>
+        </div>
+      </section>
+    </SiteShell>
+  );
+}
