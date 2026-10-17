@@ -391,7 +391,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
 
       {/* =====================================================================
           SECTION 03 · YOUTH SUMMIT CREW (3 CORE LEADERS ON LANDING PAGE)
-          + Button to /team to see all 7 members
+          + Button to /team to see other team members
          ===================================================================== */}
       <section id="youth-summit-crew" className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
         <div className="max-w-[1240px] mx-auto">
@@ -415,10 +415,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                 className="inline-flex items-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#323E48] text-white font-semibold px-6 py-3.5 text-xs sm:text-sm shadow-sm transition-all"
               >
                 <Users className="w-4 h-4 text-[#FCE46D]" />
-                <span>
-                  {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).ctaText} (
-                  {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || []).length} Total)
-                </span>
+                <span>See All Team Members</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -442,7 +439,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                     className="h-full flex flex-col justify-between"
                   >
                     <div>
-                      {/* Top Badge & Number */}
+                      {/* Top Badge & Location */}
                       <div className="flex items-center justify-between gap-2 mb-5">
                         <span
                           className={`text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
@@ -475,7 +472,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                           <img
                             src={member.imageUrl}
                             alt={member.name}
-                            className="w-full h-full object-cover object-top"
+                            className="w-full h-full object-cover object-center"
                           />
                         </div>
                         <div>
@@ -538,7 +535,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                             : "text-[#1B2228] hover:underline"
                         }`}
                       >
-                        <span>Full Crew</span>
+                        <span>Team Members</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>
@@ -546,39 +543,6 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                 );
               })}
           </CardSlider>
-
-          {/* Bottom Callout Bar to View All 7 Members on /team */}
-          <div className="mt-6 rounded-2xl bg-white border border-slate-200/80 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
-            <div className="flex items-center gap-3.5">
-              <div className="flex -space-x-2.5 overflow-hidden shrink-0">
-                {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || [])
-                  .slice(0, 7)
-                  .map((m) => (
-                    <img
-                      key={m.id}
-                      src={m.imageUrl}
-                      alt={m.name}
-                      className="inline-block h-9 w-9 rounded-full ring-2 ring-white object-cover object-top bg-slate-100"
-                    />
-                  ))}
-              </div>
-              <div>
-                <div className="text-xs sm:text-sm font-bold text-[#1B2228]">
-                  Explore All {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || []).length} Youth Summit Crew &amp; WDC Board Leaders
-                </div>
-                <div className="text-xs text-[#54626F]">
-                  Including Sapiens Ndatabaje, Susan Remane, Abdulrahman Monsur, Jonathan Itegwa, Maria Horvat Kohutova, Dr. Ndifanji Namacha &amp; Johnny Walker.
-                </div>
-              </div>
-            </div>
-            <Link
-              href="/team"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-6 py-3 text-xs sm:text-sm shrink-0 transition-all"
-            >
-              <span>See All 7 Team Members</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 

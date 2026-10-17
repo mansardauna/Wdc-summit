@@ -1123,7 +1123,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     headline: "Meet the Youth Summit Crew",
     subtitle:
       "The executive leadership, strategy directors, technical architects, and global board members of the World Disaster Center driving the 2027 Youth Leader Summit in Cape Town.",
-    ctaText: "Meet All 7 Crew Members",
+    ctaText: "See All Team Members",
     members: [
       {
         id: "crew-1",

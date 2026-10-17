@@ -416,7 +416,7 @@ export function Footer({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
                 </li>
                 <li>
                   <Link href="/team" className="hover:text-white transition">
-                    Youth Summit Crew (7 Members)
+                    Youth Summit Crew
                   </Link>
                 </li>
                 <li>

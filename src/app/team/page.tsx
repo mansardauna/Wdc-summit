@@ -50,7 +50,7 @@ export default function TeamPage() {
   return (
     <SiteShell cms={cms}>
       {/* =====================================================================
-          HERO HEADER — YOUTH SUMMIT CREW (7 MEMBERS TOTAL)
+          HERO HEADER — YOUTH SUMMIT CREW
          ===================================================================== */}
       <section className="px-5 sm:px-8 lg:px-14 pt-10 sm:pt-14 pb-8">
         <div className="max-w-[1240px] mx-auto">
@@ -70,7 +70,7 @@ export default function TeamPage() {
                   <Users className="w-3.5 h-3.5" />
                   <span>
                     {teamSection.sectionNumber} · {teamSection.sectionLabel} ·{" "}
-                    {allMembers.length} OFFICIAL MEMBERS
+                    TEAM MEMBERS
                   </span>
                 </div>
 
@@ -111,36 +111,26 @@ export default function TeamPage() {
                       CREW ROSTER
                     </span>
                     <span className="rounded-full bg-[#FCE46D] text-[#1B2228] text-[11px] font-extrabold px-2.5 py-0.5">
-                      {allMembers.length} TOTAL
+                      WDC GLOBAL
                     </span>
                   </div>
                   <div className="grid grid-cols-2 gap-3 text-center">
                     <div className="rounded-xl bg-white/5 p-3 border border-white/10">
-                      <div className="text-2xl font-extrabold text-[#FCE46D]">
-                        {coreCrew.length}
+                      <div className="text-sm font-extrabold text-[#FCE46D]">
+                        Executive Core
                       </div>
                       <div className="text-[11px] text-slate-300 mt-0.5">
-                        Executive &amp; Core Crew
+                        Summit Operations
                       </div>
                     </div>
                     <div className="rounded-xl bg-white/5 p-3 border border-white/10">
-                      <div className="text-2xl font-extrabold text-white">
-                        {boardAndAdvisory.length}
+                      <div className="text-sm font-extrabold text-white">
+                        Global Board
                       </div>
                       <div className="text-[11px] text-slate-300 mt-0.5">
-                        Global Board Directors
+                        Directors &amp; Advisors
                       </div>
                     </div>
-                  </div>
-                  <div className="flex -space-x-2 overflow-hidden pt-1 justify-center">
-                    {allMembers.map((m) => (
-                      <img
-                        key={m.id}
-                        src={m.imageUrl}
-                        alt={m.name}
-                        className="inline-block h-10 w-10 rounded-full ring-2 ring-[#0B1929] object-cover object-top bg-white"
-                      />
-                    ))}
                   </div>
                 </div>
               </div>
@@ -150,7 +140,7 @@ export default function TeamPage() {
       </section>
 
       {/* =====================================================================
-          EXECUTIVE CORE CREW (FEATURED 3 LEADERS)
+          EXECUTIVE CORE CREW
          ===================================================================== */}
       <section className="px-5 sm:px-8 lg:px-14 py-8 sm:py-12">
         <div className="max-w-[1240px] mx-auto">
@@ -165,7 +155,7 @@ export default function TeamPage() {
               </h2>
             </div>
             <span className="text-xs font-mono uppercase tracking-wider text-[#54626F]">
-              FEATURED ON LANDING PAGE · 3 CORE LEADERS
+              EXECUTIVE LEADERSHIP
             </span>
           </div>
 
@@ -214,7 +204,7 @@ export default function TeamPage() {
                         <img
                           src={member.imageUrl}
                           alt={member.name}
-                          className="w-full h-full object-cover object-top"
+                          className="w-full h-full object-cover object-center"
                         />
                       </div>
                       <div>
@@ -288,7 +278,7 @@ export default function TeamPage() {
       </section>
 
       {/* =====================================================================
-          ALL 7 MEMBERS DIRECTORY (WITH FILTER TABS & FULL SUNSUMMIT CARDS)
+          TEAM MEMBERS DIRECTORY (WITH FILTER TABS & FULL SUNSUMMIT CARDS)
          ===================================================================== */}
       <section className="px-5 sm:px-8 lg:px-14 py-10 sm:py-14">
         <div className="max-w-[1240px] mx-auto">
@@ -296,24 +286,24 @@ export default function TeamPage() {
             <div>
               <SectionPillBadge
                 number="02"
-                label="COMPLETE 7-MEMBER DIRECTORY"
+                label="COMPLETE TEAM DIRECTORY"
               />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[#1B2228]">
-                All {allMembers.length} Youth Summit Crew &amp; Board Members
+                Youth Summit Crew &amp; Board Members
               </h2>
               <p className="text-sm text-[#54626F] mt-1">
-                Meet the full leadership team and international board directors guiding the World Disaster Center Youth Leader Summit.
+                Meet the leadership team and international board directors guiding the World Disaster Center Youth Leader Summit.
               </p>
             </div>
 
             {/* Filter Pills */}
             <div className="inline-flex items-center gap-1.5 rounded-full bg-white p-1.5 border border-slate-200/80 shadow-2xs self-start">
               {[
-                { key: "all", label: `All Crew (${allMembers.length})` },
-                { key: "core", label: `Executive Core (${coreCrew.length})` },
+                { key: "all", label: "All Team Members" },
+                { key: "core", label: "Executive Core" },
                 {
                   key: "board",
-                  label: `Board & Directors (${boardAndAdvisory.length})`,
+                  label: "Board & Directors",
                 },
               ].map((tab) => (
                 <button
@@ -377,7 +367,7 @@ export default function TeamPage() {
                         <img
                           src={member.imageUrl}
                           alt={member.name}
-                          className="w-full h-full object-cover object-top"
+                          className="w-full h-full object-cover object-center"
                         />
                       </div>
                       <div>
@@ -491,7 +481,7 @@ export default function TeamPage() {
                 <img
                   src={selectedMember.imageUrl}
                   alt={selectedMember.name}
-                  className="w-20 h-20 rounded-2xl object-cover object-top border-2 border-[#FCE46D] bg-slate-100"
+                  className="w-20 h-20 rounded-2xl object-cover object-center border-2 border-[#FCE46D] bg-slate-100"
                 />
                 <div>
                   <span className="inline-block text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-[#1B2228] mb-1">
