@@ -67,6 +67,10 @@ function readLocalStore(): FullDatabaseStore {
         parsed.cms?.teamSection && parsed.cms.teamSection.members?.length
           ? parsed.cms.teamSection
           : INITIAL_STORE.cms.teamSection,
+      partnersSection:
+        parsed.cms?.partnersSection?.partners?.some((p) => p.logoUrl)
+          ? parsed.cms.partnersSection
+          : INITIAL_STORE.cms.partnersSection,
     };
     return {
       cms: mergedCms,
@@ -107,6 +111,10 @@ export async function getStore(): Promise<FullDatabaseStore> {
             pgData.cms?.teamSection && pgData.cms.teamSection.members?.length
               ? pgData.cms.teamSection
               : INITIAL_STORE.cms.teamSection,
+          partnersSection:
+            pgData.cms?.partnersSection?.partners?.some((p) => p.logoUrl)
+              ? pgData.cms.partnersSection
+              : INITIAL_STORE.cms.partnersSection,
         };
         return pgData;
       } else {

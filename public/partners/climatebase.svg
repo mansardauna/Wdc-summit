@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 90" fill="none">
+  <g transform="translate(10, 13)">
+    <circle cx="32" cy="32" r="28" stroke="#0E7490" stroke-width="5.5" />
+    <path d="M12 32C18 22 28 18 52 24" stroke="#10B981" stroke-width="5" stroke-linecap="round" />
+    <path d="M10 40C22 46 38 44 54 34" stroke="#0284C7" stroke-width="5" stroke-linecap="round" />
+    <circle cx="32" cy="32" r="6" fill="#10B981" />
+  </g>
+  <text x="84" y="54" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-weight="800" font-size="34" letter-spacing="-0.8" fill="#0F172A">
+    Climatebase
+  </text>
+</svg>

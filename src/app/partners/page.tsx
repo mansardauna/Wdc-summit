@@ -23,8 +23,8 @@ export default function PartnersPage() {
   return (
     <SiteShell cms={cms}>
       {/* SECTION 11 · OUR PARTNERS */}
-      <section className="px-5 sm:px-8 lg:px-14 pt-12 sm:pt-16 pb-10">
-        <div className="max-w-[1240px] mx-auto">
+      <section className="pt-12 sm:pt-16 pb-10 overflow-hidden">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-14">
           <div className="max-w-2xl mb-8">
             <SectionPillBadge
               number={cms.partnersSection.sectionNumber}
@@ -37,28 +37,52 @@ export default function PartnersPage() {
               {cms.partnersSection.subtitle}
             </p>
           </div>
+        </div>
 
-          <CardSlider
-            cardClassName="w-[80vw] sm:w-[320px] lg:w-[360px]"
-            gap="gap-5"
-            badge="Global Partner Network"
-          >
-            {cms.partnersSection.partners.map((partner) => (
+        {/* Infinite Scrolling Logo Marquee */}
+        <div className="relative w-full overflow-hidden py-4 mb-8">
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F4F6F8] to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#F4F6F8] to-transparent z-10" />
+
+          <div className="animate-wdc-marquee gap-5 px-3">
+            {[
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+            ].map((partner, idx) => (
               <div
-                key={partner.id}
-                className="rounded-[24px] bg-[#E8F2F9] hover:bg-[#DCEBF6] border border-white/80 p-9 text-center shadow-2xs transition-all flex flex-col items-center justify-center min-h-[150px] h-full"
+                key={`${partner.id}-${idx}`}
+                className="w-[260px] sm:w-[295px] shrink-0 rounded-[24px] bg-white hover:bg-[#E8F2F9] border border-slate-200/80 p-7 text-center shadow-card transition-all flex flex-col items-center justify-between min-h-[175px]"
               >
-                <div className="text-xl sm:text-2xl font-bold text-[#1B2228]">
-                  {partner.name}
+                <div className="w-full h-20 flex items-center justify-center px-3 py-2 rounded-2xl bg-[#F8FAFC] border border-slate-100 mb-4">
+                  {partner.logoUrl ? (
+                    <img
+                      src={partner.logoUrl}
+                      alt={partner.name}
+                      className="max-h-14 max-w-[195px] w-auto h-auto object-contain"
+                    />
+                  ) : (
+                    <span className="text-lg font-extrabold text-[#1B2228]">
+                      {partner.name}
+                    </span>
+                  )}
                 </div>
-                {partner.category && (
-                  <div className="text-xs text-[#54626F] mt-1.5">
-                    {partner.category}
+                <div>
+                  <div className="text-base sm:text-lg font-bold text-[#1B2228]">
+                    {partner.name}
                   </div>
-                )}
+                  {partner.category && (
+                    <div className="text-xs text-[#54626F] mt-1">
+                      {partner.category}
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
-          </CardSlider>
+          </div>
         </div>
       </section>
 

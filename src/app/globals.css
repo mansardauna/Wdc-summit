@@ -29,17 +29,48 @@ body {
   outline-offset: 2px;
 }
 
+/* Infinite Partner Logo Marquee */
+@keyframes wdcMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes wdcMarqueeReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-wdc-marquee {
+  display: flex;
+  width: max-content;
+  animation: wdcMarquee 38s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-wdc-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: wdcMarqueeReverse 42s linear infinite !important;
+  will-change: transform;
+}
+
+.animate-wdc-marquee:hover,
+.animate-wdc-marquee-reverse:hover {
+  animation-play-state: paused !important;
+}
+
 /* WCAG 2.1 AAA: Respect User's Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
   }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
+

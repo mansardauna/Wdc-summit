@@ -1799,9 +1799,18 @@ export default function AdminCMSPage() {
                         className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono text-slate-400">
-                            Partner #{idx + 1}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            {part.logoUrl && (
+                              <img
+                                src={part.logoUrl}
+                                alt={part.name}
+                                className="h-6 w-12 object-contain bg-white rounded border px-1"
+                              />
+                            )}
+                            <span className="text-[10px] font-mono text-slate-400">
+                              Partner #{idx + 1}
+                            </span>
+                          </div>
                           <button
                             type="button"
                             onClick={() =>
@@ -1822,6 +1831,7 @@ export default function AdminCMSPage() {
                         </div>
                         <input
                           type="text"
+                          placeholder="Partner Name"
                           value={part.name}
                           onChange={(e) => {
                             const next = [...cms.partnersSection.partners];
@@ -1838,6 +1848,7 @@ export default function AdminCMSPage() {
                         />
                         <input
                           type="text"
+                          placeholder="Category"
                           value={part.category}
                           onChange={(e) => {
                             const next = [...cms.partnersSection.partners];
@@ -1854,6 +1865,26 @@ export default function AdminCMSPage() {
                             });
                           }}
                           className="w-full rounded-lg border px-2.5 py-1 text-xs bg-white text-slate-600"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Logo URL (/partners/...)"
+                          value={part.logoUrl || ""}
+                          onChange={(e) => {
+                            const next = [...cms.partnersSection.partners];
+                            next[idx] = {
+                              ...next[idx],
+                              logoUrl: e.target.value,
+                            };
+                            setCms({
+                              ...cms,
+                              partnersSection: {
+                                ...cms.partnersSection,
+                                partners: next,
+                              },
+                            });
+                          }}
+                          className="w-full rounded-lg border px-2.5 py-1 text-xs bg-white font-mono text-slate-500"
                         />
                       </div>
                     ))}

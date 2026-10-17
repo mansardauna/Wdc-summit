@@ -871,6 +871,87 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
           </SunThemeCard>
         </div>
       </section>
+
+      {/* =====================================================================
+          SECTION 11 · OUR PARTNERS (INFINITE SCROLLING MARQUEE WITH REAL LOGOS)
+          Placed directly above the Final CTA!
+         ===================================================================== */}
+      <section id="partners-marquee" className="py-12 sm:py-16 overflow-hidden">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-14 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <SectionPillBadge
+                number={cms.partnersSection.sectionNumber}
+                label={cms.partnersSection.sectionLabel}
+              />
+              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-2.5">
+                {cms.partnersSection.headline}
+              </h2>
+              <p className="text-sm sm:text-base text-[#54626F]">
+                {cms.partnersSection.subtitle}
+              </p>
+            </div>
+
+            <div className="shrink-0">
+              <Link
+                href="/partners"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1B2228]/25 bg-white hover:bg-[#1B2228] text-[#1B2228] hover:text-white font-semibold px-6 py-3 text-xs sm:text-sm shadow-2xs transition-all"
+              >
+                <Handshake className="w-4 h-4" />
+                <span>View Partners &amp; Summit Impact</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Full-Width Infinite Scrolling Logo Marquee */}
+        <div className="relative w-full overflow-hidden py-3">
+          {/* Left & Right Soft Gradient Masks */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F4F6F8] to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#F4F6F8] to-transparent z-10" />
+
+          <div className="animate-wdc-marquee gap-5 px-3">
+            {[
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+            ].map((partner, idx) => (
+              <div
+                key={`${partner.id}-${idx}`}
+                className="w-[250px] sm:w-[285px] shrink-0 rounded-[24px] bg-white hover:bg-[#EEF6FC] border border-slate-200/80 p-6 shadow-card transition-all flex flex-col items-center justify-between text-center group"
+              >
+                <div className="w-full h-20 flex items-center justify-center px-3 py-2 rounded-2xl bg-[#F8FAFC] border border-slate-100 mb-4">
+                  {partner.logoUrl ? (
+                    <img
+                      src={partner.logoUrl}
+                      alt={partner.name}
+                      className="max-h-14 max-w-[190px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <span className="text-lg font-extrabold text-[#1B2228]">
+                      {partner.name}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-sm sm:text-base font-bold text-[#1B2228] leading-snug">
+                    {partner.name}
+                  </div>
+                  {partner.category && (
+                    <div className="text-[11px] font-medium text-[#54626F] mt-1">
+                      {partner.category}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </SiteShell>
   );
 }

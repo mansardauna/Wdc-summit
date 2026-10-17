@@ -26,6 +26,7 @@ export interface PartnerItem {
   id: string;
   name: string;
   category: string;
+  logoUrl?: string;
   website?: string;
 }
 
@@ -920,12 +921,89 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     subtitle:
       "The Youth Leader Summit is built with partners across climate, data, research and technology.",
     partners: [
-      { id: "part-1", name: "EcoPeace", category: "Environmental Peacebuilding" },
-      { id: "part-2", name: "Global Climate Collective", category: "Climate Action Network" },
-      { id: "part-3", name: "Google", category: "Technology & AI Forecasting" },
-      { id: "part-4", name: "UN Data Systems", category: "Global Humanitarian Data" },
-      { id: "part-5", name: "Ben-Gurion University of the Negev", category: "Drylands & Climate Research" },
-      { id: "part-6", name: "ClimateBase", category: "Climate Careers & Talent" },
+      {
+        id: "part-1",
+        name: "EcoPeace Middle East",
+        category: "Environmental Peacebuilding",
+        logoUrl: "/partners/ecopeace.jpg",
+        website: "https://ecopeaceme.org",
+      },
+      {
+        id: "part-2",
+        name: "Global Climate Collective",
+        category: "Climate Action Network",
+        logoUrl: "/partners/global-climate-collective.svg",
+      },
+      {
+        id: "part-3",
+        name: "Google",
+        category: "Technology & AI Forecasting",
+        logoUrl: "/partners/google.png",
+        website: "https://google.com",
+      },
+      {
+        id: "part-4",
+        name: "UN Data Systems",
+        category: "Global Humanitarian Data",
+        logoUrl: "/partners/un.svg",
+        website: "https://data.un.org",
+      },
+      {
+        id: "part-5",
+        name: "Ben-Gurion University of the Negev",
+        category: "Drylands & Climate Research",
+        logoUrl: "/partners/bgu.svg",
+        website: "https://in.bgu.ac.il",
+      },
+      {
+        id: "part-6",
+        name: "ClimateBase",
+        category: "Climate Careers & Talent",
+        logoUrl: "/partners/climatebase.svg",
+        website: "https://climatebase.org",
+      },
+      {
+        id: "part-7",
+        name: "UNDP",
+        category: "Development & Resilience",
+        logoUrl: "/partners/undp.png",
+        website: "https://undp.org",
+      },
+      {
+        id: "part-8",
+        name: "Esri",
+        category: "Geospatial & GIS Intelligence",
+        logoUrl: "/partners/esri.png",
+        website: "https://esri.com",
+      },
+      {
+        id: "part-9",
+        name: "Microsoft",
+        category: "Cloud & AI Infrastructure",
+        logoUrl: "/partners/microsoft.png",
+        website: "https://microsoft.com",
+      },
+      {
+        id: "part-10",
+        name: "The World Bank",
+        category: "Global Development Finance",
+        logoUrl: "/partners/worldbank.svg",
+        website: "https://worldbank.org",
+      },
+      {
+        id: "part-11",
+        name: "European Space Agency",
+        category: "Earth Observation & Satellite Data",
+        logoUrl: "/partners/esa.png",
+        website: "https://esa.int",
+      },
+      {
+        id: "part-12",
+        name: "GCSE",
+        category: "Science & Environment Council",
+        logoUrl: "/partners/gcse.png",
+        website: "https://gcseglobal.org",
+      },
     ],
   },
   impactSection: {
