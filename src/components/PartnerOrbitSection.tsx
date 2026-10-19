@@ -115,19 +115,12 @@ export default function PartnerOrbitSection({
           "linear-gradient(180deg, #EAF4FC 0%, #F4F9FD 45%, #E3F0FA 100%)",
       }}
     >
-      {/* Subtle Cape Town Mountain & Coastal Atmospheric Backdrop + 2D/3D Soft Glows */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-20 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/illustrations/cape-town-circle.jpg')",
-          filter: "blur(6px) saturate(0.85)",
-        }}
-      />
+      {/* Crisp Atmospheric Sky & Radial Glow Backdrop */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 54%, rgba(255,255,255,0.45) 0%, rgba(234,244,252,0.88) 65%, rgba(227,240,250,0.97) 100%)",
+            "radial-gradient(circle at 50% 52%, rgba(255,255,255,0.92) 0%, rgba(232,244,253,0.95) 58%, rgba(216,236,250,1) 100%)",
         }}
       />
 

@@ -146,9 +146,24 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
               summit.
             </h1>
 
-            {/* Description */}
+            {/* Description with bold white highlights on "Cape Town, South Africa" & "WDC Global Environmental Protection Declaration." */}
             <p className="text-sm sm:text-base md:text-[17px] text-slate-200/95 leading-relaxed mb-7 max-w-xl">
-              {cms.hero.description}
+              {(cms.hero.description || "")
+                .split(
+                  /(Cape Town, South Africa|WDC Global Environmental Protection Declaration\.?)/g
+                )
+                .map((part, i) =>
+                  part === "Cape Town, South Africa" ||
+                  part.startsWith(
+                    "WDC Global Environmental Protection Declaration"
+                  ) ? (
+                    <strong key={i} className="font-extrabold text-white">
+                      {part}
+                    </strong>
+                  ) : (
+                    <React.Fragment key={i}>{part}</React.Fragment>
+                  )
+                )}
             </p>
 
             {/* Meta Pills */}
@@ -203,16 +218,19 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
           </div>
         </div>
 
-        {/* Yellow Ticker Bar at Bottom of Hero */}
-        <div className="relative z-20 w-full bg-[#FCE46D] border-t border-[#EBD052] py-3.5 px-5 overflow-x-auto">
-          <div className="max-w-[1280px] mx-auto flex items-center justify-between gap-6 whitespace-nowrap text-[11px] sm:text-xs font-extrabold tracking-[0.14em] uppercase text-[#1B2228]">
-            {cms.hero.tickerItems.map((item, idx) => (
-              <React.Fragment key={idx}>
+        {/* Infinite-Scrolling Yellow Ticker Bar at Bottom of Hero */}
+        <div className="relative z-20 w-full bg-[#FCE46D] border-t border-[#EBD052] py-3.5 overflow-hidden select-none">
+          <div className="animate-wdc-marquee items-center gap-8 whitespace-nowrap text-[11px] sm:text-xs font-extrabold tracking-[0.16em] uppercase text-[#1B2228]">
+            {[
+              ...cms.hero.tickerItems,
+              ...cms.hero.tickerItems,
+              ...cms.hero.tickerItems,
+              ...cms.hero.tickerItems,
+            ].map((item, idx) => (
+              <span key={idx} className="inline-flex items-center gap-8">
                 <span>{item}</span>
-                {idx < cms.hero.tickerItems.length - 1 && (
-                  <span className="text-[#1B2228]/35">•</span>
-                )}
-              </React.Fragment>
+                <span className="text-[#1B2228]/45">•</span>
+              </span>
             ))}
           </div>
         </div>
