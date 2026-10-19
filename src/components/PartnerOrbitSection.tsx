@@ -115,12 +115,18 @@ export default function PartnerOrbitSection({
           "linear-gradient(180deg, #EAF4FC 0%, #F4F9FD 45%, #E3F0FA 100%)",
       }}
     >
-      {/* Crisp Atmospheric Sky & Radial Glow Backdrop */}
+      {/* Crisp High-Key Cape Town & Table Mountain Bay Panoramic Backdrop (No Blur) */}
+      <img
+        src="/illustrations/partner-section-bg.jpg"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 w-full h-full object-cover object-center opacity-55"
+      />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 52%, rgba(255,255,255,0.92) 0%, rgba(232,244,253,0.95) 58%, rgba(216,236,250,1) 100%)",
+            "linear-gradient(180deg, rgba(238,247,255,0.72) 0%, rgba(244,249,253,0.45) 50%, rgba(230,242,252,0.78) 100%)",
         }}
       />
 
@@ -346,16 +352,16 @@ export default function PartnerOrbitSection({
           <div className="relative z-10 w-[165px] h-[165px] sm:w-[265px] sm:h-[265px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-[5px] sm:border-[7px] border-white ring-4 sm:ring-8 ring-[#BAE6FD]/75 shadow-[0_20px_60px_rgba(8,32,62,0.28)] flex flex-col items-center justify-start text-center">
             {/* Cape Town & Table Mountain Photo Backdrop */}
             <img
-              src="/illustrations/cape-town-circle.jpg"
+              src="/illustrations/table-mountain-center.jpg"
               alt="World Disaster Center Youth Leadership Summit 2027 Cape Town"
-              className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+              className="absolute inset-0 w-full h-full object-cover object-center"
             />
-            {/* Royal Navy-to-Transparent Top Sky Gradient Overlay */}
+            {/* Subtle Royal Navy Top Sky Gradient for Crisp White Typography */}
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(180deg, rgba(6,28,66,0.92) 0%, rgba(11,52,110,0.74) 48%, rgba(11,52,110,0.18) 78%, rgba(6,28,66,0.35) 100%)",
+                  "linear-gradient(180deg, rgba(6,28,66,0.78) 0%, rgba(11,52,110,0.48) 45%, rgba(11,52,110,0.05) 75%, rgba(6,28,66,0.2) 100%)",
               }}
             />
 
