@@ -20,6 +20,7 @@ import {
 import { SiteShell } from "@/components/NavbarAndFooter";
 import { SunThemeCard, SectionPillBadge } from "@/components/SunSummitDesign";
 import CardSlider from "@/components/CardSlider";
+import PartnerOrbitSection from "@/components/PartnerOrbitSection";
 
 export default function TeamPage() {
   const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
@@ -50,94 +51,15 @@ export default function TeamPage() {
   return (
     <SiteShell cms={cms}>
       {/* =====================================================================
-          HERO HEADER — YOUTH SUMMIT CREW
+          ROTATING CIRCULAR "MEET THE TEAM" ORBIT SECTION (Matches Image 1!)
          ===================================================================== */}
-      <section className="px-5 sm:px-8 lg:px-14 pt-10 sm:pt-14 pb-8">
-        <div className="max-w-[1240px] mx-auto">
-          <div className="relative overflow-hidden rounded-[32px] bg-[#0B1929] text-white p-8 sm:p-12 md:p-16 border border-sky-400/15 shadow-card">
-            {/* Subtle Radial Glow */}
-            <div
-              className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full opacity-25 blur-3xl"
-              style={{
-                background:
-                  "radial-gradient(circle, #38BDF8 0%, #FCE46D 50%, transparent 80%)",
-              }}
-            />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-8">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-3.5 py-1.5 text-[11px] font-mono uppercase tracking-[0.16em] text-[#FCE46D] mb-4">
-                  <Users className="w-3.5 h-3.5" />
-                  <span>
-                    {teamSection.sectionNumber} · {teamSection.sectionLabel} ·{" "}
-                    TEAM MEMBERS
-                  </span>
-                </div>
-
-                <h1 className="text-3xl sm:text-5xl md:text-[54px] font-extrabold tracking-tight leading-[1.08] mb-4">
-                  Youth Summit <span className="text-[#FCE46D]">Crew</span> &amp;
-                  WDC Leadership
-                </h1>
-
-                <p className="text-sm sm:text-base md:text-lg text-slate-200/90 max-w-2xl leading-relaxed mb-6">
-                  {teamSection.subtitle}
-                </p>
-
-                <div className="flex flex-wrap items-center gap-3">
-                  <a
-                    href="https://www.linkedin.com/company/worlddisastercenter/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-6 py-3 text-xs sm:text-sm transition-all"
-                  >
-                    <span>World Disaster Center on LinkedIn</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                  <Link
-                    href="/apply"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/25 hover:bg-white/10 text-white font-semibold px-6 py-3 text-xs sm:text-sm transition-all"
-                  >
-                    <span>Apply to Join Delegates in Cape Town</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Summary Pill Box */}
-              <div className="lg:col-span-4">
-                <div className="rounded-2xl bg-white/8 border border-white/15 p-6 backdrop-blur-md space-y-4">
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <span className="text-xs font-mono uppercase tracking-wider text-sky-200">
-                      CREW ROSTER
-                    </span>
-                    <span className="rounded-full bg-[#FCE46D] text-[#1B2228] text-[11px] font-extrabold px-2.5 py-0.5">
-                      WDC GLOBAL
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 text-center">
-                    <div className="rounded-xl bg-white/5 p-3 border border-white/10">
-                      <div className="text-sm font-extrabold text-[#FCE46D]">
-                        Executive Core
-                      </div>
-                      <div className="text-[11px] text-slate-300 mt-0.5">
-                        Summit Operations
-                      </div>
-                    </div>
-                    <div className="rounded-xl bg-white/5 p-3 border border-white/10">
-                      <div className="text-sm font-extrabold text-white">
-                        Global Board
-                      </div>
-                      <div className="text-[11px] text-slate-300 mt-0.5">
-                        Directors &amp; Advisors
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PartnerOrbitSection
+        eyebrow="STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM"
+        headline="Meet the Team"
+        subtitle="A global team working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible."
+        members={allMembers}
+        showViewAllButton={false}
+      />
 
       {/* =====================================================================
           EXECUTIVE CORE CREW

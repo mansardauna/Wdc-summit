@@ -410,161 +410,22 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
       </section>
 
       {/* =====================================================================
-          SECTION 03 · YOUTH SUMMIT CREW (3 CORE LEADERS ON LANDING PAGE)
-          + Button to /team to see other team members
+          SECTION 03 · MEET THE TEAM (ROTATING CIRCULAR ORBIT WITH HOVER DETAIL CARD)
+          Matches Reference Image 1 ("STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM · Meet the Team")
          ===================================================================== */}
-      <section id="youth-summit-crew" className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
-        <div className="max-w-[1240px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-            <div className="max-w-2xl">
-              <SectionPillBadge
-                number={(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).sectionNumber}
-                label={(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).sectionLabel}
-              />
-              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-3">
-                {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).headline}
-              </h2>
-              <p className="text-sm sm:text-base text-[#54626F]">
-                {(cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).subtitle}
-              </p>
-            </div>
-
-            <div className="shrink-0">
-              <Link
-                href="/team"
-                className="inline-flex items-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#323E48] text-white font-semibold px-6 py-3.5 text-xs sm:text-sm shadow-sm transition-all"
-              >
-                <Users className="w-4 h-4 text-[#FCE46D]" />
-                <span>See All Team Members</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* 3 Featured Core Leaders in Responsive SunSummit CardSlider */}
-          <CardSlider
-            cardClassName="w-[86vw] sm:w-[360px] lg:w-[392px]"
-            badge="Swipe to meet the crew"
-          >
-            {((cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members || [])
-              .filter((m) => m.featuredOnHome)
-              .slice(0, 3)
-              .map((member, idx) => {
-                const isSlate = member.theme === "slate";
-                return (
-                  <SunThemeCard
-                    key={member.id}
-                    theme={member.theme}
-                    watermarkPosition={idx === 1 ? "top-center" : "bottom-right"}
-                    className="h-full flex flex-col justify-between"
-                  >
-                    <div>
-                      {/* Top Badge & Location */}
-                      <div className="flex items-center justify-between gap-2 mb-5">
-                        <span
-                          className={`text-[11px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${
-                            isSlate
-                              ? "border-white/25 bg-white/10 text-[#FCE46D]"
-                              : "border-[#1B2228]/20 bg-white/75 text-[#1B2228]"
-                          }`}
-                        >
-                          {member.badge}
-                        </span>
-                        <span
-                          className={`inline-flex items-center gap-1 text-[11px] font-medium ${
-                            isSlate ? "text-slate-300" : "text-[#4A5864]"
-                          }`}
-                        >
-                          <MapPin className="w-3 h-3" />
-                          {member.location}
-                        </span>
-                      </div>
-
-                      {/* Official Portrait */}
-                      <div className="flex items-center gap-4 mb-5">
-                        <div
-                          className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shrink-0 border-2 shadow-md ${
-                            isSlate
-                              ? "border-[#FCE46D]/70 bg-white"
-                              : "border-white bg-white"
-                          }`}
-                        >
-                          <img
-                            src={member.imageUrl}
-                            alt={member.name}
-                            className="w-full h-full object-cover object-center"
-                          />
-                        </div>
-                        <div>
-                          <h3
-                            className={`text-xl sm:text-2xl font-extrabold tracking-tight leading-snug ${
-                              isSlate ? "text-white" : "text-[#1B2228]"
-                            }`}
-                          >
-                            {member.name}
-                          </h3>
-                          <p
-                            className={`text-xs sm:text-sm font-semibold mt-1 ${
-                              isSlate ? "text-[#FCE46D]" : "text-[#2C3740]"
-                            }`}
-                          >
-                            {member.role}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Bio */}
-                      <p
-                        className={`text-xs sm:text-sm leading-relaxed mb-6 ${
-                          isSlate ? "text-slate-200/95" : "text-[#3D4B56]"
-                        }`}
-                      >
-                        {member.bio}
-                      </p>
-                    </div>
-
-                    {/* Footer Links */}
-                    <div
-                      className={`pt-4 border-t flex items-center justify-between gap-3 ${
-                        isSlate ? "border-white/15" : "border-[#1B2228]/10"
-                      }`}
-                    >
-                      {member.linkedinUrl ? (
-                        <a
-                          href={member.linkedinUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
-                            isSlate
-                              ? "bg-white/10 hover:bg-white text-white hover:text-[#1B2228]"
-                              : "bg-white/80 hover:bg-[#1B2228] text-[#1B2228] hover:text-white"
-                          }`}
-                        >
-                          <span>Official LinkedIn</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
-                        </a>
-                      ) : (
-                        <span />
-                      )}
-
-                      <Link
-                        href="/team"
-                        className={`inline-flex items-center gap-1 text-xs font-bold ${
-                          isSlate
-                            ? "text-[#FCE46D] hover:underline"
-                            : "text-[#1B2228] hover:underline"
-                        }`}
-                      >
-                        <span>Team Members</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </SunThemeCard>
-                );
-              })}
-          </CardSlider>
-        </div>
-      </section>
+      <PartnerOrbitSection
+        eyebrow="STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM"
+        headline="Meet the Team"
+        subtitle="A global team working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible."
+        members={
+          (cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members?.length
+            ? (cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members
+            : DEFAULT_CMS_CONTENT.teamSection.members
+        }
+        showViewAllButton={true}
+        viewAllHref="/team"
+        viewAllLabel="See All Team Members"
+      />
 
       {/* =====================================================================
           SECTION 04 · SUMMIT PROGRAMME OVERVIEW (11–15 OCTOBER 2027)
@@ -870,26 +731,85 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
       </section>
 
       {/* =====================================================================
-          SECTION 11 · ROTATING CIRCULAR PARTNER ORBIT SECTION
-          Matches Image 1: Slowly rotates around the Cape Town WDC centerpiece,
-          and brings up a floating detail card when hovering on any partner!
+          SECTION 11 · OUR PARTNERS (INFINITE SCROLLING MARQUEE WITH REAL LOGOS)
+          Placed directly above the Final CTA!
          ===================================================================== */}
-      <PartnerOrbitSection
-        eyebrow="STRATEGIC PARTNERS, DATA & GLOBAL ECOSYSTEM"
-        headline={cms.partnersSection?.headline || "Organisations Behind the Summit"}
-        subtitle={
-          cms.partnersSection?.subtitle ||
-          "A global coalition of partners working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible."
-        }
-        partners={
-          cms.partnersSection?.partners?.length
-            ? cms.partnersSection.partners
-            : DEFAULT_CMS_CONTENT.partnersSection.partners
-        }
-        showViewAllButton={true}
-        viewAllHref="/partners"
-        viewAllLabel="View Partners & Summit Impact"
-      />
+      <section id="partners-marquee" className="py-12 sm:py-16 overflow-hidden">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-14 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="max-w-2xl">
+              <SectionPillBadge
+                number={cms.partnersSection.sectionNumber}
+                label={cms.partnersSection.sectionLabel}
+              />
+              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-2.5">
+                {cms.partnersSection.headline}
+              </h2>
+              <p className="text-sm sm:text-base text-[#54626F]">
+                {cms.partnersSection.subtitle}
+              </p>
+            </div>
+
+            <div className="shrink-0">
+              <Link
+                href="/partners"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1B2228]/25 bg-white hover:bg-[#1B2228] text-[#1B2228] hover:text-white font-semibold px-6 py-3 text-xs sm:text-sm shadow-2xs transition-all"
+              >
+                <Handshake className="w-4 h-4" />
+                <span>View Partners &amp; Summit Impact</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Full-Width Infinite Scrolling Logo Marquee */}
+        <div className="relative w-full overflow-hidden py-3">
+          {/* Left & Right Soft Gradient Masks */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F4F6F8] to-transparent z-10" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#F4F6F8] to-transparent z-10" />
+
+          <div className="animate-wdc-marquee gap-5 px-3">
+            {[
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+              ...(cms.partnersSection.partners?.length
+                ? cms.partnersSection.partners
+                : DEFAULT_CMS_CONTENT.partnersSection.partners),
+            ].map((partner, idx) => (
+              <div
+                key={`${partner.id}-${idx}`}
+                className="w-[250px] sm:w-[285px] shrink-0 rounded-[24px] bg-white hover:bg-[#EEF6FC] border border-slate-200/80 p-6 shadow-card transition-all flex flex-col items-center justify-between text-center group"
+              >
+                <div className="w-full h-20 flex items-center justify-center px-3 py-2 rounded-2xl bg-[#F8FAFC] border border-slate-100 mb-4">
+                  {partner.logoUrl ? (
+                    <img
+                      src={partner.logoUrl}
+                      alt={partner.name}
+                      className="max-h-14 max-w-[190px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <span className="text-lg font-extrabold text-[#1B2228]">
+                      {partner.name}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <div className="text-sm sm:text-base font-bold text-[#1B2228] leading-snug">
+                    {partner.name}
+                  </div>
+                  {partner.category && (
+                    <div className="text-[11px] font-medium text-[#54626F] mt-1">
+                      {partner.category}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </SiteShell>
   );
 }

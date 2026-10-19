@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, ArrowUpRight, Handshake } from "lucide-react";
-import { PartnerItem } from "@/lib/default-data";
+import { ChevronLeft, ChevronRight, ArrowUpRight, Users } from "lucide-react";
+import { PartnerItem, TeamMember } from "@/lib/default-data";
 
 export interface OrbitNodeItem {
   id: string;
@@ -19,6 +19,7 @@ interface PartnerOrbitSectionProps {
   eyebrow?: string;
   headline?: string;
   subtitle?: string;
+  members?: TeamMember[];
   partners?: PartnerItem[];
   customNodes?: OrbitNodeItem[];
   showViewAllButton?: boolean;
@@ -27,19 +28,31 @@ interface PartnerOrbitSectionProps {
 }
 
 export default function PartnerOrbitSection({
-  eyebrow = "STRATEGY, PARTNERSHIPS AND DEVELOPMENT ECOSYSTEM",
-  headline = "Our Global Partners",
-  subtitle = "A global coalition of organisations working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible.",
+  eyebrow = "STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM",
+  headline = "Meet the Team",
+  subtitle = "A global team working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible.",
+  members = [],
   partners = [],
   customNodes,
   showViewAllButton = true,
-  viewAllHref = "/partners",
-  viewAllLabel = "Explore Partner Ecosystem",
+  viewAllHref = "/team",
+  viewAllLabel = "See All Team Members",
 }: PartnerOrbitSectionProps) {
-  // Convert partners or customNodes into standardized OrbitNodeItem[]
+  // Convert members, customNodes, or partners into standardized OrbitNodeItem[]
   const allItems: OrbitNodeItem[] =
     customNodes && customNodes.length > 0
       ? customNodes
+      : members && members.length > 0
+      ? members.map((m) => ({
+          id: m.id,
+          name: m.name,
+          subtitle: m.role,
+          description:
+            m.bio.length > 135 ? m.bio.slice(0, 132).trim() + "..." : m.bio,
+          imageUrl: m.imageUrl,
+          isPhoto: true,
+          linkUrl: m.linkedinUrl,
+        }))
       : partners.map((p) => ({
           id: p.id,
           name: p.name,
@@ -52,16 +65,16 @@ export default function PartnerOrbitSection({
           linkUrl: p.website,
         }));
 
-  // Display 8 nodes around the orbit ring at a time (matching the 8-node symmetry in the reference design)
   const visibleCount = Math.min(8, allItems.length);
   const [pageOffset, setPageOffset] = useState(0);
   const [rotationDeg, setRotationDeg] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(2); // Default highlighted node on right side
+  const [activeIndex, setActiveIndex] = useState<number>(
+    Math.min(1, Math.max(0, visibleCount - 1))
+  );
   const [isPaused, setIsPaused] = useState(false);
   const animRef = useRef<number | null>(null);
 
-  // Build the 8 visible nodes for the current page offset
   const visibleNodes: OrbitNodeItem[] = [];
   if (allItems.length > 0) {
     for (let i = 0; i < visibleCount; i++) {
@@ -76,7 +89,6 @@ export default function PartnerOrbitSection({
       const dt = now - lastTime;
       lastTime = now;
       if (!isPaused && hoveredIndex === null) {
-        // Rotate slowly (~6 degrees per second = 60 seconds per full revolution)
         setRotationDeg((prev) => (prev + dt * 0.0065) % 360);
       }
       animRef.current = requestAnimationFrame(tick);
@@ -108,14 +120,14 @@ export default function PartnerOrbitSection({
 
   return (
     <section
-      id="partners-orbit"
+      id="youth-summit-crew"
       className="relative py-16 sm:py-24 overflow-hidden select-none"
       style={{
         background:
           "linear-gradient(180deg, #EAF4FC 0%, #F4F9FD 45%, #E3F0FA 100%)",
       }}
     >
-      {/* Crisp High-Key Cape Town & Table Mountain Bay Panoramic Backdrop (No Blur) */}
+      {/* Crisp High-Key Cape Town & Table Mountain Bay Panoramic Backdrop */}
       <img
         src="/illustrations/partner-section-bg.jpg"
         alt=""
@@ -132,7 +144,7 @@ export default function PartnerOrbitSection({
 
       {/* 3D Floating Decorative Spheres */}
       <div
-        className="pointer-events-none hidden lg:block absolute top-20 left-16 w-20 h-20 rounded-full opacity-50 blur-[1px] animate-pulse"
+        className="pointer-events-none hidden lg:block absolute top-20 left-16 w-20 h-20 rounded-full opacity-50 animate-pulse"
         style={{
           background:
             "radial-gradient(circle at 30% 30%, #FFFFFF 0%, #93C5FD 55%, #1D4ED8 100%)",
@@ -177,7 +189,7 @@ export default function PartnerOrbitSection({
           <button
             type="button"
             onClick={handlePrev}
-            aria-label="Previous partner"
+            aria-label="Previous team member"
             className="absolute -left-2 sm:-left-10 md:-left-16 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/90 hover:bg-white text-[#08203E] shadow-lg border border-sky-200/80 flex items-center justify-center transition-all hover:scale-105 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
@@ -187,7 +199,7 @@ export default function PartnerOrbitSection({
           <button
             type="button"
             onClick={handleNext}
-            aria-label="Next partner"
+            aria-label="Next team member"
             className="absolute -right-2 sm:-right-10 md:-right-16 z-30 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white/90 hover:bg-white text-[#08203E] shadow-lg border border-sky-200/80 flex items-center justify-center transition-all hover:scale-105 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
@@ -197,9 +209,9 @@ export default function PartnerOrbitSection({
           <div className="pointer-events-none absolute w-[94%] h-[94%] rounded-full border border-sky-300/40" />
 
           {/* Main Orbital Connector Ring */}
-          <div className="pointer-events-none absolute w-[78%] h-[78%] rounded-full border-[2.5px] border-[#93C5FD]/75 shadow-[0_0_40px_rgba(56,189,248,0.18)]" />
+          <div className="pointer-events-none absolute w-[78%] h-[78%] rounded-full border-[2.5px] border-[#93C5FD]/80 shadow-[0_0_40px_rgba(56,189,248,0.18)]" />
 
-          {/* Rotating Layer: Connector Dots + Partner Nodes */}
+          {/* Rotating Layer: Connector Dots + Team Member Nodes */}
           <div
             className="absolute inset-0"
             style={{
@@ -207,12 +219,12 @@ export default function PartnerOrbitSection({
               transition: isPaused ? "transform 0.35s ease-out" : "none",
             }}
           >
-            {/* Small Blue Orbital Connector Dots placed between the 8 main nodes */}
+            {/* Small Blue Orbital Connector Dots placed between the main nodes */}
             {visibleNodes.map((_, idx) => {
               const stepAngle = 360 / visibleCount;
               const dotAngle1 = idx * stepAngle + stepAngle * 0.36 - 90;
               const dotAngle2 = idx * stepAngle + stepAngle * 0.64 - 90;
-              const rPercent = 39; // matches 78% diameter / 2
+              const rPercent = 39;
               const x1 = 50 + rPercent * Math.cos((dotAngle1 * Math.PI) / 180);
               const y1 = 50 + rPercent * Math.sin((dotAngle1 * Math.PI) / 180);
               const x2 = 50 + rPercent * Math.cos((dotAngle2 * Math.PI) / 180);
@@ -232,17 +244,16 @@ export default function PartnerOrbitSection({
               );
             })}
 
-            {/* 8 Circular Nodes on the Orbit Ring */}
+            {/* Circular Team Member Nodes on the Orbit Ring */}
             {visibleNodes.map((node, idx) => {
               const stepAngle = 360 / visibleCount;
-              const baseAngleDeg = idx * stepAngle - 90; // Start at 12 o'clock
+              const baseAngleDeg = idx * stepAngle - 90;
               const rPercent = 39;
               const leftPct =
                 50 + rPercent * Math.cos((baseAngleDeg * Math.PI) / 180);
               const topPct =
                 50 + rPercent * Math.sin((baseAngleDeg * Math.PI) / 180);
 
-              // Calculate actual screen angle (incorporating current rotation) to position the hover card smartly
               const screenAngleDeg =
                 ((baseAngleDeg + rotationDeg) % 360 + 360) % 360;
               const isRightHalf =
@@ -259,7 +270,7 @@ export default function PartnerOrbitSection({
                     top: `${topPct}%`,
                   }}
                 >
-                  {/* Counter-rotate so node content & popup card remain 100% upright */}
+                  {/* Counter-rotate so member portrait & popup card remain 100% upright */}
                   <div
                     className="relative flex items-center justify-center"
                     style={{
@@ -267,7 +278,7 @@ export default function PartnerOrbitSection({
                       transition: isPaused ? "transform 0.35s ease-out" : "none",
                     }}
                   >
-                    {/* Circular Partner / Member Node */}
+                    {/* Circular Team Member Node */}
                     <button
                       type="button"
                       onMouseEnter={() => {
@@ -290,7 +301,7 @@ export default function PartnerOrbitSection({
                           <img
                             src={node.imageUrl}
                             alt={node.name}
-                            className="w-full h-full object-cover object-center"
+                            className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
                           <div className="w-full h-full p-2.5 sm:p-4 flex items-center justify-center bg-white">
@@ -311,7 +322,7 @@ export default function PartnerOrbitSection({
                     {/* Desktop Floating Detail Card next to the Hovered/Active Node (matches Image 1!) */}
                     {isFocused && (
                       <div
-                        className={`hidden md:block absolute top-1/2 -translate-y-1/2 z-40 w-[245px] lg:w-[265px] rounded-2xl bg-white/98 backdrop-blur-md p-4 lg:p-5 shadow-[0_18px_45px_rgba(8,32,62,0.16)] border border-sky-200/90 text-left transition-all duration-200 ${
+                        className={`hidden md:block absolute top-1/2 -translate-y-1/2 z-40 w-[250px] lg:w-[270px] rounded-2xl bg-white/98 backdrop-blur-md p-4 lg:p-5 shadow-[0_18px_45px_rgba(8,32,62,0.16)] border border-sky-200/90 text-left transition-all duration-200 ${
                           isRightHalf
                             ? "left-[calc(100%+16px)]"
                             : "right-[calc(100%+16px)]"
@@ -334,7 +345,7 @@ export default function PartnerOrbitSection({
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 text-[11px] font-bold text-[#08203E] hover:text-[#2563EB] mt-2.5"
                           >
-                            <span>Official Partner</span>
+                            <span>LinkedIn Profile</span>
                             <ArrowUpRight className="w-3 h-3" />
                           </a>
                         )}
@@ -350,13 +361,11 @@ export default function PartnerOrbitSection({
               CENTRAL CAPE TOWN SUMMIT EMBLEM PORTAL (Matches Image 1 Center!)
              ================================================================= */}
           <div className="relative z-10 w-[165px] h-[165px] sm:w-[265px] sm:h-[265px] md:w-[320px] md:h-[320px] rounded-full overflow-hidden border-[5px] sm:border-[7px] border-white ring-4 sm:ring-8 ring-[#BAE6FD]/75 shadow-[0_20px_60px_rgba(8,32,62,0.28)] flex flex-col items-center justify-start text-center">
-            {/* Cape Town & Table Mountain Photo Backdrop */}
             <img
               src="/illustrations/table-mountain-center.jpg"
               alt="World Disaster Center Youth Leadership Summit 2027 Cape Town"
               className="absolute inset-0 w-full h-full object-cover object-center"
             />
-            {/* Subtle Royal Navy Top Sky Gradient for Crisp White Typography */}
             <div
               className="absolute inset-0"
               style={{
@@ -365,9 +374,7 @@ export default function PartnerOrbitSection({
               }}
             />
 
-            {/* WDC Emblem & Typography inside Center Circle */}
             <div className="relative z-10 pt-4 sm:pt-7 md:pt-9 px-3 flex flex-col items-center text-white">
-              {/* WDC Wireframe Globe Icon */}
               <svg
                 viewBox="0 0 48 48"
                 fill="none"
@@ -409,7 +416,7 @@ export default function PartnerOrbitSection({
           </div>
         </div>
 
-        {/* Mobile / Tablet Active Partner Detail Card (Always accessible on smaller screens) */}
+        {/* Mobile / Tablet Active Member Detail Card */}
         {focusedNode && (
           <div className="md:hidden mt-6 max-w-sm mx-auto rounded-2xl bg-white/95 backdrop-blur-md p-5 shadow-lg border border-sky-200 text-center">
             <div className="text-base font-extrabold text-[#08203E]">
@@ -455,7 +462,7 @@ export default function PartnerOrbitSection({
               href={viewAllHref}
               className="inline-flex items-center gap-2 rounded-full bg-[#08203E] hover:bg-[#12345E] text-white font-semibold px-7 py-3.5 text-xs sm:text-sm shadow-md transition-all hover:-translate-y-0.5"
             >
-              <Handshake className="w-4 h-4 text-[#FCE46D]" />
+              <Users className="w-4 h-4 text-[#FCE46D]" />
               <span>{viewAllLabel}</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
