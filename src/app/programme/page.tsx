@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { DEFAULT_CMS_CONTENT, SiteCMSContent } from "@/lib/default-data";
 import { SiteShell } from "@/components/NavbarAndFooter";
 import { SunThemeCard, SectionPillBadge } from "@/components/SunSummitDesign";
 import CardSlider from "@/components/CardSlider";
+import SummitProgrammeOverview from "@/components/SummitProgrammeOverview";
 
 export default function ProgrammePage() {
   const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
@@ -22,60 +23,35 @@ export default function ProgrammePage() {
 
   return (
     <SiteShell cms={cms}>
-      {/* SECTION 07 · THE PROGRAMME ("Five Days in Cape Town") */}
-      <section id="programme" className="px-5 sm:px-8 lg:px-14 pt-12 sm:pt-16 pb-10">
+      {/* =====================================================================
+          SECTION 07 · THE PROGRAMME OVERVIEW (11–15 OCTOBER 2027)
+          Extracted & corrected from official Youth Leadership Summit 2027 board
+         ===================================================================== */}
+      <section
+        id="programme"
+        className="px-5 sm:px-8 lg:px-14 pt-10 sm:pt-14 pb-10"
+      >
         <div className="max-w-[1240px] mx-auto">
-          <div className="max-w-2xl mb-8">
+          <div className="max-w-3xl mb-8">
             <SectionPillBadge
               number={cms.programme.sectionNumber}
-              label={cms.programme.sectionLabel}
+              label="SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027"
             />
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1B2228] leading-[1.1] mb-3">
-              {cms.programme.headline}
+              Youth Leadership Summit 2027 Programme
             </h1>
             <p className="text-sm sm:text-base text-[#54626F]">
               {cms.programme.subtitle}
             </p>
           </div>
 
-          {/* 5-Day Programme in Responsive Slider */}
-          <CardSlider
-            cardClassName="w-[85vw] sm:w-[320px] lg:w-[350px]"
-            gap="gap-5"
-            badge="5-Day Cape Town Schedule"
-          >
-            {cms.programme.days.map((day) => (
-              <SunThemeCard
-                key={day.id}
-                theme={day.themeColor}
-                watermarkPosition="bottom-right"
-                className="h-full flex flex-col justify-between"
-              >
-                <div>
-                  <div className="text-xs font-mono font-bold text-[#1B2228]/80 mb-1">
-                    {day.dayNumber}
-                  </div>
-                  <div className="text-xs text-[#54626F] mb-3">{day.date}</div>
-                  <h3 className="text-lg font-bold text-[#1B2228] mb-4">
-                    {day.title}
-                  </h3>
-                  <ul className="space-y-2.5">
-                    {day.items.map((item, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-2 text-xs text-[#2C3740] leading-relaxed"
-                      >
-                        <Check className="w-3.5 h-3.5 text-[#1B2228] shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </SunThemeCard>
-            ))}
-          </CardSlider>
+          {/* Complete 6-Stage Summit Overview Board with 2D/3D Illustrations */}
+          <SummitProgrammeOverview
+            days={cms.programme?.days || DEFAULT_CMS_CONTENT.programme.days}
+            compact={false}
+          />
 
-          <div className="rounded-[26px] bg-[#1E2933] text-white p-7 sm:p-9 flex flex-col sm:flex-row items-center justify-between gap-6 mt-8">
+          <div className="rounded-[26px] bg-[#1E2933] text-white p-7 sm:p-9 flex flex-col sm:flex-row items-center justify-between gap-6 mt-8 shadow-card">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold mb-1">
                 {cms.programme.bannerTitle}
@@ -145,7 +121,9 @@ export default function ProgrammePage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-300 pt-1">{cms.stage.footnote}</p>
+                <p className="text-xs text-slate-300 pt-1">
+                  {cms.stage.footnote}
+                </p>
               </div>
             </div>
           </SunThemeCard>

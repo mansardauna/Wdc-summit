@@ -239,8 +239,8 @@ function PaymentPageContent() {
 
               <p className="text-xs sm:text-sm text-[#4A5864] leading-relaxed mb-7">
                 Thank you for completing your payment for the{" "}
-                <strong>World Disaster Center Youth Leader Summit 2027</strong>{" "}
-                (10–14 October 2027, Cape Town, South Africa). Your transaction has been recorded in our central admissions and finance portal.
+                <strong>World Disaster Center Youth Leadership Summit 2027</strong>{" "}
+                (11–15 October 2027, Cape Town, South Africa). Your transaction has been recorded in our central admissions and finance portal.
               </p>
 
               <div className="flex flex-wrap items-center gap-3">

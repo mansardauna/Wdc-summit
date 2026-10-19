@@ -26,6 +26,7 @@ export interface PartnerItem {
   id: string;
   name: string;
   category: string;
+  description?: string;
   logoUrl?: string;
   website?: string;
 }
@@ -48,8 +49,14 @@ export interface ProgrammeDay {
   id: string;
   dayNumber: string;
   date: string;
+  shortDate?: string;
   title: string;
+  subtitle?: string;
   themeColor: "ice" | "powder" | "glacier" | "slate";
+  headerColor?: string;
+  iconType?: "welcome" | "innovation" | "culture" | "drone" | "declaration" | "closing";
+  delegateCount?: string;
+  delegateLabel?: string;
   items: string[];
 }
 
@@ -335,10 +342,10 @@ export interface FullDatabaseStore {
 export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   settings: {
     orgName: "World Disaster Center",
-    summitTitle: "Youth Leader Summit 2027",
+    summitTitle: "Youth Leadership Summit 2027",
     editionBadge: "1ST GLOBAL EDITION · SPRING SUMMIT",
-    datesText: "10–14 October 2027",
-    countdownTargetIso: "2027-10-10T09:00:00Z",
+    datesText: "11–15 October 2027",
+    countdownTargetIso: "2027-10-11T09:00:00Z",
     hostCity: "Cape Town, South Africa",
     ageRange: "Ages 18–30",
     speakerSlotsCount: 20,
@@ -346,7 +353,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     websiteDomain: "worlddisastercenter.org",
     officeAddress: "Cape Town International Convention Precinct, Cape Town, South Africa",
     whatsappOrPhone: "+27 21 555 0194",
-    announcementBar: "Applications for the 2027 World Disaster Center Youth Leader Summit in Cape Town are now open.",
+    announcementBar: "Applications for the 2027 World Disaster Center Youth Leadership Summit in Cape Town (11–15 October 2027) are now open.",
     paymentMode: "sandbox",
     defaultGateway: "paystack",
     paystackPublicKey: "",
@@ -356,27 +363,28 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     supabaseConnectedNote: "Hybrid PostgreSQL / Supabase + Local Persistence Active",
   },
   hero: {
-    badge: "1ST GLOBAL EDITION · SPRING SUMMIT",
-    eyebrow: "World Disaster Center Youth Leader Summit 2027",
+    badge: "1ST GLOBAL EDITION · PEOPLE | SOLUTIONS | RESILIENT FUTURES",
+    eyebrow: "World Disaster Center Youth Leadership Summit 2027",
     headlineLine1: "Join the First",
     headlineLine2: "Global Summit.",
     description:
-      "A spring summit that lands in a different part of the globe every year. This year, Cape Town, South Africa. Five days to train as a youth leader in climate resilience, disaster prediction and resilience in conflict zones, and to put your name to the WDC Global Environmental Protection Declaration.",
+      "A spring summit that lands in a different part of the globe every year. This year, Cape Town, South Africa (11–15 October 2027). Five days to train as a youth leader in climate resilience, disaster tracking and management, and to put your name to the WDC Global Environmental Protection Declaration.",
     metaPills: [
-      "10–14 October 2027",
+      "11–15 October 2027",
       "Cape Town, South Africa",
       "Ages 18–30",
-      "20 delegate speaker slots",
+      "200 Registered Delegates",
+      "20 Delegate Speaker Slots",
     ],
     primaryCta: "Apply Now",
     secondaryCta: "The Declaration →",
     tickerItems: [
-      "CLIMATE RESILIENCE",
-      "LEADERSHIP",
-      "DISASTER PREDICTION",
-      "RESILIENCE IN CONFLICT ZONES",
+      "CLIMATE LEADERSHIP & INNOVATION",
+      "CLIMATE & CULTURE",
+      "DISASTER TRACKING & DRONE DEMO",
+      "YOUTH DEBATE & DECLARATION",
       "FULLY FUNDED SEATS",
-      "SPRING 2027",
+      "11–15 OCT 2027 · CAPE TOWN",
     ],
     mountainImageUrl:
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=85",
@@ -386,14 +394,14 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     sectionLabel: "ABOUT THE SUMMIT",
     headline: "Where Youth Leaders Learn to Get Ahead of Disaster",
     paragraph1:
-      "The World Disaster Center Youth Leader Summit trains the next generation to prepare for, respond to and recover from the shocks that define this century. Over five days, delegates aged 18–30 work on climate resilience, leadership, disaster prediction and resilience in conflict zones.",
+      "The World Disaster Center Youth Leadership Summit 2027 trains the next generation to prepare for, respond to and recover from the shocks that define this century. From 11–15 October 2027, up to 200 registered delegates aged 18–30 gather for speeches, masterclasses, exhibitions, investment opportunities, and hands-on disaster technology demonstrations.",
     paragraph2:
-      "It is the first edition of a global summit that takes place every spring in a different part of the globe. In 2027 it comes to Cape Town, South Africa, and it closes with delegates signing the WDC Global Environmental Protection Declaration.",
+      "It is the first edition of a global summit that takes place every spring in a different part of the globe. In 2027 it comes to Cape Town, South Africa, and closes with delegates drafting, debating, and signing the WDC Youth Declaration.",
     ctaText: "See Scholarships & Packages",
     stats: [
+      { value: "200", label: "Registered global delegates" },
       { value: "20", label: "Delegate speaker slots" },
-      { value: "3", label: "Scholarship tiers" },
-      { value: "5", label: "Days in Cape Town" },
+      { value: "5", label: "Days · 11–15 Oct 2027" },
       { value: "18–30", label: "Age range, every nationality" },
     ],
   },
@@ -450,7 +458,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     sectionNumber: "03",
     sectionLabel: "THE PRINCIPAL OUTCOME",
     headline: "The WDC Global Environmental Protection Declaration",
-    signedBadge: "Signed in Cape Town · 14 October 2027",
+    signedBadge: "Signed in Cape Town · 14–15 October 2027",
     paragraph1:
       "The principal outcome of the Summit is a collective statement on protecting the planet and the people who live on it, drafted, debated and signed by the delegates themselves.",
     paragraph2:
@@ -488,7 +496,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     sectionLabel: "WHAT YOU WILL TRAIN IN",
     headline: "Six Pillars of Resilience",
     subtitle:
-      "Every session, workshop and dialogue across the five days sits under one of six connected pillars.",
+      "Every session, workshop and dialogue across 11–15 October 2027 sits under one of six connected pillars.",
     items: [
       {
         number: "01",
@@ -541,10 +549,10 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     paragraph1:
       "Climate pressure is part of daily life in Cape Town: water scarcity, wildfire on the mountain slopes and winter flooding in low-lying settlements. It is a working classroom for climate resilience, which makes it the right place to open a global summit about readiness.",
     paragraph2:
-      "The Youth Leader Summit is a spring summit. Each year it moves to a different part of the globe, so every edition is hosted on the front line of a different challenge.",
+      "The Youth Leadership Summit is a spring summit. Each year it moves to a different part of the globe, so every edition is hosted on the front line of a different challenge.",
     highlights: [
       {
-        title: "10–14 October 2027",
+        title: "11–15 October 2027",
         subtitle: "Five days, in person",
       },
       {
@@ -574,81 +582,146 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   },
   programme: {
     sectionNumber: "07",
-    sectionLabel: "THE PROGRAMME",
-    headline: "Five Days in Cape Town",
-    subtitle: "Indicative programme, subject to confirmation.",
+    sectionLabel: "SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027",
+    headline: "Youth Leadership Summit 2027 Programme",
+    subtitle:
+      "People | Solutions | Resilient Futures — Youth Leadership for a Safer, More Resilient World in Cape Town, South Africa (11–15 October 2027).",
     days: [
       {
         id: "day-1",
-        dayNumber: "Day 01",
-        date: "Sunday · 10 October 2027",
-        title: "Arrival & Opening",
+        dayNumber: "STAGE 01 · ARRIVAL",
+        date: "Monday · 11 October 2027 (Morning)",
+        shortDate: "MON 11 OCT 2027",
+        title: "Arrival & Welcome Experience",
+        subtitle: "For fully funded and partially funded delegates",
         themeColor: "ice",
+        headerColor: "#0E3F6E",
+        iconType: "welcome",
+        delegateCount: "50",
+        delegateLabel: "Fully funded and partially funded delegates",
         items: [
-          "Delegate registration & welcome kit",
-          "Official opening ceremony",
-          "Inaugural keynote: youth leaders and climate resilience",
-          "Delegate introductions & country roll call",
-          "Welcome reception",
+          "Airport arrivals and transfers",
+          "Delegate registration",
+          "Welcome briefing",
+          "Networking and orientation",
+          "Evening welcome reception",
         ],
       },
       {
         id: "day-2",
-        dayNumber: "Day 02",
+        dayNumber: "DAY 01 · OPENING",
         date: "Monday · 11 October 2027",
-        title: "Climate & Leadership",
+        shortDate: "MON 11 OCT 2027",
+        title: "Climate Leadership and Innovation",
+        subtitle: "Solutions, technology and leadership for a resilient future",
         themeColor: "powder",
+        headerColor: "#005EB8",
+        iconType: "innovation",
+        delegateCount: "200",
+        delegateLabel: "All registered delegates",
         items: [
-          "Morning plenary on climate resilience",
-          "Leadership workshop: decisions under pressure",
-          "Breakouts on adaptation and environmental protection",
-          "Networking reception",
+          "Opening session and keynote speeches",
+          "Masterclasses with global experts",
+          "Corporate and expert speakers",
+          "Innovation showcase",
+          "Investment opportunities",
+          "Exhibition area (morning to lunch)",
+          "Networking sessions",
         ],
       },
       {
         id: "day-3",
-        dayNumber: "Day 03",
+        dayNumber: "DAY 02",
         date: "Tuesday · 12 October 2027",
-        title: "Prediction & Early Warning",
+        shortDate: "TUE 12 OCT 2027",
+        title: "Climate and Culture",
+        subtitle: "The power of media, storytelling and creative expression for climate action",
         themeColor: "glacier",
+        headerColor: "#0082B3",
+        iconType: "culture",
+        delegateCount: "200",
+        delegateLabel: "All registered delegates",
         items: [
-          "Plenary: from data to early warning",
-          "Hands-on disaster prediction lab",
-          "Breakouts on community preparedness",
-          "Partnership roundtables",
+          "Keynote speakers",
+          "Documentary screening",
+          "Panel discussion: The role of media in climate action",
+          "Masterclasses on storytelling and communication",
+          "Corporate and expert speakers",
+          "Investment opportunities",
+          "Exhibition area (morning to lunch)",
+          "Networking sessions",
         ],
       },
       {
         id: "day-4",
-        dayNumber: "Day 04",
+        dayNumber: "DAY 03",
         date: "Wednesday · 13 October 2027",
-        title: "Conflict Zones & the City",
+        shortDate: "WED 13 OCT 2027",
+        title: "Disaster Tracking and Disaster Management",
+        subtitle: "Data, technology and people for early action and resilience",
         themeColor: "ice",
+        headerColor: "#0D7D6E",
+        iconType: "drone",
+        delegateCount: "200",
+        delegateLabel: "All registered delegates",
         items: [
-          "Session on resilience in conflict zones",
-          "Site visit in Cape Town (venue TBC)",
-          "Delegate stage: the 20 speakers",
-          "Cultural evening",
+          "Keynote speakers",
+          "Drone demo day and technology demonstrations",
+          "Expert panels on disaster management and early warning",
+          "Masterclasses with leading experts",
+          "Corporate speakers",
+          "Investment opportunities",
+          "Exhibition area (morning to lunch)",
+          "Networking sessions",
         ],
       },
       {
         id: "day-5",
-        dayNumber: "Day 05",
+        dayNumber: "DAY 04",
         date: "Thursday · 14 October 2027",
-        title: "Declaration & Closing",
+        shortDate: "THU 14 OCT 2027",
+        title: "Youth Leadership, Debate and Declaration",
+        subtitle: "From dialogue to commitment for a more resilient world",
         themeColor: "slate",
+        headerColor: "#164A8A",
+        iconType: "declaration",
+        delegateCount: "200",
+        delegateLabel: "All registered delegates",
         items: [
-          "Working groups on the Declaration text",
-          "Plenary debate & adoption of the Declaration",
-          "Signing ceremony: every delegate a named signatory",
-          "Certificate ceremony",
-          "Group photograph & farewell dinner",
+          "Youth-led debates and working groups",
+          "Keynote speakers",
+          "Masterclasses",
+          "Corporate and expert speakers",
+          "Investment opportunities",
+          "Development of the WDC Youth Declaration",
+          "Formal signing ceremony",
+          "Closing session and networking",
+        ],
+      },
+      {
+        id: "day-6",
+        dayNumber: "DAY 05 · CLOSING",
+        date: "Friday · 15 October 2027",
+        shortDate: "FRI 15 OCT 2027",
+        title: "Closing Experience and Departures",
+        subtitle: "For fully funded, partially funded and forum access delegates",
+        themeColor: "powder",
+        headerColor: "#0A6AD6",
+        iconType: "closing",
+        delegateCount: "50",
+        delegateLabel: "Fully funded, partially funded and forum access delegates",
+        items: [
+          "Closing reflections",
+          "Networking and informal meetings",
+          "Final sessions and acknowledgements",
+          "Cultural experience options (for eligible delegates)",
+          "Transfers to the airport",
         ],
       },
     ],
     bannerTitle: "You leave a signatory.",
     bannerSubtitle:
-      "Your name on the Declaration, an official certificate in hand and a network of youth leaders behind you.",
+      "Your name on the WDC Youth Declaration, an official certificate in hand and a global network of 200 youth leaders behind you.",
     bannerCta: "Apply Now",
   },
   whoCanApply: {
@@ -916,15 +989,17 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
   ],
   partnersSection: {
     sectionNumber: "11",
-    sectionLabel: "OUR PARTNERS",
+    sectionLabel: "STRATEGIC PARTNERS & ECOSYSTEM",
     headline: "Organisations Behind the Summit",
     subtitle:
-      "The Youth Leader Summit is built with partners across climate, data, research and technology.",
+      "A global coalition of partners across climate, data, research and technology working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible.",
     partners: [
       {
         id: "part-1",
         name: "EcoPeace Middle East",
         category: "Environmental Peacebuilding",
+        description:
+          "Advances cross-border water diplomacy, climate resilience, and environmental peacebuilding training in conflict-sensitive regions.",
         logoUrl: "/partners/ecopeace.jpg",
         website: "https://ecopeaceme.org",
       },
@@ -932,12 +1007,16 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-2",
         name: "Global Climate Collective",
         category: "Climate Action Network",
+        description:
+          "Connects grassroots youth climate innovators, policy advocates, and community resilience chapters across 60+ countries.",
         logoUrl: "/partners/global-climate-collective.svg",
       },
       {
         id: "part-3",
         name: "Google",
         category: "Technology & AI Forecasting",
+        description:
+          "Powers AI flood forecasting, wildfire boundary tracking, and cloud-scale planetary data analysis for early disaster action.",
         logoUrl: "/partners/google.png",
         website: "https://google.com",
       },
@@ -945,6 +1024,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-4",
         name: "UN Data Systems",
         category: "Global Humanitarian Data",
+        description:
+          "Provides standardized global humanitarian indicators, crisis telemetry datasets, and SDG monitoring frameworks.",
         logoUrl: "/partners/un.svg",
         website: "https://data.un.org",
       },
@@ -952,6 +1033,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-5",
         name: "Ben-Gurion University of the Negev",
         category: "Drylands & Climate Research",
+        description:
+          "Leads academic research in desert hydrology, arid-zone agriculture, and dryland climate adaptation solutions.",
         logoUrl: "/partners/bgu.svg",
         website: "https://in.bgu.ac.il",
       },
@@ -959,6 +1042,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-6",
         name: "ClimateBase",
         category: "Climate Careers & Talent",
+        description:
+          "Supports youth delegates with climate career pathways, fellowship placements, and green-tech venture connections.",
         logoUrl: "/partners/climatebase.svg",
         website: "https://climatebase.org",
       },
@@ -966,6 +1051,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-7",
         name: "UNDP",
         category: "Development & Resilience",
+        description:
+          "Supports national adaptation planning, youth climate governance, and sustainable recovery programmes worldwide.",
         logoUrl: "/partners/undp.png",
         website: "https://undp.org",
       },
@@ -973,6 +1060,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-8",
         name: "Esri",
         category: "Geospatial & GIS Intelligence",
+        description:
+          "Delivers ArcGIS spatial mapping, real-time hazard visualization, and disaster tracking masterclasses for delegates.",
         logoUrl: "/partners/esri.png",
         website: "https://esri.com",
       },
@@ -980,6 +1069,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-9",
         name: "Microsoft",
         category: "Cloud & AI Infrastructure",
+        description:
+          "Enables AI for Good planetary computer tools, emergency response cloud infrastructure, and digital resilience labs.",
         logoUrl: "/partners/microsoft.png",
         website: "https://microsoft.com",
       },
@@ -987,6 +1078,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-10",
         name: "The World Bank",
         category: "Global Development Finance",
+        description:
+          "Shares frameworks on climate risk financing, resilient urban infrastructure investment, and disaster recovery funds.",
         logoUrl: "/partners/worldbank.svg",
         website: "https://worldbank.org",
       },
@@ -994,6 +1087,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-11",
         name: "European Space Agency",
         category: "Earth Observation & Satellite Data",
+        description:
+          "Supplies Copernicus Sentinel satellite imagery for drought monitoring, coastal erosion, and rapid disaster mapping.",
         logoUrl: "/partners/esa.png",
         website: "https://esa.int",
       },
@@ -1001,6 +1096,8 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         id: "part-12",
         name: "GCSE",
         category: "Science & Environment Council",
+        description:
+          "Bridges scientific research and environmental policy to ground the WDC Youth Declaration in evidence-based action.",
         logoUrl: "/partners/gcse.png",
         website: "https://gcseglobal.org",
       },
@@ -1057,15 +1154,15 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     items: [
       {
         id: "faq-1",
-        question: "What is the World Disaster Center Youth Leader Summit?",
+        question: "What is the World Disaster Center Youth Leadership Summit 2027?",
         answer:
-          "A global summit organised by the World Disaster Center for youth leaders aged 18 to 30. The 2027 edition takes place in Cape Town, South Africa, and trains delegates in climate resilience, leadership, disaster prediction and resilience in conflict zones.",
+          "A global summit organised by the World Disaster Center for youth leaders aged 18 to 30. The 2027 edition takes place in Cape Town, South Africa (11–15 October 2027), and trains 200 registered delegates in climate leadership, innovation, media storytelling, disaster tracking, and resilience.",
       },
       {
         id: "faq-2",
         question: "When and where does it take place?",
         answer:
-          "10–14 October 2027 in Cape Town, South Africa. It is a spring summit that moves to a different part of the globe every year.",
+          "11–15 October 2027 in Cape Town, South Africa. It is a spring summit that moves to a different part of the globe every year.",
       },
       {
         id: "faq-3",
@@ -1122,7 +1219,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     sectionLabel: "YOUTH SUMMIT CREW",
     headline: "Meet the Youth Summit Crew",
     subtitle:
-      "The executive leadership, strategy directors, technical architects, and global board members of the World Disaster Center driving the 2027 Youth Leader Summit in Cape Town.",
+      "The executive leadership, strategy directors, technical architects, and global board members of the World Disaster Center driving the Youth Leadership Summit 2027 in Cape Town.",
     ctaText: "See All Team Members",
     members: [
       {
@@ -1157,7 +1254,7 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
         role: "Technical Lead",
         badge: "TECHNICAL LEAD",
         location: "Global Digital Operations",
-        bio: "Full-stack software engineer and technical lead spearheading the World Disaster Center Youth Leader Summit digital infrastructure, delegate telemetry portals, real-time application systems, and web architecture.",
+        bio: "Full-stack software engineer and technical lead spearheading the World Disaster Center Youth Leadership Summit 2027 digital infrastructure, delegate telemetry portals, real-time application systems, and web architecture.",
         imageUrl: "/team/abdulrahman-monsur.jpg",
         linkedinUrl: "https://www.linkedin.com/in/monsur-alao-abdulrahman-3517913ab",
         email: "summit@worlddisastercenter.org",
@@ -1219,10 +1316,10 @@ export const DEFAULT_CMS_CONTENT: SiteCMSContent = {
     ],
   },
   gatewayCta: {
-    eyebrow: "APPLY FOR THE WORLD DISASTER CENTER YOUTH LEADER SUMMIT 2027",
+    eyebrow: "APPLY FOR THE WORLD DISASTER CENTER YOUTH LEADERSHIP SUMMIT 2027",
     headline: "Your Gateway to Climate Leadership",
     subtitle:
-      "10–14 October 2027 · Cape Town, South Africa · Ages 18–30 · Fully Funded, Partially Funded and Funded Forum Access scholarships available.",
+      "11–15 October 2027 · Cape Town, South Africa · Ages 18–30 · Fully Funded, Partially Funded and Funded Forum Access scholarships available.",
     primaryCta: "Apply Now",
     secondaryCta: "Read the FAQ",
     disclaimer:

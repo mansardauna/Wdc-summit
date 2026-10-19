@@ -27,15 +27,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "World Disaster Center · Youth Leader Summit 2027 (Cape Town)",
-    template: "%s | WDC Youth Leader Summit 2027",
+    default: "World Disaster Center · Youth Leadership Summit 2027 (Cape Town)",
+    template: "%s | WDC Youth Leadership Summit 2027",
   },
   description:
-    "Join the first global edition of the World Disaster Center Youth Leader Summit in Cape Town, South Africa (10–14 October 2027). Intensive simulations in disaster prediction, climate resilience, environmental governance, and emergency response.",
+    "Join the first global edition of the World Disaster Center Youth Leadership Summit in Cape Town, South Africa (11–15 October 2027). Intensive simulations in disaster prediction, climate resilience, environmental governance, and emergency response.",
   applicationName: "WDC Summit 2027",
   keywords: [
     "World Disaster Center",
-    "Youth Leader Summit 2027",
+    "Youth Leadership Summit 2027",
     "Cape Town Summit",
     "Disaster Management Training",
     "Climate Resilience",
@@ -60,31 +60,31 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "World Disaster Center Youth Leader Summit 2027",
-    title: "World Disaster Center · Youth Leader Summit 2027 (Cape Town)",
+    siteName: "World Disaster Center Youth Leadership Summit 2027",
+    title: "World Disaster Center · Youth Leadership Summit 2027 (Cape Town)",
     description:
-      "Join the premier global youth gathering for disaster preparedness and climate leadership in Cape Town, South Africa (10–14 October 2027). Apply for full/partial scholarships.",
+      "Join the premier global youth gathering for disaster preparedness and climate leadership in Cape Town, South Africa (11–15 October 2027). Apply for full/partial scholarships.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "World Disaster Center Youth Leader Summit 2027 Cape Town Official Banner",
+        alt: "World Disaster Center Youth Leadership Summit 2027 Cape Town Official Banner",
         type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "World Disaster Center · Youth Leader Summit 2027",
+    title: "World Disaster Center · Youth Leadership Summit 2027",
     description:
-      "Cape Town, South Africa · 10–14 October 2027. Training the next generation of disaster response leaders, scientists, and climate innovators.",
+      "Cape Town, South Africa · 11–15 October 2027. Training the next generation of disaster response leaders, scientists, and climate innovators.",
     creator: "@WDC_Summit",
     site: "@WDC_Summit",
     images: [
       {
         url: "/twitter-image.jpg",
-        alt: "World Disaster Center Youth Leader Summit 2027 Cape Town",
+        alt: "World Disaster Center Youth Leadership Summit 2027 Cape Town",
       },
     ],
   },
@@ -122,11 +122,11 @@ export default function RootLayout({
   const jsonLdEvent = {
     "@context": "https://schema.org",
     "@type": "Event",
-    name: "World Disaster Center Youth Leader Summit 2027",
+    name: "World Disaster Center Youth Leadership Summit 2027",
     description:
-      "The first global edition of the World Disaster Center Youth Leader Summit bringing 200+ selected youth delegates from 75+ nations for intensive simulations in climate resilience, disaster prediction, and global environmental protection.",
+      "The first global edition of the World Disaster Center Youth Leadership Summit bringing 200+ selected youth delegates from 75+ nations for intensive simulations in climate resilience, disaster prediction, and global environmental protection.",
     startDate: "2027-10-10T08:30:00+02:00",
-    endDate: "2027-10-14T18:00:00+02:00",
+    endDate: "2027-10-15T18:00:00+02:00",
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
@@ -194,11 +194,11 @@ export default function RootLayout({
   const jsonLdWebSite = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "World Disaster Center Youth Leader Summit 2027",
-    alternateName: ["WDC Summit 2027", "WDC Youth Leader Summit Cape Town"],
+    name: "World Disaster Center Youth Leadership Summit 2027",
+    alternateName: ["WDC Summit 2027", "WDC Youth Leadership Summit Cape Town"],
     url: siteUrl,
     description:
-      "Join the first global edition of the World Disaster Center Youth Leader Summit in Cape Town, South Africa (10–14 October 2027).",
+      "Join the first global edition of the World Disaster Center Youth Leadership Summit in Cape Town, South Africa (11–15 October 2027).",
     publisher: {
       "@type": "Organization",
       name: "World Disaster Center",

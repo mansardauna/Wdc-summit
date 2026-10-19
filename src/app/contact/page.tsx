@@ -175,7 +175,7 @@ export default function ContactPage() {
                     Message Received by the Summit Secretariat
                   </h2>
                   <p className="text-sm text-[#54626F] max-w-md mx-auto">
-                    Thank you for contacting the World Disaster Center Youth Leader Summit 2027 team. Your inquiry has been delivered to our CMS Inbox and we will respond to your email shortly.
+                    Thank you for contacting the World Disaster Center Youth Leadership Summit 2027 team. Your inquiry has been delivered to our CMS Inbox and we will respond to your email shortly.
                   </p>
                   <div className="pt-3 flex justify-center gap-3">
                     <button
@@ -333,7 +333,7 @@ export default function ContactPage() {
                       rows={5}
                       required
                       aria-required="true"
-                      placeholder="How can the World Disaster Center Youth Leader Summit team assist you?"
+                      placeholder="How can the World Disaster Center Youth Leadership Summit team assist you?"
                       value={form.message}
                       onChange={(e) =>
                         setForm({ ...form, message: e.target.value })

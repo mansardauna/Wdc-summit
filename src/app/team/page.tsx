@@ -292,7 +292,7 @@ export default function TeamPage() {
                 Youth Summit Crew &amp; Board Members
               </h2>
               <p className="text-sm text-[#54626F] mt-1">
-                Meet the leadership team and international board directors guiding the World Disaster Center Youth Leader Summit.
+                Meet the leadership team and international board directors guiding the World Disaster Center Youth Leadership Summit.
               </p>
             </div>
 

@@ -77,7 +77,7 @@ export default function AdminLoginPage() {
               CMS Administrator Sign In
             </h1>
             <p className="text-xs text-[#54626F] mt-1">
-              Sign in to manage World Disaster Center Youth Leader Summit 2027 content, applications, leads, and payments.
+              Sign in to manage World Disaster Center Youth Leadership Summit 2027 content, applications, leads, and payments.
             </p>
           </div>
 

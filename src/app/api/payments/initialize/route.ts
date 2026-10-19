@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
               phonenumber: customerPhone || "",
             },
             customizations: {
-              title: "World Disaster Center Youth Leader Summit 2027",
+              title: "World Disaster Center Youth Leadership Summit 2027",
               description: pkg.name,
             },
           }),

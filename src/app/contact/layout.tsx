@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact the Secretariat · Delegate Inquiries & Support",
   description:
-    "Get in touch with the World Disaster Center Youth Leader Summit 2027 desk in Cape Town. Direct inquiries on scholarships, admissions, university delegations, and visa letters.",
+    "Get in touch with the World Disaster Center Youth Leadership Summit 2027 desk in Cape Town. Direct inquiries on scholarships, admissions, university delegations, and visa letters.",
   alternates: {
     canonical: "/contact",
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Contact the Summit Secretariat · WDC 2027",
     description:
-      "Official admissions desk and delegate support for the World Disaster Center Youth Leader Summit 2027 in Cape Town.",
+      "Official admissions desk and delegate support for the World Disaster Center Youth Leadership Summit 2027 in Cape Town.",
     images: ["/twitter-image.jpg"],
   },
 };

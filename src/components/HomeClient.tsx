@@ -24,6 +24,8 @@ import {
 import { SiteShell } from "./NavbarAndFooter";
 import GlobalTelemetryHeroMap from "./GlobalTelemetryHeroMap";
 import CardSlider from "./CardSlider";
+import PartnerOrbitSection from "./PartnerOrbitSection";
+import SummitProgrammeOverview from "./SummitProgrammeOverview";
 
 export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent }) {
   const [cms, setCms] = useState<SiteCMSContent>(initialCms);
@@ -60,7 +62,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
   useEffect(() => {
     const updateTimer = () => {
       const target = new Date(
-        cms.settings.countdownTargetIso || "2027-10-10T09:00:00Z"
+        cms.settings.countdownTargetIso || "2027-10-11T09:00:00Z"
       ).getTime();
       const now = Date.now();
       const diff = Math.max(0, target - now);
@@ -547,6 +549,19 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
       </section>
 
       {/* =====================================================================
+          SECTION 04 · SUMMIT PROGRAMME OVERVIEW (11–15 OCTOBER 2027)
+          Extracted & corrected from official Youth Leadership Summit 2027 overview
+         ===================================================================== */}
+      <section id="programme-overview" className="px-5 sm:px-8 lg:px-14 py-10 sm:py-14">
+        <div className="max-w-[1240px] mx-auto">
+          <SummitProgrammeOverview
+            days={cms.programme?.days || DEFAULT_CMS_CONTENT.programme.days}
+            compact={true}
+          />
+        </div>
+      </section>
+
+      {/* =====================================================================
           DEDICATED PAGES DIRECTORY & $16.99 SCHOLARSHIP CALLOUT
          ===================================================================== */}
       <section className="px-5 sm:px-8 lg:px-14 py-10">
@@ -605,7 +620,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                         Six Pillars & Cape Town
                       </h3>
                       <p className="text-xs text-[#4A5864] leading-relaxed mb-4">
-                        Explore the six training pillars and why Cape Town hosts the 1st global edition.
+                        Explore the six training pillars and why Cape Town hosts the 1st global edition (11–15 Oct 2027).
                       </p>
                     </div>
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2228] group-hover:translate-x-1 transition-transform">
@@ -636,10 +651,10 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                     <div>
                       <Calendar className="w-6 h-6 text-[#1B2228] mb-3" />
                       <h3 className="text-lg font-bold text-[#1B2228] mb-1">
-                        5-Day Programme
+                        11–15 Oct Programme
                       </h3>
                       <p className="text-xs text-[#2C3740] leading-relaxed mb-4">
-                        Full Day 01–Day 05 itinerary in Cape Town, 20 speaker slots, and eligibility criteria.
+                        Full 11–15 October 2027 itinerary in Cape Town, 20 speaker slots, and eligibility criteria.
                       </p>
                     </div>
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B2228] group-hover:translate-x-1 transition-transform">
@@ -685,7 +700,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
                   Get the 2027 Cape Town Information Pack & Scholarship Guide
                 </h2>
                 <p className="text-sm sm:text-base text-[#2C3740] leading-relaxed">
-                  Register your interest to receive the official programme syllabus, scholarship application guide, and Declaration briefing paper.
+                  Register your interest to receive the official 11–15 October 2027 programme syllabus, scholarship application guide, and Declaration briefing paper.
                 </p>
               </div>
 
@@ -837,85 +852,26 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
       </section>
 
       {/* =====================================================================
-          SECTION 11 · OUR PARTNERS (INFINITE SCROLLING MARQUEE WITH REAL LOGOS)
-          Placed directly above the Final CTA!
+          SECTION 11 · ROTATING CIRCULAR PARTNER ORBIT SECTION
+          Matches Image 1: Slowly rotates around the Cape Town WDC centerpiece,
+          and brings up a floating detail card when hovering on any partner!
          ===================================================================== */}
-      <section id="partners-marquee" className="py-12 sm:py-16 overflow-hidden">
-        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-14 mb-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div className="max-w-2xl">
-              <SectionPillBadge
-                number={cms.partnersSection.sectionNumber}
-                label={cms.partnersSection.sectionLabel}
-              />
-              <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-[#1B2228] leading-[1.12] mb-2.5">
-                {cms.partnersSection.headline}
-              </h2>
-              <p className="text-sm sm:text-base text-[#54626F]">
-                {cms.partnersSection.subtitle}
-              </p>
-            </div>
-
-            <div className="shrink-0">
-              <Link
-                href="/partners"
-                className="inline-flex items-center gap-2 rounded-full border border-[#1B2228]/25 bg-white hover:bg-[#1B2228] text-[#1B2228] hover:text-white font-semibold px-6 py-3 text-xs sm:text-sm shadow-2xs transition-all"
-              >
-                <Handshake className="w-4 h-4" />
-                <span>View Partners &amp; Summit Impact</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Full-Width Infinite Scrolling Logo Marquee */}
-        <div className="relative w-full overflow-hidden py-3">
-          {/* Left & Right Soft Gradient Masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F4F6F8] to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#F4F6F8] to-transparent z-10" />
-
-          <div className="animate-wdc-marquee gap-5 px-3">
-            {[
-              ...(cms.partnersSection.partners?.length
-                ? cms.partnersSection.partners
-                : DEFAULT_CMS_CONTENT.partnersSection.partners),
-              ...(cms.partnersSection.partners?.length
-                ? cms.partnersSection.partners
-                : DEFAULT_CMS_CONTENT.partnersSection.partners),
-            ].map((partner, idx) => (
-              <div
-                key={`${partner.id}-${idx}`}
-                className="w-[250px] sm:w-[285px] shrink-0 rounded-[24px] bg-white hover:bg-[#EEF6FC] border border-slate-200/80 p-6 shadow-card transition-all flex flex-col items-center justify-between text-center group"
-              >
-                <div className="w-full h-20 flex items-center justify-center px-3 py-2 rounded-2xl bg-[#F8FAFC] border border-slate-100 mb-4">
-                  {partner.logoUrl ? (
-                    <img
-                      src={partner.logoUrl}
-                      alt={partner.name}
-                      className="max-h-14 max-w-[190px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <span className="text-lg font-extrabold text-[#1B2228]">
-                      {partner.name}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <div className="text-sm sm:text-base font-bold text-[#1B2228] leading-snug">
-                    {partner.name}
-                  </div>
-                  {partner.category && (
-                    <div className="text-[11px] font-medium text-[#54626F] mt-1">
-                      {partner.category}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PartnerOrbitSection
+        eyebrow="STRATEGIC PARTNERS, DATA & GLOBAL ECOSYSTEM"
+        headline={cms.partnersSection?.headline || "Organisations Behind the Summit"}
+        subtitle={
+          cms.partnersSection?.subtitle ||
+          "A global coalition of partners working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible."
+        }
+        partners={
+          cms.partnersSection?.partners?.length
+            ? cms.partnersSection.partners
+            : DEFAULT_CMS_CONTENT.partnersSection.partners
+        }
+        showViewAllButton={true}
+        viewAllHref="/partners"
+        viewAllLabel="View Partners & Summit Impact"
+      />
     </SiteShell>
   );
 }

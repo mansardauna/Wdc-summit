@@ -87,7 +87,7 @@ export function SunLogoIcon({ className = "w-5 h-5" }: { className?: string }) {
 export function WdcBrandLogo({
   theme = "dark",
   showBadge = true,
-  summitTitle = "Youth Leader Summit 2027",
+  summitTitle = "Youth Leadership Summit 2027",
 }: {
   theme?: "dark" | "light";
   showBadge?: boolean;
@@ -136,7 +136,7 @@ export function WdcBrandLogo({
               }`}
             />
             <span
-              className={`hidden sm:inline-block text-xs font-medium leading-tight max-w-[115px] ${
+              className={`hidden sm:inline-block text-xs font-medium leading-tight max-w-[125px] ${
                 isLight ? "text-slate-300" : "text-[#54626F]"
               }`}
             >
@@ -237,23 +237,23 @@ export function SunThemeCard({
 }) {
   const themeStyles: Record<string, { bg: string; watermark: string }> = {
     ice: {
-      bg: "bg-[#E4EFF7] text-[#1B2228] border border-white/80",
+      bg: "bg-gradient-to-br from-[#EAF3FA] via-[#E4EFF7] to-[#D6E8F5] text-[#1B2228] border border-white/85",
       watermark: "text-[#C6DCEC]/55",
     },
     powder: {
-      bg: "bg-[#B7D3E6] text-[#1B2228] border border-white/60",
+      bg: "bg-gradient-to-br from-[#C4DDF0] via-[#B7D3E6] to-[#A6C7DF] text-[#1B2228] border border-white/70",
       watermark: "text-[#9BBCD4]/55",
     },
     glacier: {
-      bg: "bg-[#C8DFEE] text-[#1B2228] border border-white/70",
+      bg: "bg-gradient-to-br from-[#D4E8F5] via-[#C8DFEE] to-[#B7D4E8] text-[#1B2228] border border-white/75",
       watermark: "text-[#ADCBE0]/55",
     },
     slate: {
-      bg: "bg-[#455664] text-white border border-[#566A7A]",
+      bg: "bg-gradient-to-br from-[#4D6070] via-[#455664] to-[#374652] text-white border border-[#5D7384]",
       watermark: "text-[#586C7C]/50",
     },
     white: {
-      bg: "bg-white text-[#1B2228] border border-slate-200/70",
+      bg: "bg-white text-[#1B2228] border border-slate-200/80",
       watermark: "text-[#E2EDF5]/60",
     },
   };
@@ -262,8 +262,18 @@ export function SunThemeCard({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-[26px] p-7 md:p-8 shadow-card transition-all duration-300 hover:shadow-cardHover ${current.bg} ${className}`}
+      className={`relative overflow-hidden rounded-[28px] p-7 md:p-8 shadow-card transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-cardHover ${current.bg} ${className}`}
     >
+      {/* Subtle 3D Top-Left Specular Glass Highlight */}
+      <div
+        className="pointer-events-none absolute -top-20 -left-20 w-52 h-52 rounded-full opacity-35 blur-2xl"
+        style={{
+          background:
+            theme === "slate"
+              ? "radial-gradient(circle, rgba(125,211,252,0.35) 0%, transparent 70%)"
+              : "radial-gradient(circle, rgba(255,255,255,0.95) 0%, transparent 70%)",
+        }}
+      />
       {watermarkPosition !== "none" && (
         <SunburstWatermark
           variant={watermarkPosition}
@@ -274,3 +284,4 @@ export function SunThemeCard({
     </div>
   );
 }
+

@@ -112,10 +112,10 @@ function ApplyPageContent() {
               label="DELEGATE & SCHOLARSHIP APPLICATION PORTAL"
             />
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1B2228] leading-[1.1] mb-4">
-              Apply for the Youth Leader Summit in Cape Town
+              Apply for the Youth Leadership Summit in Cape Town
             </h1>
             <p className="text-sm sm:text-base text-[#54626F]">
-              10–14 October 2027 · Ages 18–30 · All Nationalities. One application considers you for Fully Funded, Partially Funded, and Funded Forum Access scholarships, or you can book a direct Self-Funded package.
+              11–15 October 2027 · Ages 18–30 · All Nationalities. One application considers you for Fully Funded, Partially Funded, and Funded Forum Access scholarships, or you can book a direct Self-Funded package.
             </p>
           </div>
 

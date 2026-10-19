@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "World Disaster Center · Youth Leader Summit 2027",
+    name: "World Disaster Center · Youth Leadership Summit 2027",
     short_name: "WDC Summit",
-    description: "The first global edition of the World Disaster Center Youth Leader Summit in Cape Town, South Africa (10–14 October 2027).",
+    description: "The first global edition of the World Disaster Center Youth Leadership Summit in Cape Town, South Africa (11–15 October 2027).",
     start_url: "/",
     display: "standalone",
     background_color: "#061322",
