@@ -71,6 +71,12 @@ function readLocalStore(): FullDatabaseStore {
         parsed.cms?.partnersSection?.partners?.some((p) => p.logoUrl)
           ? parsed.cms.partnersSection
           : INITIAL_STORE.cms.partnersSection,
+      programme:
+        parsed.cms?.programme?.days &&
+        parsed.cms.programme.days.length <= 4 &&
+        !parsed.cms.programme.days.some((d) => d.title?.toLowerCase().includes("arrival"))
+          ? parsed.cms.programme
+          : INITIAL_STORE.cms.programme,
     };
     return {
       cms: mergedCms,
@@ -115,6 +121,12 @@ export async function getStore(): Promise<FullDatabaseStore> {
             pgData.cms?.partnersSection?.partners?.some((p) => p.logoUrl)
               ? pgData.cms.partnersSection
               : INITIAL_STORE.cms.partnersSection,
+          programme:
+            pgData.cms?.programme?.days &&
+            pgData.cms.programme.days.length <= 4 &&
+            !pgData.cms.programme.days.some((d) => d.title?.toLowerCase().includes("arrival"))
+              ? pgData.cms.programme
+              : INITIAL_STORE.cms.programme,
         };
         return pgData;
       } else {

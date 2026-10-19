@@ -402,12 +402,133 @@ function StageBadgeIcon({ iconType }: { iconType?: string }) {
   }
 }
 
+function ProgrammeDayCard({
+  day,
+  idx,
+}: {
+  day: ProgrammeDay;
+  idx: number;
+}) {
+  const headerBg =
+    day.headerColor ||
+    ["#005EB8", "#0082B3", "#0D7D6E", "#164A8A"][idx % 4];
+
+  const shortParts = (day.shortDate || "OCT 2027").split(" ");
+  const dayOfWeek = shortParts[0] || "OCT";
+  const dayNum = shortParts[1] || String(11 + idx);
+
+  return (
+    <div className="h-full rounded-[24px] bg-white border border-sky-100 shadow-[0_12px_32px_rgba(8,32,62,0.06)] hover:shadow-[0_18px_42px_rgba(8,32,62,0.12)] transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+      <div>
+        {/* Top Colored Stage Banner + Calendar Date Pill */}
+        <div
+          className="px-5 py-3.5 text-white flex items-center justify-between gap-2"
+          style={{ backgroundColor: headerBg }}
+        >
+          <div>
+            <div className="text-xs font-mono uppercase tracking-[0.14em] text-sky-200 font-bold">
+              {day.dayNumber}
+            </div>
+            <div className="text-[11px] text-white/90 font-medium">
+              {day.date}
+            </div>
+          </div>
+
+          {/* White Calendar Date Box */}
+          <div className="rounded-xl bg-white text-[#08203E] px-3 py-1.5 text-center shadow-xs shrink-0 min-w-[58px]">
+            <div className="text-[9px] font-extrabold uppercase tracking-wider text-[#005EB8]">
+              {dayOfWeek}
+            </div>
+            <div className="text-lg font-extrabold leading-none text-[#08203E] my-0.5">
+              {dayNum}
+            </div>
+            <div className="text-[8px] font-mono font-bold uppercase text-slate-500">
+              OCT 2027
+            </div>
+          </div>
+        </div>
+
+        {/* Title & Subtitle */}
+        <div className="px-5 pt-4 pb-3 text-center min-h-[108px] flex flex-col justify-center">
+          <h3
+            className="text-sm sm:text-base font-extrabold uppercase tracking-tight leading-snug"
+            style={{ color: headerBg }}
+          >
+            {day.title}
+          </h3>
+          {day.subtitle && (
+            <p className="text-xs text-[#334E68] mt-1.5 leading-relaxed">
+              {day.subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* 2D/3D Illustration Art Banner + Overlapping Circular Icon Badge */}
+        <div className="relative mb-7">
+          <div className="h-32 w-full overflow-hidden border-y border-slate-100">
+            <StageIllustrationArt
+              iconType={day.iconType}
+              index={idx}
+            />
+          </div>
+          <div
+            className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 border-white shadow-md flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+            style={{ backgroundColor: headerBg }}
+          >
+            <StageBadgeIcon iconType={day.iconType} />
+          </div>
+        </div>
+
+        {/* Bulleted Session List */}
+        <div className="px-5 pt-2 pb-5">
+          <ul className="space-y-2">
+            {day.items.map((item, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-2 text-xs text-[#1E293B] leading-relaxed"
+              >
+                <span
+                  className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
+                  style={{ backgroundColor: headerBg }}
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Delegate Count Callout Box */}
+      <div className="mx-4 mb-4 rounded-2xl bg-[#E0F2FE]/80 border border-sky-200/80 p-3.5 text-center">
+        <div className="text-[11px] font-bold text-[#0C4A6E]">
+          Number of Delegates
+        </div>
+        <div className="text-2xl sm:text-3xl font-extrabold text-[#08203E] leading-tight my-0.5">
+          {day.delegateCount || "200"}
+        </div>
+        <div className="text-[11px] font-semibold text-[#0369A1] leading-snug">
+          {day.delegateLabel || "All registered delegates"}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function SummitProgrammeOverview({
   days,
   compact = false,
 }: SummitProgrammeOverviewProps) {
-  const programmeDays =
+  const rawDays =
     days && days.length > 0 ? days : DEFAULT_CMS_CONTENT.programme.days;
+
+  // Filter out the first "Arrival & Welcome Experience" and last "Closing Experience and Departures"
+  const programmeDays = rawDays.filter(
+    (day) =>
+      !day.title.toLowerCase().includes("arrival") &&
+      !day.title.toLowerCase().includes("closing") &&
+      day.id !== "day-1" &&
+      day.id !== "day-6"
+  );
 
   const bottomHighlights = [
     {
@@ -440,7 +561,7 @@ export default function SummitProgrammeOverview({
   return (
     <div className="rounded-[32px] overflow-hidden bg-white shadow-[0_24px_70px_rgba(8,32,62,0.10)] border border-slate-200/90">
       {/* =====================================================================
-          TOP SUMMIT OVERVIEW HEADER BANNER (Matches Image 2 Top Banner)
+          TOP SUMMIT OVERVIEW HEADER BANNER (Clean Banner without duplicated Logo/Card text)
          ===================================================================== */}
       <div className="relative overflow-hidden bg-[#06234B] text-white px-6 sm:px-10 lg:px-12 py-8 sm:py-10">
         {/* Table Mountain & Cape Town Backdrop on Right */}
@@ -458,52 +579,9 @@ export default function SummitProgrammeOverview({
           }}
         />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {/* Left: WDC Logo + Youth Leadership Summit 2027 */}
-          <div className="lg:col-span-4 flex items-center gap-3.5">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 border border-sky-300/35 flex items-center justify-center shrink-0">
-              <svg
-                viewBox="0 0 48 48"
-                fill="none"
-                className="w-8 h-8 text-white"
-              >
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="19"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                />
-                <ellipse
-                  cx="24"
-                  cy="24"
-                  rx="10"
-                  ry="19"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
-                <path
-                  d="M6 18H42M6 30H42M24 5V43"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                />
-              </svg>
-            </div>
-            <div>
-              <div className="text-xs sm:text-sm font-extrabold tracking-[0.08em] uppercase text-white">
-                WORLD DISASTER CENTER
-              </div>
-              <div className="text-sm sm:text-base font-extrabold tracking-[0.05em] uppercase text-[#FCE46D]">
-                YOUTH LEADERSHIP SUMMIT 2027
-              </div>
-              <div className="text-[10px] font-mono tracking-[0.16em] uppercase text-sky-200 mt-0.5">
-                PEOPLE | SOLUTIONS | RESILIENT FUTURES
-              </div>
-            </div>
-          </div>
-
-          {/* Center: SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027 */}
-          <div className="lg:col-span-5 text-left lg:text-center">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Left: SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027 */}
+          <div>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-[0.06em] uppercase text-white leading-none">
               SUMMIT OVERVIEW
             </h2>
@@ -516,8 +594,8 @@ export default function SummitProgrammeOverview({
           </div>
 
           {/* Right: Tagline */}
-          <div className="lg:col-span-3 lg:text-right">
-            <div className="inline-block rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2.5 text-xs sm:text-sm italic font-medium text-sky-100 leading-snug">
+          <div className="md:text-right">
+            <div className="inline-block rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 text-xs sm:text-sm italic font-medium text-sky-100 leading-snug">
               &ldquo;Youth Leadership for a Safer, More Resilient World&rdquo;
             </div>
           </div>
@@ -525,130 +603,28 @@ export default function SummitProgrammeOverview({
       </div>
 
       {/* =====================================================================
-          6-COLUMN PROGRAMME OVERVIEW BOARD (Responsive Slider + Grid)
+          4-COLUMN PROGRAMME OVERVIEW BOARD (Desktop Grid + Mobile Slider)
          ===================================================================== */}
       <div className="p-5 sm:p-8 lg:p-10 bg-[#F8FBFF]">
-        <CardSlider
-          cardClassName="w-[86vw] sm:w-[330px] lg:w-[355px]"
-          gap="gap-5"
-          badge="Swipe 11–15 Oct 2027 Schedule"
-        >
-          {programmeDays.map((day, idx) => {
-            const headerBg =
-              day.headerColor ||
-              [
-                "#0E3F6E",
-                "#005EB8",
-                "#0082B3",
-                "#0D7D6E",
-                "#164A8A",
-                "#0A6AD6",
-              ][idx % 6];
+        {/* Desktop 4-Column Grid: displays all 4 days side-by-side with zero cut-off */}
+        <div className="hidden lg:grid lg:grid-cols-4 gap-5">
+          {programmeDays.map((day, idx) => (
+            <ProgrammeDayCard key={day.id} day={day} idx={idx} />
+          ))}
+        </div>
 
-            const shortParts = (day.shortDate || "OCT 2027").split(" ");
-            const dayOfWeek = shortParts[0] || "OCT";
-            const dayNum = shortParts[1] || String(11 + Math.min(idx, 4));
-
-            return (
-              <div
-                key={day.id}
-                className="h-full rounded-[24px] bg-white border border-sky-100 shadow-[0_12px_32px_rgba(8,32,62,0.06)] hover:shadow-[0_18px_42px_rgba(8,32,62,0.12)] transition-all duration-300 flex flex-col justify-between overflow-hidden group"
-              >
-                <div>
-                  {/* Top Colored Stage Banner + Calendar Date Pill */}
-                  <div
-                    className="px-5 py-3.5 text-white flex items-center justify-between gap-2"
-                    style={{ backgroundColor: headerBg }}
-                  >
-                    <div>
-                      <div className="text-xs font-mono uppercase tracking-[0.14em] text-sky-200 font-bold">
-                        {day.dayNumber}
-                      </div>
-                      <div className="text-[11px] text-white/90 font-medium">
-                        {day.date}
-                      </div>
-                    </div>
-
-                    {/* White Calendar Date Box matching Image 2 */}
-                    <div className="rounded-xl bg-white text-[#08203E] px-3 py-1.5 text-center shadow-xs shrink-0 min-w-[58px]">
-                      <div className="text-[9px] font-extrabold uppercase tracking-wider text-[#005EB8]">
-                        {dayOfWeek}
-                      </div>
-                      <div className="text-lg font-extrabold leading-none text-[#08203E] my-0.5">
-                        {dayNum}
-                      </div>
-                      <div className="text-[8px] font-mono font-bold uppercase text-slate-500">
-                        OCT 2027
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Title & Subtitle */}
-                  <div className="px-5 pt-4 pb-3 text-center min-h-[108px] flex flex-col justify-center">
-                    <h3
-                      className="text-sm sm:text-base font-extrabold uppercase tracking-tight leading-snug"
-                      style={{ color: headerBg }}
-                    >
-                      {day.title}
-                    </h3>
-                    {day.subtitle && (
-                      <p className="text-xs text-[#334E68] mt-1.5 leading-relaxed">
-                        {day.subtitle}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* 2D/3D Illustration Art Banner + Overlapping Circular Icon Badge */}
-                  <div className="relative mb-7">
-                    <div className="h-32 w-full overflow-hidden border-y border-slate-100">
-                      <StageIllustrationArt
-                        iconType={day.iconType}
-                        index={idx}
-                      />
-                    </div>
-                    <div
-                      className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 border-white shadow-md flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundColor: headerBg }}
-                    >
-                      <StageBadgeIcon iconType={day.iconType} />
-                    </div>
-                  </div>
-
-                  {/* Bulleted Session List */}
-                  <div className="px-5 pt-2 pb-5">
-                    <ul className="space-y-2">
-                      {day.items.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-xs text-[#1E293B] leading-relaxed"
-                        >
-                          <span
-                            className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
-                            style={{ backgroundColor: headerBg }}
-                          />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Bottom Delegate Count Callout Box matching Image 2 */}
-                <div className="mx-4 mb-4 rounded-2xl bg-[#E0F2FE]/80 border border-sky-200/80 p-3.5 text-center">
-                  <div className="text-[11px] font-bold text-[#0C4A6E]">
-                    Number of Delegates
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#08203E] leading-tight my-0.5">
-                    {day.delegateCount || "200"}
-                  </div>
-                  <div className="text-[11px] font-semibold text-[#0369A1] leading-snug">
-                    {day.delegateLabel || "All registered delegates"}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </CardSlider>
+        {/* Mobile / Tablet Responsive Card Slider */}
+        <div className="lg:hidden">
+          <CardSlider
+            cardClassName="w-[86vw] sm:w-[330px]"
+            gap="gap-5"
+            badge="Swipe 11–15 Oct 2027 Schedule"
+          >
+            {programmeDays.map((day, idx) => (
+              <ProgrammeDayCard key={day.id} day={day} idx={idx} />
+            ))}
+          </CardSlider>
+        </div>
       </div>
 
       {/* =====================================================================

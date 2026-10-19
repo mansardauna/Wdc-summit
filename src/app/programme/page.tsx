@@ -45,7 +45,7 @@ export default function ProgrammePage() {
             </p>
           </div>
 
-          {/* Complete 6-Stage Summit Overview Board with 2D/3D Illustrations */}
+          {/* Complete 4-Stage Summit Overview Board with 2D/3D Illustrations */}
           <SummitProgrammeOverview
             days={cms.programme?.days || DEFAULT_CMS_CONTENT.programme.days}
             compact={false}

@@ -187,33 +187,6 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
           </div>
 
           <Link
-            href="/packages"
-            className={`hover:text-[#1B2228] transition-colors ${
-              isActive("/packages") ? "font-bold text-[#1B2228]" : ""
-            }`}
-          >
-            Packages
-          </Link>
-
-          <Link
-            href="/partners"
-            className={`hover:text-[#1B2228] transition-colors ${
-              isActive("/partners") ? "font-bold text-[#1B2228]" : ""
-            }`}
-          >
-            Partners
-          </Link>
-
-          <Link
-            href="/team"
-            className={`hover:text-[#1B2228] transition-colors ${
-              isActive("/team") ? "font-bold text-[#1B2228]" : ""
-            }`}
-          >
-            Team
-          </Link>
-
-          <Link
             href="/contact"
             className={`hover:text-[#1B2228] transition-colors ${
               isActive("/contact") ? "font-bold text-[#1B2228]" : ""
@@ -281,27 +254,6 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
               className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
             >
               Programme
-            </Link>
-            <Link
-              href="/packages"
-              onClick={() => setMobileOpen(false)}
-              className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
-            >
-              Packages
-            </Link>
-            <Link
-              href="/partners"
-              onClick={() => setMobileOpen(false)}
-              className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
-            >
-              Partners
-            </Link>
-            <Link
-              href="/team"
-              onClick={() => setMobileOpen(false)}
-              className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
-            >
-              Youth Summit Crew
             </Link>
             <Link
               href="/contact"
