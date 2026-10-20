@@ -7,7 +7,7 @@
       "datesText": "11–15 October 2027",
       "countdownTargetIso": "2027-10-11T09:00:00Z",
       "hostCity": "Cape Town, South Africa",
-      "ageRange": "Ages 18–30",
+      "ageRange": "Ages 18–35",
       "speakerSlotsCount": 20,
       "contactEmail": "summit@worlddisastercenter.org",
       "websiteDomain": "worlddisastercenter.org",
@@ -31,7 +31,7 @@
       "metaPills": [
         "11–15 October 2027",
         "Cape Town, South Africa",
-        "Ages 18–30",
+        "Ages 18–35",
         "200 Registered Delegates",
         "20 Delegate Speaker Slots"
       ],
@@ -51,7 +51,7 @@
       "sectionNumber": "01",
       "sectionLabel": "ABOUT THE SUMMIT",
       "headline": "Where Youth Leaders Learn to Get Ahead of Disaster",
-      "paragraph1": "The World Disaster Center Youth Leadership Summit 2027 trains the next generation to prepare for, respond to and recover from the shocks that define this century. From 11–15 October 2027, up to 200 registered delegates aged 18–30 gather for speeches, masterclasses, exhibitions, investment opportunities, and hands-on disaster technology demonstrations.",
+      "paragraph1": "The World Disaster Center Youth Leadership Summit 2027 trains the next generation to prepare for, respond to and recover from the shocks that define this century. From 11–15 October 2027, up to 200 registered delegates aged 18–35 gather for speeches, masterclasses, exhibitions, investment opportunities, and hands-on disaster technology demonstrations.",
       "paragraph2": "It is the first edition of a global summit that takes place every spring in a different part of the globe. In 2027 it comes to Cape Town, South Africa, and closes with delegates drafting, debating, and signing the WDC Youth Declaration.",
       "ctaText": "See Scholarships & Packages",
       "stats": [
@@ -68,7 +68,7 @@
           "label": "Days · 11–15 Oct 2027"
         },
         {
-          "value": "18–30",
+          "value": "18–35",
           "label": "Age range, every nationality"
         }
       ]
@@ -333,11 +333,11 @@
       "sectionNumber": "08",
       "sectionLabel": "IS THIS FOR YOU?",
       "headline": "Who Can Apply?",
-      "subtitle": "A youth summit built for the majority of the globe. If you are between 18 and 30 and care about the planet, there is a place for you.",
+      "subtitle": "A youth summit built for the majority of the globe. If you are between 18 and 35 and care about the planet, there is a place for you.",
       "profiles": [
         {
-          "badge": "18–30",
-          "title": "Ages 18 to 30",
+          "badge": "18–35",
+          "title": "Ages 18 to 35",
           "description": "From first-year students to early-career professionals, a youth summit built around the global majority.",
           "theme": "ice"
         },
@@ -723,7 +723,7 @@
         {
           "id": "faq-1",
           "question": "What is the World Disaster Center Youth Leadership Summit 2027?",
-          "answer": "A global summit organised by the World Disaster Center for youth leaders aged 18 to 30. The 2027 edition takes place in Cape Town, South Africa (11–15 October 2027), and trains 200 registered delegates in climate leadership, innovation, media storytelling, disaster tracking, and resilience."
+          "answer": "A global summit organised by the World Disaster Center for youth leaders aged 18 to 35. The 2027 edition takes place in Cape Town, South Africa (11–15 October 2027), and trains 200 registered delegates in climate leadership, innovation, media storytelling, disaster tracking, and resilience."
         },
         {
           "id": "faq-2",
@@ -753,7 +753,7 @@
         {
           "id": "faq-7",
           "question": "Who can apply?",
-          "answer": "Anyone aged 18 to 30, of any nationality: undergraduates, graduates, people interested in sustainable development and people switching careers into climate, humanitarian or sustainability work."
+          "answer": "Anyone aged 18 to 35, of any nationality: undergraduates, graduates, people interested in sustainable development and people switching careers into climate, humanitarian or sustainability work."
         },
         {
           "id": "faq-8",
@@ -875,7 +875,7 @@
           "name": "Emerging Youth Delegate",
           "role": "This Spot Could Be Yours!",
           "badge": "APPLY TODAY",
-          "location": "Ages 18–30 · Every Nationality",
+          "location": "Ages 18–35 · Every Nationality",
           "bio": "Join 200 youth leaders from across the globe in Cape Town (11–15 October 2027). Apply for Fully Funded, Partially Funded, and Forum Access scholarships ($16.99 application fee).",
           "imageUrl": "/avatars/delegate.svg",
           "linkedinUrl": "/apply",
@@ -888,7 +888,7 @@
     "gatewayCta": {
       "eyebrow": "APPLY FOR THE WORLD DISASTER CENTER YOUTH LEADERSHIP SUMMIT 2027",
       "headline": "Your Gateway to Climate Leadership",
-      "subtitle": "11–15 October 2027 · Cape Town, South Africa · Ages 18–30 · Fully Funded, Partially Funded and Funded Forum Access scholarships available.",
+      "subtitle": "11–15 October 2027 · Cape Town, South Africa · Ages 18–35 · Fully Funded, Partially Funded and Funded Forum Access scholarships available.",
       "primaryCta": "Apply Now",
       "secondaryCta": "Read the FAQ",
       "disclaimer": "© 2027 World Disaster Center. All rights reserved. Fees are non-refundable and do not guarantee selection. Site visits are subject to scheduling and security clearance. Visa approval remains at the discretion of the relevant embassy."

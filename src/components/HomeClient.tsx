@@ -141,9 +141,7 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
             <h1 className="text-5xl sm:text-6xl md:text-[72px] font-extrabold tracking-tight leading-[1.03] mb-6 text-white">
               Join the <span className="text-[#FCE46D]">first</span>
               <br />
-              global
-              <br />
-              summit.
+              global summit.
             </h1>
 
             {/* Description with bold white highlights on "Cape Town, South Africa" & "WDC Global Environmental Protection Declaration." */}
