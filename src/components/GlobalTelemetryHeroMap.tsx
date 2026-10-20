@@ -129,15 +129,6 @@ export default function GlobalTelemetryHeroMap() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full pointer-events-none"
       />
-
-      {/* Bottom-Right Live Summit Conference + Telemetry HUD Pill */}
-      <div className="hidden md:flex absolute bottom-16 right-8 z-20 items-center gap-3 text-[10px] font-mono tracking-[0.16em] uppercase text-slate-100 bg-[#071A30]/90 backdrop-blur-md border border-sky-400/35 px-4 py-2 rounded-full shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-        <span className="w-2 h-2 rounded-full bg-emerald-400 -ml-5" />
-        <span>
-          WDC SUMMIT KEYNOTE &amp; 3D GLOBAL TELEMETRY · CAPE TOWN (11–15 OCT 2027)
-        </span>
-      </div>
     </div>
   );
 }

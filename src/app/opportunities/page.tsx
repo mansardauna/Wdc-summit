@@ -1,28 +1,39 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import {
-  Users,
-  Award,
-  Video,
+  School,
+  Globe2,
+  Film,
   Mail,
   Copy,
   Check,
   ArrowRight,
-  Sparkles,
-  School,
-  Globe2,
-  Film,
   Send,
   CheckCircle2,
-  Calendar,
-  MapPin,
-  Clock,
 } from "lucide-react";
 import { DEFAULT_CMS_CONTENT, SiteCMSContent } from "@/lib/default-data";
 import { SiteShell } from "@/components/NavbarAndFooter";
-import { SunThemeCard, SectionPillBadge } from "@/components/SunSummitDesign";
+import { SectionPillBadge, SunThemeCard } from "@/components/SunSummitDesign";
+
+/**
+ * Editorial Illustration Divider between Opportunity Sections
+ */
+function SectionIllustrationDivider({ trackNumber }: { trackNumber: string }) {
+  return (
+    <div className="py-12 sm:py-16 flex items-center justify-center">
+      <div className="w-full flex items-center gap-4">
+        <div className="flex-1 h-px bg-slate-200" />
+        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-500 text-xs font-mono">
+          <span className="w-2 h-2 rounded-full bg-[#005EB8]" />
+          <span>CONTINUE TO TRACK {trackNumber}</span>
+          <span className="w-2 h-2 rounded-full bg-[#005EB8]" />
+        </div>
+        <div className="flex-1 h-px bg-slate-200" />
+      </div>
+    </div>
+  );
+}
 
 export default function OpportunitiesPage() {
   const [cms, setCms] = useState<SiteCMSContent>(DEFAULT_CMS_CONTENT);
@@ -70,273 +81,341 @@ export default function OpportunitiesPage() {
       setInquiryEmail("");
       setInquiryNote("");
     } catch {
-      // Graceful fallback
       setSubmitted(true);
     } finally {
       setSubmitting(false);
     }
   };
 
-  const opportunities = [
-    {
-      id: "summit-crew",
-      number: "01",
-      title: "Summit Crew",
-      subtitle: "High School Volunteer Program",
-      badge: "High School Volunteers · 5 Days Onsite",
-      theme: "ice" as const,
-      icon: <School className="w-7 h-7 text-[#005EB8]" />,
-      accentBg: "bg-blue-50 border-blue-200 text-[#005EB8]",
-      tagColor: "bg-[#005EB8] text-white",
-      description:
-        "High school volunteers will be onsite in Cape Town for all 5 days of the Summit (11–15 October 2027) from neighboring schools. Volunteers support delegate coordination, exhibition stages, registration desk operations, and live technology demonstrations.",
-      highlights: [
-        "Earn official community service and volunteer credits recognized for school graduation and university applications",
-        "Onsite access to world leaders, masterclasses, and hands-on climate disaster technologies",
-        "Official Certificate of Commendation from the World Disaster Center Secretariat",
-        "Open to high school students from neighboring schools across Cape Town and the Western Cape",
-      ],
-      conceptNoteStatus: "Concept note is currently in progress. Early applications and school coordinator inquiries are open.",
-      contactEmail: "summit@worlddisastercenter.org",
-      emailSubject: "Application: Summit Crew (High School Volunteer)",
-      emailBody:
-        "Dear Secretariat,%0D%0A%0D%0AI would like to register my interest for the Summit Crew High School Volunteer Program in Cape Town (11–15 October 2027).%0D%0A%0D%0AFull Name: %0D%0ASchool / Institution: %0D%0AGrade / Year: %0D%0ACity: Cape Town%0D%0APhone / WhatsApp: %0D%0A%0D%0AThank you!",
-    },
-    {
-      id: "wdc-ambassador",
-      number: "02",
-      title: "WDC Ambassador",
-      subtitle: "WDC Leadership Summit Ambassador Competition",
-      badge: "Global Youth Competition · Worldwide",
-      theme: "powder" as const,
-      icon: <Globe2 className="w-7 h-7 text-[#D97706]" />,
-      accentBg: "bg-amber-50 border-amber-200 text-[#D97706]",
-      tagColor: "bg-[#D97706] text-white",
-      description:
-        "An international competitive search for passionate youth climate champions (ages 18–30) to represent their countries and communities. Ambassadors lead local grassroots climate initiatives, mobilize youth voices, and champion the WDC Global Environmental Protection Declaration.",
-      highlights: [
-        "Official WDC Summit Youth Ambassador designation representing your home region",
-        "Priority nomination and consideration for fully funded delegate seats and travel grants",
-        "Direct mentorship from senior humanitarian strategists and disaster resilience architects",
-        "Opportunity to co-lead youth breakout sessions and present local climate evidence on stage",
-      ],
-      conceptNoteStatus: "Competition framework and rubric in progress. Early applicant profiles and regional ambassador inquiries are open.",
-      contactEmail: "summit@worlddisastercenter.org",
-      emailSubject: "Application: WDC Leadership Summit Ambassador Competition",
-      emailBody:
-        "Dear Secretariat,%0D%0A%0D%0AI would like to apply for the WDC Leadership Summit Ambassador Competition for the 2027 Summit in Cape Town.%0D%0A%0D%0AFull Name: %0D%0ACountry of Residence: %0D%0AAge (18-30): %0D%0ABrief Climate / Community Background: %0D%0ALinkedIn / Portfolio (optional): %0D%0A%0D%0AThank you!",
-    },
-    {
-      id: "climate-cinematographers",
-      number: "03",
-      title: "Climate Cinematographers",
-      subtitle: "Call for Documentaries & Visual Stories",
-      badge: "International Call for Documentaries · Film Screening",
-      theme: "slate" as const,
-      icon: <Film className="w-7 h-7 text-[#FCE46D]" />,
-      accentBg: "bg-purple-950/80 border-purple-800 text-[#FCE46D]",
-      tagColor: "bg-[#FCE46D] text-[#1B2228]",
-      description:
-        "An open call for independent documentary filmmakers, investigative journalists, and youth storytellers producing powerful short films, documentaries, and visual narratives on climate adaptation, disaster recovery, indigenous solutions, and frontline community resilience.",
-      highlights: [
-        "Selected films will be screened on the official Climate & Culture Stage (Day 02) in Cape Town",
-        "Global exposure across World Disaster Center broadcast networks, partner hubs, and media channels",
-        "Networking and pitch sessions with international environmental documentary funders and media houses",
-        "Complimentary Summit Delegate Accreditation and invitation to the Cape Town Reception",
-      ],
-      conceptNoteStatus: "Submission guidelines and screening schedule in progress. Pitch inquiries, work-in-progress screeners, and trailers are welcome.",
-      contactEmail: "summit@worlddisastercenter.org",
-      emailSubject: "Submission Inquiry: Climate Cinematographers Call for Documentaries",
-      emailBody:
-        "Dear Secretariat,%0D%0A%0D%0AI would like to submit an inquiry / screener for the Climate Cinematographers Call for Documentaries.%0D%0A%0D%0AFilm Title: %0D%0ADirector / Producer: %0D%0ACountry: %0D%0AEstimated Runtime: %0D%0ATrailer / Screener URL: %0D%0ASynopsis: %0D%0A%0D%0AThank you!",
-    },
-  ];
-
   return (
     <SiteShell cms={cms}>
       {/* =====================================================================
-          HERO BANNER · SUMMIT OPPORTUNITIES
+          PAGE HERO · UNIFIED WITH /summit STYLE (Requirement 5 & 6)
          ===================================================================== */}
-      <section className="relative overflow-hidden bg-[#061C38] text-white pt-16 sm:pt-20 pb-16 px-5 sm:px-8 lg:px-14">
-        {/* Subtle Backdrop */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-20 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/illustrations/cape-town-circle.jpg')",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(6,28,56,0.94) 0%, rgba(6,28,56,0.86) 65%, #061C38 100%)",
-          }}
-        />
-
-        <div className="relative z-10 max-w-[1240px] mx-auto">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-sky-500/15 border border-sky-400/30 px-4 py-1.5 text-xs font-mono font-bold tracking-[0.16em] uppercase text-[#FCE46D] mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-[#FCE46D]" />
-              <span>YOUTH DEVELOPMENT PROGRAM</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.08] mb-4">
-              Summit Opportunities
-            </h1>
-
-            <p className="text-base sm:text-lg text-slate-200 leading-relaxed mb-6">
-              The World Disaster Center Youth Leadership Summit 2027 is a youth-first platform. We are developing three dedicated opportunity pathways for high school volunteers, global youth ambassadors, and climate cinematographers.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-sky-200">
-              <span className="inline-flex items-center gap-1.5 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15">
-                <Calendar className="w-3.5 h-3.5 text-[#FCE46D]" />
-                11–15 October 2027
-              </span>
-              <span className="inline-flex items-center gap-1.5 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15">
-                <MapPin className="w-3.5 h-3.5 text-[#FCE46D]" />
-                Cape Town, South Africa
-              </span>
-              <span className="inline-flex items-center gap-1.5 bg-amber-400/15 text-amber-200 px-3.5 py-1.5 rounded-full border border-amber-400/30 font-medium">
-                <Clock className="w-3.5 h-3.5" />
-                Concept Notes in Progress · Applications Open via Email
-              </span>
-            </div>
-          </div>
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number="OPP"
+            label="YOUTH DEVELOPMENT PROGRAM"
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            Summit Opportunities
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            Youth Summit Crew is a premier youth development program offering three distinct pathways for high school volunteers, emerging global ambassadors, and climate cinematographers to participate in the Cape Town Summit (11–15 October 2027).
+          </p>
+          <p className="text-xs sm:text-sm text-[#FCE46D] font-mono tracking-wide max-w-2xl">
+            Concept notes are currently in progress. Early applications and school coordinator inquiries are open via the official Secretariat emails below.
+          </p>
         </div>
       </section>
 
       {/* =====================================================================
-          THE 3 OPPORTUNITY TRACKS
+          OPPORTUNITY TRACKS WRITTEN NORMALLY WITHOUT CARDS (Requirement 2)
          ===================================================================== */}
       <section className="px-5 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="max-w-[1240px] mx-auto space-y-12">
-          {opportunities.map((opp) => (
-            <div
-              key={opp.id}
-              id={opp.id}
-              className="scroll-mt-28 bg-white rounded-[32px] p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-card transition-all"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                {/* Left Details */}
-                <div className="lg:col-span-7 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-slate-100 border border-slate-200 text-[#08203E] font-mono font-extrabold text-sm">
-                      {opp.number}
-                    </span>
-                    <span
-                      className={`inline-block rounded-full px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider ${opp.accentBg}`}
-                    >
-                      {opp.badge}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[#1B2228]">
-                      {opp.title}
-                    </h2>
-                    <p className="text-sm sm:text-base font-semibold text-[#005EB8] mt-1">
-                      {opp.subtitle}
-                    </p>
-                  </div>
-
-                  <p className="text-sm sm:text-base text-[#4A5864] leading-relaxed">
-                    {opp.description}
-                  </p>
-
-                  <div className="pt-2">
-                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#1B2228] mb-3">
-                      KEY BENEFITS &amp; SCOPE
-                    </div>
-                    <ul className="space-y-2.5">
-                      {opp.highlights.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] mt-2 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Status Note */}
-                  <div className="rounded-2xl bg-amber-50/80 border border-amber-200/80 p-4 text-xs text-amber-900 leading-relaxed">
-                    <strong className="font-bold">Status:</strong> {opp.conceptNoteStatus}
-                  </div>
+        <div className="max-w-[1240px] mx-auto">
+          {/* TRACK 01 · SUMMIT CREW */}
+          <div id="summit-crew" className="scroll-mt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 text-[#005EB8] px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider">
+                  <School className="w-3.5 h-3.5" />
+                  <span>HIGH SCHOOL VOLUNTEERS · 5 DAYS ONSITE</span>
                 </div>
 
-                {/* Right Action / Email Application Desk */}
-                <div className="lg:col-span-5 bg-[#F8FBFF] rounded-[24px] p-6 sm:p-7 border border-sky-100 flex flex-col justify-between h-full space-y-5">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[#08203E] mb-2">
-                      <Mail className="w-4 h-4 text-[#005EB8]" />
-                      <span>HOW TO APPLY / INQUIRE</span>
-                    </div>
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1B2228] leading-[1.12]">
+                  01 · Summit Crew
+                </h2>
+                <div className="text-base sm:text-lg font-semibold text-[#005EB8]">
+                  High School Volunteer Program
+                </div>
 
-                    <h3 className="text-lg font-bold text-[#1B2228] mb-1">
-                      Apply via Official Email
-                    </h3>
-                    <p className="text-xs text-[#54626F] leading-relaxed mb-4">
-                      While the full online registration form is being configured alongside the concept notes, all applicants can register immediately by emailing the Secretariat desk.
-                    </p>
+                <p className="text-sm sm:text-base text-[#4A5864] leading-relaxed">
+                  High school volunteers will be onsite in Cape Town for all 5 days of the Summit (11–15 October 2027) from neighboring schools. Volunteers support delegate coordination, exhibition stages, registration desk operations, and live disaster technology demonstrations.
+                </p>
 
-                    <div className="rounded-xl bg-white p-3.5 border border-slate-200/80 space-y-2">
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                        Recipient Address
-                      </div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-xs sm:text-sm font-bold text-[#08203E] break-all">
-                          {opp.contactEmail}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => handleCopyEmail(opp.contactEmail)}
-                          className="shrink-0 p-2 rounded-lg hover:bg-slate-100 text-slate-600 transition cursor-pointer"
-                          title="Copy email address"
-                        >
-                          {copiedEmail === opp.contactEmail ? (
-                            <Check className="w-4 h-4 text-emerald-600" />
-                          ) : (
-                            <Copy className="w-4 h-4" />
-                          )}
-                        </button>
-                      </div>
-                      <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100">
-                        <span className="font-semibold text-slate-700">Subject:</span> {opp.emailSubject}
-                      </div>
-                    </div>
+                <div className="pt-2">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#1B2228] mb-3">
+                    KEY BENEFITS &amp; SCOPE
                   </div>
+                  <ul className="space-y-2.5">
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] mt-2 shrink-0" />
+                      <span>Earn official community service and volunteer credits recognized for school graduation and university applications</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] mt-2 shrink-0" />
+                      <span>Onsite access to world leaders, masterclasses, and hands-on climate disaster technologies</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] mt-2 shrink-0" />
+                      <span>Official Certificate of Commendation from the World Disaster Center Secretariat</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#005EB8] mt-2 shrink-0" />
+                      <span>Open to high school students from neighboring schools across Cape Town and the Western Cape</span>
+                    </li>
+                  </ul>
+                </div>
 
-                  <div className="space-y-2.5 pt-2">
-                    <a
-                      href={`mailto:${opp.contactEmail}?subject=${encodeURIComponent(
-                        opp.emailSubject
-                      )}&body=${opp.emailBody}`}
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#08203E] hover:bg-[#133A6B] text-white font-bold py-3.5 px-6 text-xs sm:text-sm shadow-sm transition-all"
-                    >
-                      <Mail className="w-4 h-4 text-[#FCE46D]" />
-                      <span>Send Application Email</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setInquiryTrack(opp.title);
-                        const el = document.getElementById("quick-inquiry");
-                        el?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      className="w-full text-center text-xs font-semibold text-[#005EB8] hover:underline cursor-pointer py-1"
-                    >
-                      Or submit quick interest on this page ↓
-                    </button>
-                  </div>
+                <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-900 leading-relaxed">
+                  <strong className="font-bold">Status:</strong> Concept note is currently in progress. Early applications and school coordinator inquiries are open.
                 </div>
               </div>
+
+              {/* Right Email Application Box */}
+              <div className="lg:col-span-5 bg-slate-50 rounded-[24px] p-6 sm:p-8 border border-slate-200/90 space-y-4">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#08203E]">
+                  HOW TO APPLY / INQUIRE
+                </div>
+                <h3 className="text-lg font-bold text-[#1B2228]">
+                  Apply via Official Email
+                </h3>
+                <p className="text-xs text-[#54626F] leading-relaxed">
+                  While the full online registration form is being configured alongside the concept notes, all applicants can register immediately by emailing the Secretariat desk.
+                </p>
+
+                <div className="rounded-xl bg-white p-3.5 border border-slate-200 space-y-1.5">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    Recipient Address
+                  </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-sm font-bold text-[#08203E]">
+                      summit@worlddisastercenter.org
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyEmail("summit@worlddisastercenter.org")}
+                      className="p-1.5 rounded-md hover:bg-slate-100 text-slate-600 transition cursor-pointer"
+                      title="Copy email address"
+                    >
+                      {copiedEmail === "summit@worlddisastercenter.org" ? (
+                        <Check className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                    <span className="font-semibold text-slate-700">Subject:</span> Application: Summit Crew (High School Volunteer)
+                  </div>
+                </div>
+
+                <a
+                  href="mailto:summit@worlddisastercenter.org?subject=Application:%20Summit%20Crew%20(High%20School%20Volunteer)&body=Dear%20Secretariat,%0D%0A%0D%0AI%20would%20like%20to%20register%20my%20interest%20for%20the%20Summit%20Crew%20High%20School%20Volunteer%20Program%20in%20Cape%20Town%20(11–15%20October%202027).%0D%0A%0D%0AFull%20Name:%20%0D%0ASchool%20/%20Institution:%20%0D%0AGrade%20/%20Year:%20%0D%0ACity:%20Cape%20Town%0D%0APhone%20/%20WhatsApp:%20%0D%0A%0D%0AThank%20you!"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white font-bold py-3.5 px-6 text-xs sm:text-sm transition-all"
+                >
+                  <Mail className="w-4 h-4 text-[#FCE46D]" />
+                  <span>Send Application Email</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
-          ))}
+          </div>
+
+          <SectionIllustrationDivider trackNumber="02" />
+
+          {/* TRACK 02 · WDC AMBASSADOR */}
+          <div id="wdc-ambassador" className="scroll-mt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 text-[#D97706] px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider">
+                  <Globe2 className="w-3.5 h-3.5" />
+                  <span>GLOBAL YOUTH COMPETITION · WORLDWIDE</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1B2228] leading-[1.12]">
+                  02 · WDC Ambassador
+                </h2>
+                <div className="text-base sm:text-lg font-semibold text-[#D97706]">
+                  WDC Leadership Summit Ambassador Competition
+                </div>
+
+                <p className="text-sm sm:text-base text-[#4A5864] leading-relaxed">
+                  An international competitive search for passionate youth climate champions (ages 18–30) to represent their countries and communities. Ambassadors lead local grassroots climate initiatives, mobilize youth voices, and champion the WDC Global Environmental Protection Declaration.
+                </p>
+
+                <div className="pt-2">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#1B2228] mb-3">
+                    KEY BENEFITS &amp; SCOPE
+                  </div>
+                  <ul className="space-y-2.5">
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 shrink-0" />
+                      <span>Official WDC Summit Youth Ambassador designation representing your home region</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 shrink-0" />
+                      <span>Priority nomination and consideration for fully funded delegate seats and travel grants</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 shrink-0" />
+                      <span>Direct mentorship from senior humanitarian strategists and disaster resilience architects</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D97706] mt-2 shrink-0" />
+                      <span>Opportunity to co-lead youth breakout sessions and present local climate evidence on stage</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-900 leading-relaxed">
+                  <strong className="font-bold">Status:</strong> Competition framework and rubric in progress. Early applicant profiles and regional ambassador inquiries are open.
+                </div>
+              </div>
+
+              {/* Right Email Application Box */}
+              <div className="lg:col-span-5 bg-slate-50 rounded-[24px] p-6 sm:p-8 border border-slate-200/90 space-y-4">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#08203E]">
+                  HOW TO APPLY / INQUIRE
+                </div>
+                <h3 className="text-lg font-bold text-[#1B2228]">
+                  Apply via Official Email
+                </h3>
+                <p className="text-xs text-[#54626F] leading-relaxed">
+                  Submit your brief profile and climate background directly to the Secretariat desk.
+                </p>
+
+                <div className="rounded-xl bg-white p-3.5 border border-slate-200 space-y-1.5">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    Recipient Address
+                  </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-sm font-bold text-[#08203E]">
+                      summit@worlddisastercenter.org
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyEmail("summit@worlddisastercenter.org")}
+                      className="p-1.5 rounded-md hover:bg-slate-100 text-slate-600 transition cursor-pointer"
+                      title="Copy email address"
+                    >
+                      {copiedEmail === "summit@worlddisastercenter.org" ? (
+                        <Check className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                    <span className="font-semibold text-slate-700">Subject:</span> Application: WDC Leadership Summit Ambassador Competition
+                  </div>
+                </div>
+
+                <a
+                  href="mailto:summit@worlddisastercenter.org?subject=Application:%20WDC%20Leadership%20Summit%20Ambassador%20Competition&body=Dear%20Secretariat,%0D%0A%0D%0AI%20would%20like%20to%20apply%20for%20the%20WDC%20Leadership%20Summit%20Ambassador%20Competition%20for%20the%202027%20Summit%20in%20Cape%20Town.%0D%0A%0D%0AFull%20Name:%20%0D%0ACountry%20of%20Residence:%20%0D%0AAge%20(18-30):%20%0D%0ABrief%20Climate%20/%20Community%20Background:%20%0D%0ALinkedIn%20/%20Portfolio%20(optional):%20%0D%0A%0D%0AThank%20you!"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white font-bold py-3.5 px-6 text-xs sm:text-sm transition-all"
+                >
+                  <Mail className="w-4 h-4 text-[#FCE46D]" />
+                  <span>Send Ambassador Application Email</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <SectionIllustrationDivider trackNumber="03" />
+
+          {/* TRACK 03 · CLIMATE CINEMATOGRAPHERS */}
+          <div id="climate-cinematographers" className="scroll-mt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+              <div className="lg:col-span-7 space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-purple-100 text-purple-800 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider">
+                  <Film className="w-3.5 h-3.5" />
+                  <span>CALL FOR DOCUMENTARIES &amp; VISUAL STORIES</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1B2228] leading-[1.12]">
+                  03 · Climate Cinematographers
+                </h2>
+                <div className="text-base sm:text-lg font-semibold text-purple-800">
+                  Call for Documentaries &amp; Visual Stories
+                </div>
+
+                <p className="text-sm sm:text-base text-[#4A5864] leading-relaxed">
+                  An open call for independent documentary filmmakers, investigative journalists, and youth storytellers producing powerful short films, documentaries, and visual narratives on climate adaptation, disaster recovery, indigenous solutions, and frontline community resilience.
+                </p>
+
+                <div className="pt-2">
+                  <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#1B2228] mb-3">
+                    KEY BENEFITS &amp; SCOPE
+                  </div>
+                  <ul className="space-y-2.5">
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-700 mt-2 shrink-0" />
+                      <span>Selected films will be screened on the official Climate &amp; Culture Stage (Day 02) in Cape Town</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-700 mt-2 shrink-0" />
+                      <span>Global exposure across World Disaster Center broadcast networks, partner hubs, and media channels</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-700 mt-2 shrink-0" />
+                      <span>Networking and pitch sessions with international environmental documentary funders and media houses</span>
+                    </li>
+                    <li className="flex items-start gap-2.5 text-xs sm:text-sm text-[#2C3740]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-700 mt-2 shrink-0" />
+                      <span>Complimentary Summit Delegate Accreditation and invitation to the Cape Town Reception</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 text-xs text-amber-900 leading-relaxed">
+                  <strong className="font-bold">Status:</strong> Submission guidelines and screening schedule in progress. Pitch inquiries, work-in-progress screeners, and trailers are welcome.
+                </div>
+              </div>
+
+              {/* Right Email Application Box */}
+              <div className="lg:col-span-5 bg-slate-50 rounded-[24px] p-6 sm:p-8 border border-slate-200/90 space-y-4">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#08203E]">
+                  HOW TO APPLY / INQUIRE
+                </div>
+                <h3 className="text-lg font-bold text-[#1B2228]">
+                  Submit Documentary Inquiry
+                </h3>
+                <p className="text-xs text-[#54626F] leading-relaxed">
+                  Email your screener link, synopsis, or pitch deck to the media coordinator desk.
+                </p>
+
+                <div className="rounded-xl bg-white p-3.5 border border-slate-200 space-y-1.5">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500">
+                    Recipient Address
+                  </div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs sm:text-sm font-bold text-[#08203E]">
+                      summit@worlddisastercenter.org
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyEmail("summit@worlddisastercenter.org")}
+                      className="p-1.5 rounded-md hover:bg-slate-100 text-slate-600 transition cursor-pointer"
+                      title="Copy email address"
+                    >
+                      {copiedEmail === "summit@worlddisastercenter.org" ? (
+                        <Check className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                  <div className="text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+                    <span className="font-semibold text-slate-700">Subject:</span> Submission Inquiry: Climate Cinematographers Call for Documentaries
+                  </div>
+                </div>
+
+                <a
+                  href="mailto:summit@worlddisastercenter.org?subject=Submission%20Inquiry:%20Climate%20Cinematographers%20Call%20for%20Documentaries&body=Dear%20Secretariat,%0D%0A%0D%0AI%20would%20like%20to%20submit%20an%20inquiry%20/%20screener%20for%20the%20Climate%20Cinematographers%20Call%20for%20Documentaries.%0D%0A%0D%0AFilm%20Title:%20%0D%0ADirector%20/%20Producer:%20%0D%0ACountry:%20%0D%0AEstimated%20Runtime:%20%0D%0ATrailer%20/%20Screener%20URL:%20%0D%0ASynopsis:%20%0D%0A%0D%0AThank%20you!"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white font-bold py-3.5 px-6 text-xs sm:text-sm transition-all"
+                >
+                  <Mail className="w-4 h-4 text-[#FCE46D]" />
+                  <span>Submit Screener / Inquiry Email</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -455,7 +534,7 @@ export default function OpportunitiesPage() {
                     <button
                       type="submit"
                       disabled={submitting}
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#08203E] hover:bg-[#133A6B] text-white font-bold py-3 px-6 text-xs sm:text-sm transition-all disabled:opacity-50 cursor-pointer"
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white font-bold py-3 px-6 text-xs sm:text-sm transition-all disabled:opacity-50 cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5 text-[#FCE46D]" />
                       <span>{submitting ? "Registering..." : "Register Early Interest"}</span>

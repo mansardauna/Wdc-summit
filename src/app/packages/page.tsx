@@ -32,22 +32,31 @@ export default function PackagesPage() {
 
   return (
     <SiteShell cms={cms}>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number={cms.scholarshipSection.sectionNumber}
+            label={cms.scholarshipSection.sectionLabel}
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            {cms.scholarshipSection.headline}
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            {cms.scholarshipSection.subtitle}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>Fully Funded, Partially Funded &amp; Forum Access</span>
+            <span>·</span>
+            <span>${cms.scholarshipSection.applicationFeePrice} Application Fee</span>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 09 · SCHOLARSHIP PROGRAMME */}
       <section id="scholarships" className="px-5 sm:px-8 lg:px-14 pt-12 sm:pt-16 pb-10">
         <div className="max-w-[1240px] mx-auto">
-          <div className="max-w-3xl mb-8">
-            <SectionPillBadge
-              number={cms.scholarshipSection.sectionNumber}
-              label={cms.scholarshipSection.sectionLabel}
-            />
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1B2228] leading-[1.1] mb-3">
-              {cms.scholarshipSection.headline}
-            </h1>
-            <p className="text-sm sm:text-base text-[#54626F]">
-              {cms.scholarshipSection.subtitle}
-            </p>
-          </div>
-
           <div className="rounded-[28px] bg-[#1E2933] text-white p-7 sm:p-10 mb-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-card">
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-6">
               <div className="flex items-baseline gap-2.5">
@@ -63,13 +72,14 @@ export default function PackagesPage() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <Link
-                href="/apply?package=pkg-scholarship-app"
-                className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-xs sm:text-sm transition-all"
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
+                className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-xs sm:text-sm transition-all cursor-pointer"
               >
                 <span>{cms.scholarshipSection.applicationFeeCta}</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </button>
               <Link
                 href="/payment?package=pkg-scholarship-app"
                 className="inline-flex items-center gap-1.5 rounded-full border border-white/25 hover:bg-white/10 text-white font-medium px-5 py-3.5 text-xs sm:text-sm transition-all"

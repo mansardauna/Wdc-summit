@@ -78,18 +78,30 @@ export default function ContactPage() {
 
   return (
     <SiteShell cms={cms}>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number="DESK"
+            label="SECRETARIAT & DELEGATE RELATIONS"
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            Contact the Summit Secretariat
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            Have questions about scholarship eligibility, group university delegations, school volunteer programs, or institutional partnerships for Cape Town 2027? Reach out to our team below.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>{cms.settings.contactEmail}</span>
+            <span>·</span>
+            <span>Cape Town International Convention Precinct</span>
+          </div>
+        </div>
+      </section>
+
       <section className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
         <div className="max-w-[1180px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <SectionPillBadge number="24/7" label="DELEGATE RELATIONS & SUPPORT" />
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1B2228] leading-[1.1] mb-4">
-              Contact the World Disaster Center Summit Desk
-            </h1>
-            <p className="text-sm sm:text-base text-[#54626F]">
-              Have questions about scholarship eligibility, group university delegations, visa invitation letters, or institutional partnerships for Cape Town 2027? Reach out to our team below.
-            </p>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left 5 Columns: SunSummit Styled Contact Info Cards */}
             <div className="lg:col-span-5 space-y-5">

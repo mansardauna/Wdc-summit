@@ -22,23 +22,30 @@ export default function PartnersPage() {
 
   return (
     <SiteShell cms={cms}>
-      {/* SECTION 11 · OUR PARTNERS */}
-      <section className="pt-12 sm:pt-16 pb-10 overflow-hidden">
-        <div className="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-14">
-          <div className="max-w-2xl mb-8">
-            <SectionPillBadge
-              number={cms.partnersSection.sectionNumber}
-              label={cms.partnersSection.sectionLabel}
-            />
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1B2228] mb-3">
-              {cms.partnersSection.headline}
-            </h1>
-            <p className="text-sm sm:text-base text-[#54626F]">
-              {cms.partnersSection.subtitle}
-            </p>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number={cms.partnersSection.sectionNumber}
+            label={cms.partnersSection.sectionLabel}
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            {cms.partnersSection.headline}
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            {cms.partnersSection.subtitle}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>Global Coalition &amp; Technology Ecosystem</span>
+            <span>·</span>
+            <span>Cape Town 2027</span>
           </div>
         </div>
+      </section>
 
+      {/* SECTION 11 · OUR PARTNERS MARQUEE */}
+      <section className="pt-12 sm:pt-16 pb-10 overflow-hidden">
         {/* Infinite Scrolling Logo Marquee */}
         <div className="relative w-full overflow-hidden py-4 mb-8">
           <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#F4F6F8] to-transparent z-10" />

@@ -1,27 +1,23 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 import {
   Users,
   Lightbulb,
   Video,
   Cpu,
   Award,
-  Mic,
-  BookOpen,
-  Settings,
-  TrendingUp,
-  Handshake,
-  ArrowRight,
   Plane,
 } from "lucide-react";
 import { ProgrammeDay, DEFAULT_CMS_CONTENT } from "@/lib/default-data";
+import { SectionPillBadge } from "./SunSummitDesign";
 import CardSlider from "./CardSlider";
 
 interface SummitProgrammeOverviewProps {
   days?: ProgrammeDay[];
   compact?: boolean;
+  sectionNumber?: string;
+  showHeading?: boolean;
 }
 
 /**
@@ -36,9 +32,7 @@ function StageIllustrationArt({
 }) {
   const type =
     iconType ||
-    (["welcome", "innovation", "culture", "drone", "declaration", "closing"][
-      index % 6
-    ] as string);
+    (["innovation", "culture", "drone", "declaration"][index % 4] as string);
 
   if (type === "welcome") {
     return (
@@ -60,14 +54,12 @@ function StageIllustrationArt({
         </defs>
         <rect width="320" height="150" fill="url(#bgWelcome)" />
         <circle cx="250" cy="45" r="55" fill="url(#orbWelcome)" />
-        {/* 3D Isometric Cape Town Airport & Welcome Arch */}
         <path
           d="M20 130 Q160 85 300 130"
           stroke="#7DD3FC"
           strokeWidth="2"
           strokeDasharray="4 4"
         />
-        {/* 3D Floating Delegate Pass Card */}
         <g transform="translate(42, 26)">
           <rect
             x="0"
@@ -84,7 +76,6 @@ function StageIllustrationArt({
           <rect x="54" y="35" width="34" height="5" rx="2.5" fill="#BAE6FD" />
           <rect x="18" y="57" width="80" height="6" rx="3" fill="#38BDF8" />
         </g>
-        {/* 3D Isometric Globe & Plane */}
         <g transform="translate(188, 22)">
           <circle
             cx="48"
@@ -136,7 +127,6 @@ function StageIllustrationArt({
         </defs>
         <rect width="320" height="150" fill="url(#bgInnov)" />
         <circle cx="160" cy="70" r="75" fill="url(#glowInnov)" />
-        {/* 3D Holographic Earth & Keynote Stage */}
         <ellipse
           cx="160"
           cy="125"
@@ -163,7 +153,6 @@ function StageIllustrationArt({
           strokeWidth="1.3"
         />
         <path d="M122 64H198" stroke="#BAE6FD" strokeWidth="1.3" />
-        {/* Floating 3D Data Cubes */}
         <rect
           x="52"
           y="36"
@@ -201,7 +190,6 @@ function StageIllustrationArt({
           </linearGradient>
         </defs>
         <rect width="320" height="150" fill="url(#bgCult)" />
-        {/* 3D Media Lens, Soundwaves & Storytelling Frames */}
         <rect
           x="34"
           y="24"
@@ -213,7 +201,6 @@ function StageIllustrationArt({
           strokeWidth="1.6"
         />
         <polygon points="82,46 82,78 110,62" fill="#FCE46D" />
-        {/* 3D Broadcast Waves */}
         <circle
           cx="228"
           cy="66"
@@ -250,7 +237,6 @@ function StageIllustrationArt({
           </linearGradient>
         </defs>
         <rect width="320" height="150" fill="url(#bgDrone)" />
-        {/* 3D Radar Grid & Autonomous Disaster Drone */}
         <ellipse
           cx="160"
           cy="118"
@@ -260,12 +246,10 @@ function StageIllustrationArt({
           stroke="#5EEAD4"
           strokeWidth="1.5"
         />
-        {/* Radar Scan Cone */}
         <polygon
           points="160,48 95,118 225,118"
           fill="rgba(252,228,109,0.22)"
         />
-        {/* 3D Quadcopter Drone Silhouette */}
         <line
           x1="105"
           y1="42"
@@ -292,65 +276,6 @@ function StageIllustrationArt({
     );
   }
 
-  if (type === "declaration") {
-    return (
-      <svg
-        viewBox="0 0 320 150"
-        fill="none"
-        className="w-full h-full object-cover"
-      >
-        <defs>
-          <linearGradient id="bgDecl" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#091E3A" />
-            <stop offset="60%" stopColor="#164A8A" />
-            <stop offset="100%" stopColor="#2563EB" />
-          </linearGradient>
-        </defs>
-        <rect width="320" height="150" fill="url(#bgDecl)" />
-        {/* 3D Signed Declaration Scroll & Debate Podium */}
-        <rect
-          x="95"
-          y="18"
-          width="130"
-          height="96"
-          rx="12"
-          fill="rgba(255,255,255,0.16)"
-          stroke="#FCE46D"
-          strokeWidth="2"
-        />
-        <line
-          x1="118"
-          y1="42"
-          x2="202"
-          y2="42"
-          stroke="#FFFFFF"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <line
-          x1="118"
-          y1="58"
-          x2="190"
-          y2="58"
-          stroke="#BAE6FD"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <line
-          x1="118"
-          y1="74"
-          x2="176"
-          y2="74"
-          stroke="#BAE6FD"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <circle cx="192" cy="86" r="12" fill="#FCE46D" />
-      </svg>
-    );
-  }
-
-  // Closing Experience
   return (
     <svg
       viewBox="0 0 320 150"
@@ -358,27 +283,51 @@ function StageIllustrationArt({
       className="w-full h-full object-cover"
     >
       <defs>
-        <linearGradient id="bgClose" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#0B2545" />
-          <stop offset="55%" stopColor="#1D4ED8" />
-          <stop offset="100%" stopColor="#38BDF8" />
+        <linearGradient id="bgDecl" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#091E3A" />
+          <stop offset="60%" stopColor="#164A8A" />
+          <stop offset="100%" stopColor="#2563EB" />
         </linearGradient>
       </defs>
-      <rect width="320" height="150" fill="url(#bgClose)" />
-      {/* Table Mountain 3D Silhouette + Golden Sun */}
-      <circle cx="240" cy="46" r="24" fill="#FCE46D" fillOpacity="0.9" />
-      <path
-        d="M15 130 L65 68 L205 68 L255 130 Z"
-        fill="rgba(11,37,69,0.65)"
-        stroke="#93C5FD"
-        strokeWidth="2"
-      />
-      <path
-        d="M45 105 Q160 35 280 55"
+      <rect width="320" height="150" fill="url(#bgDecl)" />
+      <rect
+        x="95"
+        y="18"
+        width="130"
+        height="96"
+        rx="12"
+        fill="rgba(255,255,255,0.16)"
         stroke="#FCE46D"
         strokeWidth="2"
-        strokeDasharray="5 5"
       />
+      <line
+        x1="118"
+        y1="42"
+        x2="202"
+        y2="42"
+        stroke="#FFFFFF"
+        strokeWidth="3"
+        strokeLinecap="round"
+      />
+      <line
+        x1="118"
+        y1="58"
+        x2="190"
+        y2="58"
+        stroke="#BAE6FD"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <line
+        x1="118"
+        y1="74"
+        x2="176"
+        y2="74"
+        stroke="#BAE6FD"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle cx="192" cy="86" r="12" fill="#FCE46D" />
     </svg>
   );
 }
@@ -386,19 +335,19 @@ function StageIllustrationArt({
 function StageBadgeIcon({ iconType }: { iconType?: string }) {
   switch (iconType) {
     case "welcome":
-      return <Users className="w-6 h-6 text-white" />;
+      return <Users className="w-5 h-5 text-white" />;
     case "innovation":
-      return <Lightbulb className="w-6 h-6 text-white" />;
+      return <Lightbulb className="w-5 h-5 text-white" />;
     case "culture":
-      return <Video className="w-6 h-6 text-white" />;
+      return <Video className="w-5 h-5 text-white" />;
     case "drone":
-      return <Cpu className="w-6 h-6 text-white" />;
+      return <Cpu className="w-5 h-5 text-white" />;
     case "declaration":
-      return <Award className="w-6 h-6 text-white" />;
+      return <Award className="w-5 h-5 text-white" />;
     case "closing":
-      return <Plane className="w-6 h-6 text-white" />;
+      return <Plane className="w-5 h-5 text-white" />;
     default:
-      return <Users className="w-6 h-6 text-white" />;
+      return <Users className="w-5 h-5 text-white" />;
   }
 }
 
@@ -418,11 +367,11 @@ function ProgrammeDayCard({
   const dayNum = shortParts[1] || String(11 + idx);
 
   return (
-    <div className="h-full rounded-[24px] bg-white border border-sky-100 shadow-[0_12px_32px_rgba(8,32,62,0.06)] hover:shadow-[0_18px_42px_rgba(8,32,62,0.12)] transition-all duration-300 flex flex-col justify-between overflow-hidden group">
+    <div className="h-full rounded-[28px] bg-white border border-slate-200/80 shadow-card hover:shadow-lg transition-all duration-300 flex flex-col justify-between overflow-hidden group">
       <div>
         {/* Top Colored Stage Banner + Calendar Date Pill */}
         <div
-          className="px-5 py-3.5 text-white flex items-center justify-between gap-2"
+          className="px-5 py-4 text-white flex items-center justify-between gap-2"
           style={{ backgroundColor: headerBg }}
         >
           <div>
@@ -449,7 +398,7 @@ function ProgrammeDayCard({
         </div>
 
         {/* Title & Subtitle */}
-        <div className="px-5 pt-4 pb-3 text-center min-h-[108px] flex flex-col justify-center">
+        <div className="px-5 pt-5 pb-3 text-center min-h-[96px] flex flex-col justify-center">
           <h3
             className="text-sm sm:text-base font-extrabold uppercase tracking-tight leading-snug"
             style={{ color: headerBg }}
@@ -457,22 +406,22 @@ function ProgrammeDayCard({
             {day.title}
           </h3>
           {day.subtitle && (
-            <p className="text-xs text-[#334E68] mt-1.5 leading-relaxed">
+            <p className="text-xs text-[#54626F] mt-1.5 leading-relaxed line-clamp-2">
               {day.subtitle}
             </p>
           )}
         </div>
 
         {/* 2D/3D Illustration Art Banner + Overlapping Circular Icon Badge */}
-        <div className="relative mb-7">
-          <div className="h-32 w-full overflow-hidden border-y border-slate-100">
+        <div className="relative mb-6">
+          <div className="h-28 w-full overflow-hidden border-y border-slate-100">
             <StageIllustrationArt
               iconType={day.iconType}
               index={idx}
             />
           </div>
           <div
-            className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 border-white shadow-md flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+            className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-3 border-white shadow-md flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
             style={{ backgroundColor: headerBg }}
           >
             <StageBadgeIcon iconType={day.iconType} />
@@ -485,7 +434,7 @@ function ProgrammeDayCard({
             {day.items.map((item, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 text-xs text-[#1E293B] leading-relaxed"
+                className="flex items-start gap-2 text-xs text-[#2C3740] leading-relaxed"
               >
                 <span
                   className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
@@ -499,9 +448,9 @@ function ProgrammeDayCard({
       </div>
 
       {/* Bottom Delegate Count Callout Box */}
-      <div className="mx-4 mb-4 rounded-2xl bg-[#E0F2FE]/80 border border-sky-200/80 p-3.5 text-center">
-        <div className="text-[11px] font-bold text-[#0C4A6E]">
-          Number of Delegates
+      <div className="mx-4 mb-4 rounded-2xl bg-[#F0F7FF] border border-sky-100 p-3.5 text-center">
+        <div className="text-[10px] font-mono uppercase tracking-wider text-[#0C4A6E] font-bold">
+          NUMBER OF DELEGATES
         </div>
         <div className="text-2xl sm:text-3xl font-extrabold text-[#08203E] leading-tight my-0.5">
           {day.delegateCount || "200"}
@@ -516,12 +465,13 @@ function ProgrammeDayCard({
 
 export default function SummitProgrammeOverview({
   days,
-  compact = false,
+  sectionNumber = "04",
+  showHeading = true,
 }: SummitProgrammeOverviewProps) {
   const rawDays =
     days && days.length > 0 ? days : DEFAULT_CMS_CONTENT.programme.days;
 
-  // Filter out the first "Arrival & Welcome Experience" and last "Closing Experience and Departures"
+  // Filter out arrival and departure/closing days, leaving the 4 core summit days
   const programmeDays = rawDays.filter(
     (day) =>
       !day.title.toLowerCase().includes("arrival") &&
@@ -530,145 +480,54 @@ export default function SummitProgrammeOverview({
       day.id !== "day-6"
   );
 
-  const bottomHighlights = [
-    {
-      icon: <Mic className="w-6 h-6 text-[#7DD3FC]" />,
-      title: "SPEECHES",
-      subtitle: "From global leaders",
-    },
-    {
-      icon: <BookOpen className="w-6 h-6 text-[#FCE46D]" />,
-      title: "MASTERCLASSES",
-      subtitle: "Practical learning with experts",
-    },
-    {
-      icon: <Settings className="w-6 h-6 text-[#7DD3FC]" />,
-      title: "EXHIBITIONS",
-      subtitle: "Showcase solutions (morning to lunch)",
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6 text-[#FCE46D]" />,
-      title: "INVESTMENT OPPORTUNITIES",
-      subtitle: "Connect with funders and partners",
-    },
-    {
-      icon: <Handshake className="w-6 h-6 text-[#7DD3FC]" />,
-      title: "NETWORKING",
-      subtitle: "Build global connections",
-    },
-  ];
-
   return (
-    <div className="rounded-[32px] overflow-hidden bg-white shadow-[0_24px_70px_rgba(8,32,62,0.10)] border border-slate-200/90">
-      {/* =====================================================================
-          TOP SUMMIT OVERVIEW HEADER BANNER (Clean Banner without duplicated Logo/Card text)
-         ===================================================================== */}
-      <div className="relative overflow-hidden bg-[#06234B] text-white px-6 sm:px-10 lg:px-12 py-8 sm:py-10">
-        {/* Table Mountain & Cape Town Backdrop on Right */}
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-1/2 opacity-30 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('/illustrations/cape-town-circle.jpg')",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, #051F44 0%, rgba(6,35,75,0.92) 60%, rgba(6,35,75,0.55) 100%)",
-          }}
-        />
-
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          {/* Left: SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027 */}
-          <div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-[0.06em] uppercase text-white leading-none">
-              SUMMIT OVERVIEW
-            </h2>
-            <div className="text-base sm:text-xl font-bold tracking-[0.14em] uppercase text-[#FCE46D] mt-2">
-              11 – 15 OCTOBER 2027
+    <div className="w-full">
+      {/* Existing Section Heading Style taking full width — Not wrapped in a card */}
+      {showHeading && (
+        <div className="w-full mb-8 sm:mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-slate-200/80">
+            <div>
+              <SectionPillBadge
+                number={sectionNumber}
+                label="SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027"
+              />
+              <h2 className="text-3xl sm:text-4xl md:text-[44px] font-extrabold tracking-tight text-[#1B2228] leading-[1.08] mb-2">
+                Summit Overview
+              </h2>
+              <p className="text-sm sm:text-base text-[#54626F] max-w-2xl leading-relaxed">
+                Four days of high-impact climate innovation, media &amp; culture, disaster technology demonstrations, and the formal drafting of the WDC Youth Declaration.
+              </p>
             </div>
-            <div className="text-xs sm:text-sm font-mono tracking-[0.22em] uppercase text-sky-100 mt-1">
-              CAPE TOWN, SOUTH AFRICA
-            </div>
-          </div>
-
-          {/* Right: Tagline */}
-          <div className="md:text-right">
-            <div className="inline-block rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 text-xs sm:text-sm italic font-medium text-sky-100 leading-snug">
-              &ldquo;Youth Leadership for a Safer, More Resilient World&rdquo;
+            <div className="shrink-0 text-left md:text-right">
+              <div className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-[#005EB8]">
+                CAPE TOWN, SOUTH AFRICA
+              </div>
+              <div className="text-xs text-[#54626F] mt-0.5">
+                11 – 15 October 2027
+              </div>
             </div>
           </div>
         </div>
+      )}
+
+      {/* Desktop 4-Column Grid */}
+      <div className="hidden lg:grid lg:grid-cols-4 gap-5">
+        {programmeDays.map((day, idx) => (
+          <ProgrammeDayCard key={day.id} day={day} idx={idx} />
+        ))}
       </div>
 
-      {/* =====================================================================
-          4-COLUMN PROGRAMME OVERVIEW BOARD (Desktop Grid + Mobile Slider)
-         ===================================================================== */}
-      <div className="p-5 sm:p-8 lg:p-10 bg-[#F8FBFF]">
-        {/* Desktop 4-Column Grid: displays all 4 days side-by-side with zero cut-off */}
-        <div className="hidden lg:grid lg:grid-cols-4 gap-5">
+      {/* Mobile / Tablet Responsive Card Slider */}
+      <div className="lg:hidden">
+        <CardSlider
+          cardClassName="w-[86vw] sm:w-[330px]"
+          gap="gap-5"
+          badge="11–15 Oct 2027 Schedule"
+        >
           {programmeDays.map((day, idx) => (
             <ProgrammeDayCard key={day.id} day={day} idx={idx} />
           ))}
-        </div>
-
-        {/* Mobile / Tablet Responsive Card Slider */}
-        <div className="lg:hidden">
-          <CardSlider
-            cardClassName="w-[86vw] sm:w-[330px]"
-            gap="gap-5"
-            badge="Swipe 11–15 Oct 2027 Schedule"
-          >
-            {programmeDays.map((day, idx) => (
-              <ProgrammeDayCard key={day.id} day={day} idx={idx} />
-            ))}
-          </CardSlider>
-        </div>
-      </div>
-
-      {/* =====================================================================
-          BOTTOM 5-PILLAR BAR (SPEECHES · MASTERCLASSES · EXHIBITIONS · INVESTMENT · NETWORKING)
-          Matches the bottom bar of Image 2!
-         ===================================================================== */}
-      <div className="bg-[#06234B] text-white px-6 sm:px-10 py-6 border-t border-sky-400/20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:divide-x divide-sky-400/20">
-          {bottomHighlights.map((item, idx) => (
-            <div
-              key={idx}
-              className={`flex items-center gap-3.5 ${
-                idx > 0 ? "lg:pl-5" : ""
-              }`}
-            >
-              <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
-                {item.icon}
-              </div>
-              <div>
-                <div className="text-xs sm:text-sm font-extrabold tracking-wide uppercase text-white">
-                  {item.title}
-                </div>
-                <div className="text-[11px] text-sky-200/90 mt-0.5 leading-snug">
-                  {item.subtitle}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {compact && (
-          <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-            <p className="text-xs sm:text-sm text-sky-100">
-              Explore the complete 11–15 October 2027 Cape Town syllabus, 20 delegate speaker slots, and eligibility tracks.
-            </p>
-            <Link
-              href="/programme"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#08203E] font-bold px-6 py-2.5 text-xs sm:text-sm transition-all"
-            >
-              <span>Full Programme &amp; Speaker Slots</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        )}
+        </CardSlider>
       </div>
     </div>
   );

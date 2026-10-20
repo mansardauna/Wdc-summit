@@ -103,20 +103,50 @@ function ApplyPageContent() {
 
   return (
     <SiteShell cms={cms}>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number="APPLY"
+            label="DELEGATE &amp; SCHOLARSHIP PORTAL"
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            Apply for Cape Town 2027
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            11–15 October 2027 · Ages 18–30 · All Nationalities. One application considers you for Fully Funded, Partially Funded, and Funded Forum Access scholarships, or you can book a direct Self-Funded package.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>Official Applications Opening Soon</span>
+            <span>·</span>
+            <span>Cape Town, South Africa</span>
+          </div>
+        </div>
+      </section>
+
       <section className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
         <div className="max-w-[1180px] mx-auto">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <SectionPillBadge
-              number="2027"
-              label="DELEGATE & SCHOLARSHIP APPLICATION PORTAL"
-            />
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1B2228] leading-[1.1] mb-4">
-              Apply for the Youth Leadership Summit in Cape Town
-            </h1>
-            <p className="text-sm sm:text-base text-[#54626F]">
-              11–15 October 2027 · Ages 18–30 · All Nationalities. One application considers you for Fully Funded, Partially Funded, and Funded Forum Access scholarships, or you can book a direct Self-Funded package.
-            </p>
+          {/* Priority Waitlist Notice Banner */}
+          <div className="mb-10 rounded-[24px] bg-amber-50 border border-amber-200 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-900 bg-amber-200/60 px-3 py-1 rounded-full">
+                PRE-REGISTRATION NOTICE
+              </span>
+              <h3 className="text-xl font-bold text-[#1B2228] pt-1">
+                Official Delegate Portal Opens Shortly
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-700 max-w-2xl">
+                The portal is in pre-launch preview mode. You can test your draft application below, or click to join the instant email priority list to receive the alert the moment submissions go live.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
+              className="shrink-0 rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white px-6 py-3 text-xs font-semibold cursor-pointer shadow-sm transition"
+            >
+              Get Opening Notification
+            </button>
           </div>
 
           {submittedApp ? (

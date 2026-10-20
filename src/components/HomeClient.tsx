@@ -123,9 +123,9 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
         {/* Foreground Content */}
         <div className="relative z-20 max-w-[1280px] w-full mx-auto px-5 sm:px-8 lg:px-14 pt-14 sm:pt-20 pb-14">
           <div className="max-w-2xl">
-            {/* Edition Badge */}
-            <div className="inline-flex items-center gap-2 rounded-md bg-[#1A82B8] px-3.5 py-1.5 text-[11px] font-mono font-bold uppercase tracking-[0.14em] text-white mb-5 shadow-sm">
-              <span>{cms.hero.badge}</span>
+            {/* Edition Eyebrow */}
+            <div className="text-xs font-mono font-bold uppercase tracking-[0.18em] text-[#FCE46D] mb-3">
+              {cms.hero.badge}
             </div>
 
             <p className="text-sm sm:text-base text-slate-200 font-medium mb-3">
@@ -202,12 +202,13 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
 
             {/* Primary & Secondary Buttons */}
             <div className="flex flex-wrap items-center gap-3.5">
-              <Link
-                href="/apply"
-                className="inline-flex items-center justify-center rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-8 py-3.5 text-sm shadow-md transition-all"
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
+                className="inline-flex items-center justify-center rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-8 py-3.5 text-sm shadow-md transition-all cursor-pointer"
               >
                 {cms.hero.primaryCta}
-              </Link>
+              </button>
               <Link
                 href="/declaration"
                 className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 hover:bg-white/15 text-white font-semibold px-7 py-3.5 text-sm backdrop-blur-xs transition-all"
@@ -461,13 +462,14 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <Link
-                href="/apply?package=pkg-scholarship-app"
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
                 className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-xs sm:text-sm transition-all"
               >
                 <span>{cms.scholarshipSection.applicationFeeCta}</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </button>
               <Link
                 href="/packages"
                 className="inline-flex items-center gap-1.5 rounded-full border border-white/25 hover:bg-white/10 text-white font-medium px-6 py-3.5 text-xs sm:text-sm transition-all"

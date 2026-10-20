@@ -148,16 +148,31 @@ function PaymentPageContent() {
 
   return (
     <SiteShell cms={cms}>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number="PAY"
+            label="OFFICIAL PAYMENT &amp; RECEIPT PORTAL"
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            Secure Payment &amp; Receipts
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            Complete your scholarship application fee, self-funded delegate registration, or visa invitation letter processing with 256-bit SSL encryption.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>Verified Merchant Gateway</span>
+            <span>·</span>
+            <span>Instant Digital Invoices &amp; Receipts</span>
+          </div>
+        </div>
+      </section>
+
       <section className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
         <div className="max-w-[1180px] mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <SectionPillBadge
-              number="USD"
-              label="OFFICIAL DELEGATE PAYMENT & CHECKOUT PORTAL"
-            />
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#1B2228] leading-[1.1] mb-3">
-              Secure Your Seat & Scholarship Application
-            </h1>
+          <div className="mb-8 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center">
             <p className="text-sm sm:text-base text-[#54626F]">
               All fees are quoted in United States Dollars (USD) and processed securely via{" "}
               <strong className="text-[#1B2228]">Paystack</strong> or{" "}

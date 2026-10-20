@@ -26,7 +26,50 @@ export default function DeclarationPage() {
 
   return (
     <SiteShell cms={cms}>
-      {/* Principal Outcome Hero Section */}
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number={cms.declaration.sectionNumber}
+            label={cms.declaration.sectionLabel}
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            The WDC Global{" "}
+            <span className="text-[#FCE46D]">
+              Environmental Protection
+            </span>{" "}
+            Declaration
+          </h1>
+          <div className="inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-mono font-medium text-[#E4EFF7] mb-4">
+            {cms.declaration.signedBadge}
+          </div>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            {cms.declaration.paragraph1}
+          </p>
+          <p className="text-sm sm:text-base text-white font-medium max-w-2xl leading-relaxed mb-6">
+            {cms.declaration.paragraph2}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
+              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-sm shadow-sm transition-all cursor-pointer"
+            >
+              <span>{cms.declaration.ctaText}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <Link
+              href="/programme"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 hover:bg-white/10 text-white font-medium px-6 py-3.5 text-sm transition-all"
+            >
+              <span>View Programme Itinerary</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Declaration Process Section */}
       <section className="px-5 sm:px-8 lg:px-14 py-12 sm:py-16">
         <div className="max-w-[1240px] mx-auto">
           <div className="relative overflow-hidden rounded-[32px] bg-[#16324A] text-white p-8 sm:p-12 lg:p-16 shadow-card">
@@ -41,35 +84,19 @@ export default function DeclarationPage() {
                   label={cms.declaration.sectionLabel}
                   dark
                 />
-                <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-[1.08]">
-                  The WDC Global{" "}
-                  <span className="text-[#FCE46D]">
-                    Environmental Protection
-                  </span>{" "}
-                  Declaration
-                </h1>
-                <div className="inline-block rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium text-[#E4EFF7]">
-                  {cms.declaration.signedBadge}
-                </div>
+                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-[1.1]">
+                  How the Declaration is Drafted & Adopted
+                </h2>
                 <p className="text-sm sm:text-base text-slate-200 leading-relaxed">
                   {cms.declaration.paragraph1}
                 </p>
-                <p className="text-sm sm:text-base text-white font-medium leading-relaxed">
-                  {cms.declaration.paragraph2}
-                </p>
-                <div className="pt-2 flex flex-wrap gap-3">
-                  <Link
-                    href="/apply"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-bold px-7 py-3.5 text-sm shadow-sm transition-all"
-                  >
-                    <span>{cms.declaration.ctaText}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <div className="pt-2">
                   <Link
                     href="/programme"
                     className="inline-flex items-center gap-2 rounded-full border border-white/30 hover:bg-white/10 text-white font-medium px-6 py-3.5 text-sm transition-all"
                   >
                     <span>See Day 05 Signing Schedule</span>
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>

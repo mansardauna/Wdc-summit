@@ -23,35 +23,46 @@ export default function ProgrammePage() {
 
   return (
     <SiteShell cms={cms}>
+      {/* Page Header matching /summit style */}
+      <section className="bg-[#0B1C2E] text-white py-16 sm:py-20 px-5 sm:px-8 lg:px-14 border-b border-white/10">
+        <div className="max-w-[1240px] mx-auto">
+          <SectionPillBadge
+            number={cms.programme.sectionNumber}
+            label="SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027"
+            dark
+          />
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight max-w-3xl leading-[1.08] mb-5">
+            Youth Leadership Summit 2027 Programme
+          </h1>
+          <p className="text-sm sm:text-base text-slate-200 max-w-2xl leading-relaxed mb-4">
+            {cms.programme.subtitle}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-mono text-[#FCE46D]">
+            <span>11–15 October 2027</span>
+            <span>·</span>
+            <span>Cape Town, South Africa</span>
+            <span>·</span>
+            <span>200 Registered Delegates</span>
+          </div>
+        </div>
+      </section>
+
       {/* =====================================================================
           SECTION 07 · THE PROGRAMME OVERVIEW (11–15 OCTOBER 2027)
           Extracted & corrected from official Youth Leadership Summit 2027 board
          ===================================================================== */}
       <section
         id="programme"
-        className="px-5 sm:px-8 lg:px-14 pt-10 sm:pt-14 pb-10"
+        className="px-5 sm:px-8 lg:px-14 pt-12 sm:pt-16 pb-10"
       >
         <div className="max-w-[1240px] mx-auto">
-          <div className="max-w-3xl mb-8">
-            <SectionPillBadge
-              number={cms.programme.sectionNumber}
-              label="SUMMIT OVERVIEW · 11 – 15 OCTOBER 2027"
-            />
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1B2228] leading-[1.1] mb-3">
-              Youth Leadership Summit 2027 Programme
-            </h1>
-            <p className="text-sm sm:text-base text-[#54626F]">
-              {cms.programme.subtitle}
-            </p>
-          </div>
-
           {/* Complete 4-Stage Summit Overview Board with 2D/3D Illustrations */}
           <SummitProgrammeOverview
             days={cms.programme?.days || DEFAULT_CMS_CONTENT.programme.days}
-            compact={false}
+            showHeading={false}
           />
 
-          <div className="rounded-[26px] bg-[#1E2933] text-white p-7 sm:p-9 flex flex-col sm:flex-row items-center justify-between gap-6 mt-8 shadow-card">
+          <div className="rounded-[26px] bg-[#1E2933] text-white p-7 sm:p-9 flex flex-col sm:flex-row items-center justify-between gap-6 mt-10 shadow-card">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold mb-1">
                 {cms.programme.bannerTitle}
@@ -60,13 +71,14 @@ export default function ProgrammePage() {
                 {cms.programme.bannerSubtitle}
               </p>
             </div>
-            <Link
-              href="/apply"
-              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-semibold px-7 py-3 text-xs sm:text-sm transition-all"
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-apply-modal"))}
+              className="shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F7D742] text-[#1B2228] font-semibold px-7 py-3 text-xs sm:text-sm transition-all cursor-pointer"
             >
               <span>{cms.programme.bannerCta}</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </section>

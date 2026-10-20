@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { WdcBrandLogo } from "./SunSummitDesign";
 import { SiteCMSContent, DEFAULT_CMS_CONTENT } from "@/lib/default-data";
+import ApplyModal from "./ApplyModal";
 
 export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) {
   const pathname = usePathname();
@@ -22,6 +23,13 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
   const [summitDropdown, setSummitDropdown] = useState(false);
   const [programmeDropdown, setProgrammeDropdown] = useState(false);
   const [opportunitiesDropdown, setOpportunitiesDropdown] = useState(false);
+  const [applyModalOpen, setApplyModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => setApplyModalOpen(true);
+    window.addEventListener("open-apply-modal", handleOpen);
+    return () => window.removeEventListener("open-apply-modal", handleOpen);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname?.startsWith(href);
@@ -273,12 +281,13 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
 
         {/* Right CTA Button */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/apply"
-            className="inline-flex items-center justify-center rounded-full bg-[#465765] hover:bg-[#34434F] text-white px-6 py-2.5 text-xs font-semibold tracking-wide shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2"
+          <button
+            type="button"
+            onClick={() => setApplyModalOpen(true)}
+            className="inline-flex items-center justify-center rounded-full bg-[#1B2228] hover:bg-[#34434F] text-white px-6 py-2.5 text-xs font-semibold tracking-wide shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1B2228] focus-visible:ring-offset-2 cursor-pointer"
           >
             Apply Now
-          </Link>
+          </button>
         </div>
 
         {/* Mobile menu button */}
@@ -349,16 +358,25 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
             </Link>
           </div>
           <div className="pt-2">
-            <Link
-              href="/apply"
-              onClick={() => setMobileOpen(false)}
-              className="block w-full text-center py-3 rounded-full text-xs font-semibold bg-[#465765] text-white"
+            <button
+              type="button"
+              onClick={() => {
+                setMobileOpen(false);
+                setApplyModalOpen(true);
+              }}
+              className="block w-full text-center py-3 rounded-full text-xs font-semibold bg-[#1B2228] text-white cursor-pointer"
             >
               Apply Now
-            </Link>
+            </button>
           </div>
         </nav>
       )}
+
+      {/* Global Apply Modal */}
+      <ApplyModal
+        isOpen={applyModalOpen}
+        onClose={() => setApplyModalOpen(false)}
+      />
     </header>
   );
 }
@@ -380,13 +398,17 @@ export function Footer({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
             {cms.gatewayCta.subtitle}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
+            <a
               href="/apply"
-              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F8D849] text-[#1B2228] font-semibold px-7 py-3.5 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FCE46D]"
+              onClick={(e) => {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent("open-apply-modal"));
+              }}
+              className="inline-flex items-center gap-2 rounded-full bg-[#FCE46D] hover:bg-[#F8D849] text-[#1B2228] font-semibold px-7 py-3.5 text-sm shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FCE46D] cursor-pointer"
             >
               <span>{cms.gatewayCta.primaryCta}</span>
               <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-            </Link>
+            </a>
             <Link
               href="/packages#faq"
               className="inline-flex items-center gap-2 rounded-full border border-white/30 hover:bg-white/10 text-white font-medium px-7 py-3.5 text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
@@ -482,9 +504,16 @@ export function Footer({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
                   </Link>
                 </li>
                 <li>
-                  <Link href="/apply" className="hover:text-white transition">
+                  <a
+                    href="/apply"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.dispatchEvent(new CustomEvent("open-apply-modal"));
+                    }}
+                    className="hover:text-white transition cursor-pointer"
+                  >
                     Delegate Application Portal
-                  </Link>
+                  </a>
                 </li>
                 <li>
                   <Link href="/payment" className="hover:text-white transition">
