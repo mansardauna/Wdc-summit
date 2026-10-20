@@ -35,7 +35,8 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
     href === "/" ? pathname === "/" : pathname?.startsWith(href);
 
   return (
-    <header role="banner" className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-5 sm:px-8 lg:px-14 py-3.5">
+    <>
+      <header role="banner" className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-5 sm:px-8 lg:px-14 py-3.5">
       <div className="max-w-[1320px] mx-auto flex items-center justify-between gap-4">
         {/* Left: Uploaded World Disaster Center Company Logo */}
         <Link href="/" className="group" aria-label="World Disaster Center Home">
@@ -372,12 +373,14 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
         </nav>
       )}
 
+      </header>
+
       {/* Global Apply Modal */}
       <ApplyModal
         isOpen={applyModalOpen}
         onClose={() => setApplyModalOpen(false)}
       />
-    </header>
+    </>
   );
 }
 
