@@ -64,7 +64,9 @@ function readLocalStore(): FullDatabaseStore {
       ...INITIAL_STORE.cms,
       ...(parsed.cms || {}),
       teamSection:
-        parsed.cms?.teamSection && parsed.cms.teamSection.members?.length
+        parsed.cms?.teamSection &&
+        parsed.cms.teamSection.members?.length &&
+        !parsed.cms.teamSection.members.some((m) => m.name.toLowerCase().includes("itegwa"))
           ? parsed.cms.teamSection
           : INITIAL_STORE.cms.teamSection,
       partnersSection:
@@ -114,7 +116,9 @@ export async function getStore(): Promise<FullDatabaseStore> {
           ...INITIAL_STORE.cms,
           ...(pgData.cms || {}),
           teamSection:
-            pgData.cms?.teamSection && pgData.cms.teamSection.members?.length
+            pgData.cms?.teamSection &&
+            pgData.cms.teamSection.members?.length &&
+            !pgData.cms.teamSection.members.some((m) => m.name.toLowerCase().includes("itegwa"))
               ? pgData.cms.teamSection
               : INITIAL_STORE.cms.teamSection,
           partnersSection:

@@ -28,15 +28,15 @@ interface PartnerOrbitSectionProps {
 }
 
 export default function PartnerOrbitSection({
-  eyebrow = "STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM",
+  eyebrow = "LEADERSHIP & YOUTH DEVELOPMENT INITIATIVES",
   headline = "Meet the Team",
-  subtitle = "A global team working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible.",
+  subtitle = "The executive leadership, technical architects, and emerging youth tracks driving the World Disaster Center Youth Leadership Summit 2027 in Cape Town.",
   members = [],
   partners = [],
   customNodes,
   showViewAllButton = true,
-  viewAllHref = "/team",
-  viewAllLabel = "See All Team Members",
+  viewAllHref = "/opportunities",
+  viewAllLabel = "Explore Summit Opportunities",
 }: PartnerOrbitSectionProps) {
   // Convert members, customNodes, or partners into standardized OrbitNodeItem[]
   const allItems: OrbitNodeItem[] =
@@ -50,7 +50,7 @@ export default function PartnerOrbitSection({
           description:
             m.bio.length > 135 ? m.bio.slice(0, 132).trim() + "..." : m.bio,
           imageUrl: m.imageUrl,
-          isPhoto: true,
+          isPhoto: !m.imageUrl?.endsWith(".svg"),
           linkUrl: m.linkedinUrl,
         }))
       : partners.map((p) => ({
@@ -304,11 +304,11 @@ export default function PartnerOrbitSection({
                             className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="w-full h-full p-2.5 sm:p-4 flex items-center justify-center bg-white">
+                          <div className="w-full h-full flex items-center justify-center bg-slate-50">
                             <img
                               src={node.imageUrl}
                               alt={node.name}
-                              className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                              className="w-full h-full object-cover p-0.5 transition-transform duration-300 group-hover:scale-105"
                             />
                           </div>
                         )

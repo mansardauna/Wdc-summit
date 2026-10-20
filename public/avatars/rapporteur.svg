@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="bgRap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F766E" />
+      <stop offset="100%" stop-color="#0D9488" />
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" rx="80" fill="url(#bgRap)" />
+  <circle cx="80" cy="80" r="74" fill="none" stroke="#5EEAD4" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
+  <!-- Head -->
+  <circle cx="80" cy="56" r="28" fill="#FEF3C7" opacity="0.95"/>
+  <!-- Hair with bun -->
+  <circle cx="80" cy="24" r="10" fill="#134E4A" />
+  <path d="M52 54 C52 34 64 26 80 26 C96 26 108 34 108 54 C108 62 104 68 102 70 C96 60 90 54 80 54 C70 54 64 60 58 70 C56 68 52 62 52 54 Z" fill="#134E4A" />
+  <!-- Glasses -->
+  <circle cx="70" cy="56" r="8" stroke="#FCE46D" stroke-width="2" fill="none" />
+  <circle cx="90" cy="56" r="8" stroke="#FCE46D" stroke-width="2" fill="none" />
+  <line x1="78" y1="56" x2="82" y2="56" stroke="#FCE46D" stroke-width="2" />
+  <!-- Eyes & Smile -->
+  <circle cx="70" cy="56" r="2.5" fill="#134E4A" />
+  <circle cx="90" cy="56" r="2.5" fill="#134E4A" />
+  <path d="M74 67 Q80 72 86 67" stroke="#134E4A" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <!-- Blazer with Quill / Declaration Scroll pin -->
+  <path d="M42 136 C42 102 60 92 80 92 C100 92 118 102 118 136 Z" fill="#115E59" />
+  <path d="M68 94 L80 114 L92 94" fill="#CCFBF1" />
+  <!-- Quill Pin -->
+  <line x1="84" y1="108" x2="92" y2="118" stroke="#FCE46D" stroke-width="2.5" stroke-linecap="round" />
+  <polygon points="90,116 93,120 89,120" fill="#FCE46D" />
+</svg>

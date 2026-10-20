@@ -21,6 +21,7 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [summitDropdown, setSummitDropdown] = useState(false);
   const [programmeDropdown, setProgrammeDropdown] = useState(false);
+  const [opportunitiesDropdown, setOpportunitiesDropdown] = useState(false);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname?.startsWith(href);
@@ -186,6 +187,80 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
             )}
           </div>
 
+          {/* Summit Opportunities Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpportunitiesDropdown(true)}
+            onMouseLeave={() => setOpportunitiesDropdown(false)}
+            onFocus={() => setOpportunitiesDropdown(true)}
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                setOpportunitiesDropdown(false);
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setOpportunitiesDropdown(false);
+            }}
+          >
+            <Link
+              href="/opportunities"
+              aria-haspopup="true"
+              aria-expanded={opportunitiesDropdown}
+              className={`flex items-center gap-1.5 py-1 hover:text-[#1B2228] transition-colors ${
+                isActive("/opportunities") ? "font-bold text-[#1B2228]" : ""
+              }`}
+            >
+              <span>Summit Opportunities</span>
+              <span className="rounded-full bg-[#FCE46D] px-2 py-0.5 text-[9px] font-mono font-extrabold uppercase tracking-wide text-[#1B2228]">
+                Open
+              </span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" aria-hidden="true" />
+            </Link>
+            {opportunitiesDropdown && (
+              <div
+                role="menu"
+                aria-label="Summit Opportunities submenu"
+                className="absolute left-0 top-full pt-2 w-72 z-50"
+              >
+                <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                  <Link
+                    href="/opportunities#summit-crew"
+                    role="menuitem"
+                    className="block px-3.5 py-2.5 rounded-xl text-xs hover:bg-[#EEF5FA] text-[#1B2228] transition"
+                  >
+                    <div className="font-bold flex items-center justify-between">
+                      <span>1. Summit Crew</span>
+                      <span className="text-[10px] text-sky-800 bg-sky-50 px-2 py-0.5 rounded-md font-mono">High School</span>
+                    </div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">5-day onsite volunteer credits</div>
+                  </Link>
+                  <Link
+                    href="/opportunities#wdc-ambassador"
+                    role="menuitem"
+                    className="block px-3.5 py-2.5 rounded-xl text-xs hover:bg-[#EEF5FA] text-[#1B2228] transition"
+                  >
+                    <div className="font-bold flex items-center justify-between">
+                      <span>2. WDC Ambassador</span>
+                      <span className="text-[10px] text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md font-mono">Competition</span>
+                    </div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">Global youth leadership challenge</div>
+                  </Link>
+                  <Link
+                    href="/opportunities#climate-cinematographers"
+                    role="menuitem"
+                    className="block px-3.5 py-2.5 rounded-xl text-xs hover:bg-[#EEF5FA] text-[#1B2228] transition"
+                  >
+                    <div className="font-bold flex items-center justify-between">
+                      <span>3. Climate Cinematographers</span>
+                      <span className="text-[10px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-mono">Doc Call</span>
+                    </div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">Call for climate documentaries</div>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
           <Link
             href="/contact"
             className={`hover:text-[#1B2228] transition-colors ${
@@ -254,6 +329,16 @@ export function Navbar({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
               className="px-3 py-2.5 rounded-xl bg-slate-50 text-[#1B2228]"
             >
               Programme
+            </Link>
+            <Link
+              href="/opportunities"
+              onClick={() => setMobileOpen(false)}
+              className="col-span-2 px-3 py-2.5 rounded-xl bg-amber-50 font-bold text-[#1B2228] flex items-center justify-between"
+            >
+              <span>Summit Opportunities</span>
+              <span className="rounded-full bg-[#FCE46D] px-2 py-0.5 text-[9px] font-mono font-extrabold uppercase text-[#1B2228]">
+                Open
+              </span>
             </Link>
             <Link
               href="/contact"
@@ -367,8 +452,8 @@ export function Footer({ cms = DEFAULT_CMS_CONTENT }: { cms?: SiteCMSContent }) 
                   </Link>
                 </li>
                 <li>
-                  <Link href="/team" className="hover:text-white transition">
-                    Youth Summit Crew
+                  <Link href="/opportunities" className="hover:text-white transition">
+                    Summit Opportunities
                   </Link>
                 </li>
                 <li>

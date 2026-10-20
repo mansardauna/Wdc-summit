@@ -414,17 +414,17 @@ export default function HomeClient({ initialCms }: { initialCms: SiteCMSContent 
           Matches Reference Image 1 ("STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM · Meet the Team")
          ===================================================================== */}
       <PartnerOrbitSection
-        eyebrow="STRATEGY, PARTNERSHIPS AND DEVELOPMENT TEAM"
+        eyebrow="LEADERSHIP & YOUTH DEVELOPMENT INITIATIVES"
         headline="Meet the Team"
-        subtitle="A global team working behind the scenes to make the World Disaster Center Youth Leadership Summit 2027 possible."
+        subtitle="The executive leadership, technical architects, and emerging youth tracks driving the World Disaster Center Youth Leadership Summit 2027 in Cape Town."
         members={
           (cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members?.length
             ? (cms.teamSection || DEFAULT_CMS_CONTENT.teamSection).members
             : DEFAULT_CMS_CONTENT.teamSection.members
         }
         showViewAllButton={true}
-        viewAllHref="/team"
-        viewAllLabel="See All Team Members"
+        viewAllHref="/opportunities"
+        viewAllLabel="Explore Summit Opportunities"
       />
 
       {/* =====================================================================
