@@ -1048,12 +1048,19 @@ export default function AdminCMSPage() {
                       </div>
                     </div>
 
-                    <div className="text-xs text-[#54626F]">
-                      From: <strong className="text-[#1B2228]">{msg.fullName}</strong> (
-                      <a href={`mailto:${msg.email}`} className="underline">
-                        {msg.email}
-                      </a>
-                      ) · {msg.country || "International"} · {msg.phone}
+                    <div className="text-xs text-[#54626F] flex flex-wrap items-center gap-2">
+                      <span>
+                        From: <strong className="text-[#1B2228]">{msg.fullName}</strong> (
+                        <a href={`mailto:${msg.email}`} className="underline">
+                          {msg.email}
+                        </a>
+                        ) · {msg.country || "International"} · {msg.phone}
+                      </span>
+                      {msg.recipientEmail && (
+                        <span className="font-mono text-[11px] font-semibold text-[#0B1C2E] bg-[#FCE46D]/40 border border-[#FCE46D] px-2 py-0.5 rounded-full">
+                          To: {msg.recipientEmail}
+                        </span>
+                      )}
                     </div>
 
                     <p className="text-xs sm:text-sm text-[#1B2228] bg-slate-50 p-4 rounded-xl leading-relaxed">

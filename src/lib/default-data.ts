@@ -130,6 +130,7 @@ export interface ContactRecord {
   country?: string;
   subject: string;
   category: string;
+  recipientEmail?: string;
   message: string;
   status: "UNREAD" | "READ" | "REPLIED" | "ARCHIVED";
   adminReplyNotes?: string;

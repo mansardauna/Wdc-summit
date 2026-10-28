@@ -4,7 +4,7 @@ import { addContactMessage } from "@/lib/db";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { fullName, email, phone, country, subject, category, message } = body;
+    const { fullName, email, phone, country, subject, category, recipientEmail, message } = body;
 
     if (!fullName || !email || !message) {
       return NextResponse.json(
@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       country: country || "",
       subject: subject || `${category || "General"} Inquiry from ${fullName}`,
       category: category || "General Inquiry",
+      recipientEmail: recipientEmail || "summit@worlddisastercenter.org",
       message,
     });
 
